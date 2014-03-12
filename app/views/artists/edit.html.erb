@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Editing artist</h1>
+
+      <%= render 'form' %>
+
+      <hr>
+
+      <p><%= link_to raw('&laquo; Back'), exhibition_artists_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to "Show #{@artist.name}", [@exhibition, @artist], :class => 'btn btn-mini' %></p>
+    </div>
+  </div>
+</div>

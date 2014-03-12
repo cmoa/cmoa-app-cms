@@ -1,0 +1,57 @@
+<% content_for(:js) do %>
+  app.artworkIndexPath = '<%= url_for(exhibition_artworks_path(@exhibition)) %>';
+  app.initArtworkIndex();
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Artwork</h1>
+
+      <table class="table table-striped table-bordered table-artwork">
+        <thead>
+          <tr>
+            <th class="title">Title</th>
+            <th class="artist">Artist</th>
+            <th class="category">Category</th>
+            <th class="code">Code</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @artworks.size > 0 %>
+          <% @artworks.each do |artwork| %>
+            <tr>
+              <td class="title"><%= artwork.title %></td>
+              <td class="artist"><%= artwork.artists.size > 0 ? artwork.artists.map{|a| a.name }.join(', ') : raw('&ndash;') %></td>
+              <td class="category"><%= artwork.category.title %></td>
+              <td class="code"><%= artwork.code %></td>
+              <td class="actions"><%= link_to 'Show', [@exhibition, artwork], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_artwork_path(@exhibition, artwork), :class => 'btn btn-mini' %> <%= link_to 'Delete', [@exhibition, artwork], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <% if @is_filtering %>
+              <td class="empty" colspan="5"><strong>No artwork matches this filter.</strong></td>
+              <% else %>
+              <td class="empty" colspan="5"><strong>No artwork has been added yet.</strong></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2>Filter artwork</h2>
+      <div class="form-horizontal">
+        <%= select_tag(:filter_artist, options_from_collection_for_select(@exhibition.artists.order('last_name asc'), :id, :name, @filter_artist), :prompt => 'By artist:') %> &nbsp; <%= select_tag(:filter_category, options_from_collection_for_select(Category.all.order('title asc'), :id, :title, @filter_category), :prompt => 'By category:') %> &nbsp; <%= select_tag(:filter_location, options_from_collection_for_select(Location.all.order('name asc'), :id, :name, @filter_location), :prompt => 'By location:') %><% if @is_filtering %> &nbsp; <button id="resetFilter" class="btn btn-mini btn-danger">Reset</button><% end %>
+      </div>
+
+      <hr>
+
+      <p><%= link_to 'New Artwork', new_exhibition_artwork_path(@exhibition), :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Exhibition</h1>
+
+      <h2><%= @exhibition.title %></h2>
+
+      <div class="row-fluid dash">
+        <div class="span4 artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
+          <span class="count"><%= @total_artists %></span>
+          <span class="title"><%= 'artist'.pluralize(@total_artists) %></span>
+        </a></div>
+        <div class="span4 artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>">
+          <span class="count"><%= @total_artwork %></span>
+          <span class="title">artwork</span>
+        </a></div>
+        <div class="span4 tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>">
+          <span class="count"><%= @total_tours %></span>
+          <span class="title"><%= 'tour'.pluralize(@total_tours) %></span>
+        </a></div>
+      </div>
+
+      <div class="row-fluid dash">
+        <div class="span4 categories"><a href="<%= url_for(exhibition_categories_path(@exhibition)) %>">
+          <span class="count"><%= @total_categories %></span>
+          <span class="title"><%= 'category'.pluralize(@total_categories) %></span>
+        </a></div>
+        <div class="span4 locations"><a href="<%= url_for(exhibition_locations_path(@exhibition)) %>">
+          <span class="count"><%= @total_locations %></span>
+          <span class="title"><%= 'location'.pluralize(@total_locations) %></span>
+        </a></div>
+      </div>
+    </div>
+  </div>
+</div>

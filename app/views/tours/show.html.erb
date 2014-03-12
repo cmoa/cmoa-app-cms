@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Tour Detail</h1>
+
+      <h2><%= @tour.title %></h2>
+
+      <h3>Subtitle</h3>
+      <% if @tour.subtitle.nil? || @tour.subtitle.empty? %>
+      <p class="sub"><em>No subtitle</em></p>
+      <% else %>
+      <p class="sub"><%= @tour.subtitle %></p>
+      <% end %>
+
+      <h3>Description</h3>
+      <% if @tour.body.empty? %>
+      <p class="sub"><em>No description</em></p>
+      <% else %>
+      <div class="description">
+        <%= simple_format(markdown(@tour.body)) %>
+      </div>
+      <% end %>
+
+      <h2 class="big-space">Artwork in this tour</h2>
+      <% if @tour.artworks.size > 0 %>
+      <div class="artwork-list">
+        <ol>
+          <% @tour.artworks.each_with_index do |artwork, index| %>
+          <li class="clearfix">
+            <div class="position no-drag"><%= index + 1 %></div>
+            <p class="title"><%= artwork.title %></p>
+          </li>
+          <% end %>
+        </ol>
+      </div>
+      <% else %>
+      <p><em>This tour has no artwork.</em></p>
+      <% end %>
+
+      <hr>
+
+      <p><%= link_to raw('&laquo; Back'), exhibition_tours_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_tour_path(@exhibition, @tour), :class => 'btn btn-mini' %> <%= link_to 'Modify artwork', edit_exhibition_tour_tour_artwork_path(@exhibition, @tour), :class => 'btn btn-mini btn-success' %></p>
+    </div>
+  </div>
+</div>

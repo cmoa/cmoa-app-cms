@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  exhibition_id: 1
+  artwork_id: 1
+  kind: MyString
+
+two:
+  exhibition_id: 1
+  artwork_id: 1
+  kind: MyString

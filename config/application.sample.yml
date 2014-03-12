@@ -1,0 +1,30 @@
+test:
+  s3_bucket: museum-app-test
+  s3_key: S3_KEY
+  s3_secret: S3_SECRET
+  s3_hash_secret: HASH_SECRET
+  api_token: API_TOKEN
+  api_secret: API_SECRET
+  mailchimp_id: MAILCHIMP_ID
+  mailchimp_api_key: MAILCHIMP_API_KEY
+
+development:
+  s3_bucket: museum-app-devel
+  s3_key: S3_KEY
+  s3_secret: S3_SECRET
+  s3_hash_secret: HASH_SECRET
+  api_token: API_TOKEN
+  api_secret: API_SECRET
+  mailchimp_id: MAILCHIMP_ID
+  mailchimp_api_key: MAILCHIMP_API_KEY
+
+production:
+  secret_token: RANDOM_HASH
+  s3_bucket: museum-app-prod
+  s3_key: S3_KEY
+  s3_secret: S3_SECRET
+  s3_hash_secret: HASH_SECRET
+  api_token: API_TOKEN
+  api_secret: API_SECRET
+  mailchimp_id: MAILCHIMP_ID
+  mailchimp_api_key: MAILCHIMP_API_KEY

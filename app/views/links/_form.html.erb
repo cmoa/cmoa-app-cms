@@ -1,0 +1,21 @@
+<%= form_for([@exhibition, @artist, @link]) do |f| %>
+  <% if @link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul class="errors">
+      <% @link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="lbl"><%= f.label :title %></p>
+  <p class="input"><%= f.text_field :title, :class => 'input-xlarge' %></p>
+
+  <p class="lbl"><%= f.label :url %></p>
+  <p class="input"><%= f.text_field :url, :class => 'input-xlarge' %></p>
+
+  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+<% end %>

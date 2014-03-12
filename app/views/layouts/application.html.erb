@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Carnegie Museum of Art - 2013 Carnegie International</title>
+  <%= stylesheet_link_tag "main", :media => "all", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1><a href="/">Carnegie Museum of Art</a></h1>
+    <% if admin_signed_in? %>
+    <nav>
+      <ul>
+        <li class="logout no-text"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
+      </ul>
+    </nav>
+    <% end %>
+  </header>
+
+  <!-- Nav -->
+  <nav>
+    <ul>
+      <li class="home no-text"><a href="<%= url_for(root_path) %>" data-gravity="w">Home</a></li>
+      <% if admin_signed_in? && !(controller_name == 'exhibitions' && action_name != 'show') %>
+      <li class="artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w">Artists</a></li>
+      <li class="artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w">Artwork</a></li>
+      <li class="tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w">Tours</a></li>
+      <li class="categories"><a href="<%= url_for(exhibition_categories_path(@exhibition)) %>" data-gravity="w">Categories</a></li>
+      <li class="locations"><a href="<%= url_for(exhibition_locations_path(@exhibition)) %>" data-gravity="w">Locations</a></li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <!-- Content -->
+  <div id="content">
+    <% if !notice.nil? || !alert.nil? %>
+    <!-- Flash -->
+    <div class="container-fluid flash">
+      <div class="row-fluid">
+        <div class="span12">
+          <% unless notice.nil? %>
+          <p class="flash-notice"><%= notice %></p>
+          <% end %>
+          <% unless alert.nil? %>
+          <p class="flash-alert"><%= alert %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+
+  <!-- JS -->
+  <%= yield(:js_files_before) %>
+  <%= javascript_include_tag('application', "data-turbolinks-track" => true) %>
+  <%= yield(:js_files) %>
+  <script type="text/javascript">
+    $(document).ready(function (e) {
+      app.init();
+      <%= yield(:js) %>
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<% content_for(:js) do %>
+  app.exhibitionsPositionsPath = '<%= url_for(positions_exhibitions_path) %>';
+  app.initExhibitionsIndex();
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Carnegie Museum of Art iOS App</h1>
+
+      <h2>Exhibitions</h2>
+
+      <table class="table table-striped table-bordered table-exhibitions">
+        <thead>
+          <tr>
+            <th class="position">#</th>
+            <th class="image1">iPhone</th>
+            <th class="image2">iPad</th>
+            <th class="exhibition">Exhibition</th>
+            <th class="status">Status</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @exhibitions.size > 0 %>
+          <% @exhibitions.each_with_index do |exhibition, index| %>
+            <tr data-id="<%= exhibition.id %>">
+              <td class="position"><span><%= (index + 1) %></span></td>
+              <td class="image1"><%= image_tag(exhibition.bg_iphone(:thumb)) %></td>
+              <td class="image2"><%= image_tag(exhibition.bg_ipad(:thumb)) %></td>
+              <td class="exhibition"><%= exhibition.title %></td>
+              <% if exhibition.is_live %>
+              <td class="status online"><strong>LIVE</strong></td>
+              <% else %>
+              <td class="status offline"><strong>OFFLINE</strong></td>
+              <% end %>
+              <td class="actions"><%= link_to 'Show', exhibition, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_path(exhibition), :class => 'btn btn-mini' %><% unless exhibition.is_live %> <%= link_to 'Delete', exhibition, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %><% end %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="4"><strong>No exhibitions have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'New Exhibition', new_exhibition_path, :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>

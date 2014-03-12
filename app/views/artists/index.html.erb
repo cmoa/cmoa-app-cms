@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Artists</h1>
+
+      <table class="table table-striped table-bordered table-artists">
+        <thead>
+          <tr>
+            <th class="name">Name</th>
+            <th class="country">Country</th>
+            <th class="artwork"># of Artwork</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @artists.size > 0 %>
+          <% @artists.each do |artist| %>
+            <tr>
+              <td class="name"><%= artist.name %></td>
+              <td class="country"><%= Carmen::Country.coded(artist.country).name %></td>
+              <td class="artwork"><%= artist.artworks.size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_artist => artist.id), :class => 'btn btn-mini btn-info') %></td>
+              <td class="actions"><%= link_to 'Show', [@exhibition, artist], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_artist_path(@exhibition, artist), :class => 'btn btn-mini' %> <%= link_to 'Delete', [@exhibition, artist], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="4"><strong>No artists have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'New Artist', new_exhibition_artist_path, :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>

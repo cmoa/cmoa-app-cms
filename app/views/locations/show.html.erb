@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Location Detail</h1>
+
+      <h2><%= @location.name %></h2>
+
+      <hr>
+
+      <p><%= link_to raw('&laquo; Back'), exhibition_locations_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_location_path(@exhibition, @location), :class => 'btn btn-mini' %></p>
+    </div>
+  </div>
+</div>

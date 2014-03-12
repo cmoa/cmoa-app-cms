@@ -1,0 +1,64 @@
+<% content_for(:js) do %>
+  app.linksPositionsPath = '<%= url_for(positions_exhibition_artist_links_path(@exhibition, @artist)) %>';
+  app.initArtistShow();
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Artist Detail</h1>
+
+      <h2><%= @artist.name %></h2>
+
+      <h3>Country</h3>
+      <p class="sub"><%= Carmen::Country.coded(@artist.country).name %></p>
+
+      <h3>Code</h3>
+      <% if @artist.code.nil? %>
+      <p class="sub"><em>No code set</em></p>
+      <% else %>
+      <p class="sub"><%= @artist.code %></p>
+      <% end %>
+
+      <h3>Biography</h3>
+      <% if @artist.bio.empty? %>
+      <p class="sub"><em>Bio hasn't been entered yet</em></p>
+      <% else %>
+      <div class="description">
+        <%= simple_format(markdown(@artist.bio)) %>
+      </div>
+      <% end %>
+
+      <hr>
+
+      <h2>Links</h2>
+
+      <% if @artist.links.size == 0 %>
+      <p class="sub"><em>No links have been created.</em></p>
+      <% else %>
+      <table class="table table-striped table-bordered table-links">
+        <thead>
+          <tr>
+            <th class="position">#</th>
+            <th class="title">Title</th>
+            <th class="url">URL</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @artist.links.each_with_index do |link, index| %>
+            <tr data-id="<%= link.id %>">
+              <td class="position"><span><%= (index + 1) %></span></td>
+              <td class="title"><%= link.title %></td>
+              <td class="url"><%= link_to(link.url, link.url) %></td>
+              <td class="actions"><%= link_to 'Edit', edit_exhibition_artist_link_path(@exhibition, @artist, link), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artist_link_path(@exhibition, @artist, link), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
+      <p><%= link_to raw('&laquo; Back'), exhibition_artists_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_artist_path(@exhibition, @artist), :class => 'btn btn-mini' %> <%= link_to 'Add link', new_exhibition_artist_link_path(@exhibition, @artist), :class => 'btn btn-mini btn-success' %></p>
+    </div>
+  </div>
+</div>

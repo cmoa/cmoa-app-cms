@@ -1,0 +1,772 @@
+@import "bootstrap";
+@import "compass/reset";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-sizing";
+@import "compass/css3/transition";
+
+// Vars
+$browser-context: 16;
+$color-bg: #ffffff;
+$color-font: #2c3e50;
+$color-nav: #2c3e50;
+$color-nav-active: #566573;
+$color-nav-text: #75899c;
+$color-action: #f26361;
+$color-header: #f26361;
+$color-seperator-1: #566573;
+$color-seperator-2: #f26361;
+$nav-width: 80px;
+$nav-height: 100px;
+$font-light: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+$font-medium: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+$font-bold: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+
+// Mixins
+@mixin at2x($image_name, $w: auto, $h: auto, $extention: '.png') {
+  background-image: image_url($image_name + $extention);
+  $x2img : $image_name + '@2x' + $extention;
+
+  @media all and (-webkit-min-device-pixel-ratio : 1.5) {
+    background-image: image_url($x2img);
+    background-size: $w $h;
+  }
+}
+
+// Functions
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em
+}
+
+// CSS
+body {
+  background-color: $color-bg;
+  font-size: em(16);
+  color: $color-font;
+  font-family: $font-medium;
+  padding-left: $nav-width;
+}
+
+// Header
+header {
+  background-color: $color-header;
+  height: $nav-width;
+  position: relative;
+
+  h1 {
+    padding: 28px 0 0 15px;
+  }
+
+  h1 a {
+    display: block;
+    width: 297px;
+    height: 24px;
+    text-decoration: none;
+    @include at2x('logo', 297px, 24px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-indent: -10000px;
+  }
+
+  nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    height: auto;
+
+    ul li a {
+      border: 0 !important;
+    }
+  }
+}
+
+// Nav
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $color-nav;
+  width: $nav-width;
+  height: 100%;
+
+  ul {
+    li {
+      a {
+        text-decoration: none;
+        display: block;
+        width: $nav-width;
+        height: $nav-height;
+        background-position: center center;
+        background-repeat: no-repeat;
+        @include box-sizing(border-box);
+        border-bottom: 1px solid $color-seperator-1;
+        text-transform: uppercase;
+        color: $color-nav-text;
+        font-size: em(9);
+        height: 100px;
+        text-align: center;
+        background-position: top center;
+        padding-top: 70px;
+        font-family: $font-medium;
+      }
+
+      a:link, a:visited {
+        background-color: $color-nav;
+
+        color: $color-nav-text;
+        text-decoration: none;
+      }
+
+      a:hover, a:active {
+        background-color: $color-nav-active;
+
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+
+    li.no-text {
+      a {
+        text-indent: -10000px;
+        height: $nav-width;
+      }
+    }
+
+    li.home a {
+      @include at2x('nav-home', 80px, 80px);
+    }
+
+    li.artists a {
+      @include at2x('nav-artists', 80px, 80px);
+    }
+
+    li.artwork a {
+      @include at2x('nav-artwork', 80px, 80px);
+    }
+
+    li.tours a {
+      @include at2x('nav-tours', 80px, 80px);
+    }
+
+    li.categories a {
+      @include at2x('nav-categories', 80px, 80px);
+    }
+
+    li.locations a {
+      @include at2x('nav-locations', 80px, 80px);
+    }
+
+    li.logout a {
+      @include at2x('nav-logout', 80px, 80px);
+    }
+  }
+}
+
+// Content
+#content {
+  width: 800px;
+
+  h1 {
+    font-family: $font-light;
+    font-size: em(32);
+    margin: 30px 0;
+  }
+
+  h2 {
+    font-family: $font-light;
+    font-size: em(20);
+    margin: 20px 0 15px 0;
+    border-bottom: 1px solid $color-seperator-2;
+    padding-bottom: 10px;
+  }
+
+  h3 {
+    font-family: $font-light;
+    font-size: em(16);
+    margin: 20px 0 7px 0;
+  }
+
+  .big-space {
+    margin-top: 35px !important;
+  }
+
+  p {
+    margin: 15px 0;
+    font-size: em(13);
+    line-height: 1.4em;
+  }
+
+  p.sub {
+    margin-top: 5px;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    font-family: $font-bold;
+  }
+
+  em strong,
+  strong em {
+    font-style: italic;
+    font-family: $font-bold;
+  }
+
+  ul, ol {
+    margin: 15px 0;
+  }
+
+  .description p:first-child {
+    margin-top: 5px;
+  }
+
+  // Form errors
+  ul.errors {
+    li {
+      margin: 10px 0;
+      font-size: em(12);
+    }
+  }
+
+  // Dropdown
+  ul.dropdown-menu {
+    margin: 2px 0 0 0;
+  }
+
+  // Table
+  table.table {
+    td {
+      font-size: em(13);
+    }
+  }
+
+  table.table-exhibitions {
+    th.position,
+    td.position {
+      width: 3%;
+      text-align: center;
+    }
+
+    td.position span {
+      display: block;
+      font-size: em(16);
+      line-height: 1.8em;
+      width: 24px;
+      height: 24px;
+      @include border-radius(12px);
+      @include box-sizing(border-box);
+      text-align: center;
+      background-color: $color-header;
+      color: #ffffff;
+      margin: 0 0 0 0;
+      cursor: hand;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+
+    th.image1,
+    td.image1 {
+      width: 15%
+    }
+
+    th.image2,
+    td.image2 {
+      width: 15%
+    }
+
+    td.image1,
+    td.image2 {
+      font-size: 0;
+      line-height: 1em;
+    }
+
+    td.image1 img,
+    td.image2 img {
+      width: 100px;
+      height: 100px;
+    }
+
+    th.exhibition,
+    td.exhibition {
+      width: 32%;
+    }
+
+    th.status,
+    td.status {
+      width: 11%;
+    }
+
+    td.status.online {
+      color: green;
+    }
+
+    td.status.offline {
+      color: red;
+    }
+
+    th.actions,
+    td.actions {
+      width: 24%;
+      text-align: right;
+    }
+  }
+
+  table.table-artists {
+    th.name,
+    td.name {
+      width: 28%;
+    }
+
+    th.country,
+    td.country {
+      width: 27%;
+    }
+
+    th.artwork,
+    td.artwork {
+      width: 18%;
+    }
+
+    td.artwork a {
+      float: right;
+    }
+
+    th.actions,
+    td.actions {
+      width: 27%;
+      text-align: right;
+    }
+  }
+
+  table.table-locations {
+    th.name,
+    td.name {
+      width: 55%;
+    }
+
+    th.artwork,
+    td.artwork {
+      width: 18%;
+    }
+
+    td.artwork a {
+      float: right;
+    }
+
+    th.actions,
+    td.actions {
+      width: 27%;
+      text-align: right;
+    }
+  }
+
+  table.table-artwork {
+    th.title,
+    td.title {
+      width: 23%;
+    }
+
+    th.artist,
+    td.artist {
+      width: 20%;
+    }
+
+    th.category,
+    td.category {
+      width: 20%;
+    }
+
+    th.code,
+    td.code {
+      width: 10%;
+    }
+
+    th.actions,
+    td.actions {
+      width: 27%;
+      text-align: right;
+    }
+  }
+
+  table.table-tours {
+    th.title,
+    td.title {
+      width: 48%;
+    }
+
+    th.artwork,
+    td.artwork {
+      width: 25%;
+    }
+
+    td.artwork a {
+      float: right;
+    }
+
+    th.actions,
+    td.actions {
+      width: 27%;
+      text-align: right;
+    }
+  }
+
+  table.table-categories {
+    th.title,
+    td.title {
+      width: 55%;
+    }
+
+    th.artwork,
+    td.artwork {
+      width: 18%;
+    }
+
+    td.artwork a {
+      float: right;
+    }
+
+    th.actions,
+    td.actions {
+      width: 27%;
+      text-align: right;
+    }
+  }
+
+  table.table-media-images {
+    th.position,
+    td.position {
+      width: 3%;
+      text-align: center;
+    }
+
+    td.position span {
+      display: block;
+      font-size: em(16);
+      line-height: 1.8em;
+      width: 24px;
+      height: 24px;
+      @include border-radius(12px);
+      @include box-sizing(border-box);
+      text-align: center;
+      background-color: $color-header;
+      color: #ffffff;
+      margin: 0 0 0 0;
+      cursor: hand;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+
+    th.image,
+    td.image {
+      width: 15%
+    }
+
+    td.image {
+      font-size: 0;
+      line-height: 1em;
+    }
+
+    td.image img {
+      width: 100px;
+      height: 100px;
+    }
+
+    th.title,
+    td.title {
+      width: 50%;
+    }
+
+    th.url,
+    td.url {
+      width: 15%;
+    }
+
+    th.actions,
+    td.actions {
+      width: 17%;
+      text-align: right;
+    }
+  }
+
+  table.table-media-audio,
+  table.table-media-video {
+    th.position,
+    td.position {
+      width: 3%;
+      text-align: center;
+    }
+
+    td.position span {
+      display: block;
+      font-size: em(16);
+      line-height: 1.8em;
+      width: 24px;
+      height: 24px;
+      @include border-radius(12px);
+      @include box-sizing(border-box);
+      text-align: center;
+      background-color: $color-header;
+      color: #ffffff;
+      margin: 0 0 0 0;
+      cursor: hand;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+
+    th.title,
+    td.title {
+      width: 65%;
+    }
+
+    th.url,
+    td.url {
+      width: 15%;
+    }
+
+    th.actions,
+    td.actions {
+      width: 17%;
+      text-align: right;
+    }
+  }
+
+  table.table-links {
+    th.position,
+    td.position {
+      width: 3%;
+      text-align: center;
+    }
+
+    td.position span {
+      display: block;
+      font-size: em(16);
+      line-height: 1.8em;
+      width: 24px;
+      height: 24px;
+      @include border-radius(12px);
+      @include box-sizing(border-box);
+      text-align: center;
+      background-color: $color-header;
+      color: #ffffff;
+      margin: 0 0 0 0;
+      cursor: hand;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+
+    th.title,
+    td.title {
+      width: 30%;
+    }
+
+    th.url,
+    td.url {
+      width: 50%;
+    }
+
+    th.actions,
+    td.actions {
+      width: 17%;
+      text-align: right;
+    }
+  }
+
+  table.table-artwork-artists {
+    th.name,
+    td.name {
+      width: 85%;
+    }
+
+    th.actions,
+    td.actions {
+      width: 15%;
+      text-align: right;
+    }
+  }
+
+  // Flash
+  .flash {
+    p {
+      margin-top: 20px;
+      font-family: $font-medium;
+      font-size: em(12);
+      padding: 8px 12px;
+    }
+
+    .flash-notice {
+      background-color: #a0cc8c;
+      color: #ffffff;
+    }
+
+    .flash-alert {
+      background-color: #f9febc;
+      color: #636363;
+    }
+  }
+
+  // Forms
+  p.lbl {
+    margin: 15px 0 5px 0;
+    font-family: $font-bold;
+  }
+
+  p.input {
+    margin: 5px 0 15px 0;
+  }
+
+  p.input-chk {
+    margin: 15px 0;
+  }
+
+  label.inline {
+    display: inline;
+  }
+
+  input[type=checkbox] {
+    vertical-align: middle;
+    margin: 0;
+    margin-top: -4px;
+    margin-right: 5px;
+  }
+
+  p.submit {
+    margin: 15px 0;
+  }
+
+  // Form errors
+  #error_explanation {
+    border-bottom: 1px solid $color-seperator-2;
+    margin-bottom: 25px;
+
+    h2 {
+      font-size: em(16);
+    }
+
+    ul li {
+      margin: 10px 0;
+    }
+  }
+
+  // Dashboard
+  .dash {
+    margin: 15px 0;
+
+    .span4 a {
+      display: block;
+      background-position: top center;
+      background-repeat: no-repeat;
+      text-decoration: none;
+
+      span {
+        text-align: center;
+        color: #ffffff;
+        display: block;
+      }
+
+      span.count {
+        font-size: em(55);
+        font-family: $font-light;
+        padding-top: 80px;
+        letter-spacing: -0.05em;
+      }
+
+      span.title {
+        font-size: em(15);
+        font-family: $font-light;
+        text-transform: uppercase;
+        padding: 20px 0 25px 0;
+        letter-spacing: 0.08em;
+      }
+    }
+
+    .artists a {
+      background-color: #a0cc8c;
+      @include at2x('nav-artists', 80px, 80px);
+    }
+
+    .categories a {
+      background-color: #f26a57;
+      @include at2x('nav-categories', 80px, 80px);
+    }
+
+    .artwork a {
+      background-color: #009dd8;
+      @include at2x('nav-artwork', 80px, 80px);
+    }
+
+    .tours a {
+      background-color: #fcc25b;
+      @include at2x('nav-tours', 80px, 80px);
+    }
+
+    .locations a {
+      background-color: #f47d22;
+      @include at2x('nav-locations', 80px, 80px);
+    }
+  }
+
+  // Tour artworks
+  .artwork-list {
+
+    ol {
+      > li {
+        margin: 10px 0;
+        // font-size: em(14);
+
+        .position, .btn-group, .actions, p.title {
+          float: left;
+        }
+
+        .position {
+          font-size: em(14);
+          line-height: 1.7em;
+          width: 24px;
+          height: 24px;
+          @include border-radius(12px);
+          @include box-sizing(border-box);
+          text-align: center;
+          background-color: $color-header;
+          color: #ffffff;
+          margin: 3px 10px 0 0;
+          cursor: hand;
+          cursor: grab;
+          cursor: -moz-grab;
+          cursor: -webkit-grab;
+        }
+
+        .position.no-drag {
+          cursor: default;
+        }
+
+        .actions {
+          margin: 5px 0 0 10px;
+        }
+
+        p.title {
+          display: block;
+          margin: 5px 0 0 0;
+          font-weight: $font-bold;
+          font-size: em(15);
+        }
+      }
+    }
+  }
+
+  .dropdown-sample {
+    display: none;
+  }
+
+  p.hint {
+    font-size: em(12);
+  }
+
+}

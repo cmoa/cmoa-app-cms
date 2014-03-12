@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:published] = "%A %b %e, %Y"

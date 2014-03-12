@@ -1,0 +1,31 @@
+<h1>Listing media</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Exhibition</th>
+      <th>Artwork</th>
+      <th>Kind</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @media.each do |medium| %>
+      <tr>
+        <td><%= medium.exhibition_id %></td>
+        <td><%= medium.artwork_id %></td>
+        <td><%= medium.kind %></td>
+        <td><%= link_to 'Show', [@exhibition, @artwork, medium] %></td>
+        <td><%= link_to 'Edit', edit_exhibition_artwork_medium_path(medium) %></td>
+        <td><%= link_to 'Delete', [@exhibition, @artwork, medium], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medium', new_exhibition_artwork_medium_path(@exhibition, @artwork) %>

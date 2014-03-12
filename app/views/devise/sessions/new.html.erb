@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <h1>Sign in</h1>
+
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <p class="lbl"><%= f.label :email %></p>
+        <p class="input"><%= f.email_field :email, :autofocus => true %></p>
+
+        <p class="lbl"><%= f.label :password %></p>
+        <p class="input"><%= f.password_field :password %></p>
+
+        <% if devise_mapping.rememberable? -%>
+        <p class="input-chk"><%= f.check_box :remember_me %> <%= f.label :remember_me, :class => 'inline' %></p>
+        <% end -%>
+
+        <p class="submit"><%= f.submit "Sign in", :class => 'btn' %></p>
+      <% end %>
+
+    </div>
+  </div>
+</div>

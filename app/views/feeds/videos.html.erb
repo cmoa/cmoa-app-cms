@@ -1,0 +1,12 @@
+<ul>
+  <% @entries.each do |entry| %>
+  <li>
+    <h1><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
+    <h2><%= entry.published.to_s(:published) %></h2>
+    <div class="video">
+      <%= raw(entry.embed_code) %>
+    </div>
+    <p><%= vimeo_summary_cleanup(strip_tags(entry.summary)) %></p>
+  </li>
+  <% end %>
+</ul>

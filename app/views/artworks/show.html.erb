@@ -1,0 +1,151 @@
+<% content_for(:js) do %>
+  app.mediaPositionsPath = '<%= url_for(positions_exhibition_artwork_media_path(@exhibition, @artwork)) %>';
+  app.initArtworkShow();
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Artwork Detail</h1>
+
+      <h2><%= @artwork.title %></h2>
+
+      <h3><%= 'Artist'.pluralize(@artwork.artists.size) %></h3>
+      <% if @artwork.artists.size > 0 %>
+      <table class="table table-striped table-bordered table-artwork-artists">
+        <thead>
+          <tr>
+            <th class="name">Name</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @artwork.artist_artworks.each do |artist_artwork| %>
+            <tr>
+              <td class="name"><%= artist_artwork.artist.name %></td>
+              <td class="actions"><%= link_to 'Edit', edit_exhibition_artwork_artist_artwork_path(@exhibition, @artwork, artist_artwork), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artwork_artist_artwork_path(@exhibition, @artwork, artist_artwork), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% else %>
+      <p class="sub"><em>Not set</em></p>
+      <% end %>
+
+      <h3>Category</h3>
+      <p class="sub"><%= link_to(@artwork.category.title, [@exhibition, @artwork.category]) %></p>
+
+      <h3>Location</h3>
+      <p class="sub"><%= link_to(@artwork.location.name, [@exhibition, @artwork.location]) %></p>
+
+      <h3>Code</h3>
+      <p class="sub"><%= @artwork.code %></p>
+
+      <h3>Share URL</h3>
+      <% if @artwork.share_url.nil? %>
+      <p class="sub"><em>Not set</em></p>
+      <% else %>
+      <p class="sub"><%= link_to(@artwork.share_url, @artwork.share_url) %></p>
+      <% end %>
+
+      <h3>Description</h3>
+      <% if @artwork.body.empty? %>
+      <p class="sub"><em>No description</em></p>
+      <% else %>
+      <div class="description">
+        <%= simple_format(markdown(@artwork.body)) %>
+      </div>
+      <% end %>
+
+      <h2 class="big-space">Media</h2>
+
+      <h3>Images</h3>
+      <% if @artwork.media.image.size == 0 %>
+      <p class="sub"><em>No images have been uploaded.</em></p>
+      <% else %>
+      <p class="sub"><em>Top file is the main one on artwork detail page.</em></p>
+      <table class="table table-striped table-bordered table-media-images">
+        <thead>
+          <tr>
+            <th class="position">#</th>
+            <th class="image">Image</th>
+            <th class="title">Title</th>
+            <th class="url">URL</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @artwork.media.image.each_with_index do |medium, index| %>
+            <tr data-id="<%= medium.id %>">
+              <td class="position"><span><%= (index + 1) %></span></td>
+              <td class="image"><%= image_tag(medium.file(:thumb)) %></td>
+              <td class="title"><%= medium.title %></td>
+              <td class="url"><%= link_to('Link', medium.file(:medium), :class => 'btn btn-mini') %></td>
+              <td class="actions"><%= link_to 'Edit', edit_exhibition_artwork_medium_path(@exhibition, @artwork, medium), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artwork_medium_path(@exhibition, @artwork, medium), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
+      <h3>Video</h3>
+      <% if @artwork.media.video.size == 0 %>
+      <p class="sub"><em>No videos have been uploaded.</em></p>
+      <% else %>
+      <table class="table table-striped table-bordered table-media-images">
+        <thead>
+          <tr>
+            <th class="position">#</th>
+            <th class="image">Image</th>
+            <th class="title">Title</th>
+            <th class="url">URL</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @artwork.media.video.each_with_index do |medium, index| %>
+            <tr data-id="<%= medium.id %>">
+              <td class="position"><span><%= (index + 1) %></span></td>
+              <td class="image"><%= image_tag(medium.file(:thumb)) %></td>
+              <td class="title"><%= medium.title %></td>
+              <td class="url"><%= link_to('Link', medium.file(:original), :class => 'btn btn-mini') %></td>
+              <td class="actions"><%= link_to 'Edit', edit_exhibition_artwork_medium_path(@exhibition, @artwork, medium), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artwork_medium_path(@exhibition, @artwork, medium), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
+      <h3>Audio</h3>
+      <% if @artwork.media.audio.size == 0 %>
+      <p class="sub"><em>No audio has been uploaded.</em></p>
+      <% else %>
+      <p class="sub"><em>Top file is the main one on artwork detail page.</em></p>
+      <table class="table table-striped table-bordered table-media-audio">
+        <thead>
+          <tr>
+            <th class="position">#</th>
+            <th class="title">Title</th>
+            <th class="url">URL</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @artwork.media.audio.each_with_index do |medium, index| %>
+            <tr data-id="<%= medium.id %>">
+              <td class="position"><span><%= (index + 1) %></span></td>
+              <td class="title"><%= medium.title %></td>
+              <td class="url"><%= link_to('Link', medium.file(:original), :class => 'btn btn-mini') %></td>
+              <td class="actions"><%= link_to 'Edit', edit_exhibition_artwork_medium_path(@exhibition, @artwork, medium), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artwork_medium_path(@exhibition, @artwork, medium), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
+      <hr>
+
+      <p><%= link_to raw('&laquo; Back'), exhibition_artworks_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini' %> <%= link_to 'Add artist', new_exhibition_artwork_artist_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %> <%= link_to 'Add media', new_exhibition_artwork_medium_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %></p>
+    </div>
+  </div>
+</div>

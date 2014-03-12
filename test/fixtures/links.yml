@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  uuid: MyString
+  artist_id: 1
+  title: MyString
+  url: MyString
+  deleted_at: 2013-08-04 11:27:55
+
+two:
+  uuid: MyString
+  artist_id: 1
+  title: MyString
+  url: MyString
+  deleted_at: 2013-08-04 11:27:55

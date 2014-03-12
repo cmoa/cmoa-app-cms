@@ -1,0 +1,22 @@
+<%= form_for([@exhibition, @artwork, @artist_artwork]) do |f| %>
+  <% if @artist_artwork.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@artist_artwork.errors.count, "error") %> prohibited this artwork from being saved:</h2>
+
+      <ul class="errors">
+      <% @artist_artwork.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="lbl"><%= f.label :artist_id %></p>
+  <p class="input"><%= f.collection_select :artist_id, Artist.all.order('last_name asc'), :id, :name, :selected => @artist_artwork.artist.nil? ? nil : @artist_artwork.artist.id, :prompt => 'Please select the artist:' %></p>
+
+  <% if action_name == 'new' %>
+  <p class="submit"><%= f.submit('Add Artist', :class => 'btn btn-primary') %></p>
+  <% else %>
+  <p class="submit"><%= f.submit('Update Artist', :class => 'btn btn-primary') %></p>
+  <% end %>
+<% end %>

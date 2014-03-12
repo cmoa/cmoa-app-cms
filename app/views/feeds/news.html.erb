@@ -1,0 +1,10 @@
+<ul>
+  <% @entries.each do |entry| %>
+  <li>
+    <h1><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
+    <h2><%= entry.published.to_s(:published) %></h2>
+    <p><%= entry.summary.sanitize %></p>
+    <p class="continue"><a href="<%= entry.url %>">Continue &raquo;</a></p>
+  </li>
+  <% end %>
+</ul>

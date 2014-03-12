@@ -1,0 +1,77 @@
+<% content_for(:js) do %>
+  app.initToursArtworkEdit();
+<% end %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Modifying artworks for <strong><%= @tour.title %></strong></h1>
+
+      <%= form_for(@tour, :url => { :controller => 'tour_artworks', :action => 'update' }) do |f| %>
+      <p id="noArtworkNote" style="display: <%= @tour.artworks.empty? ? 'block' : 'none' %>">This tour has no artwork. Add artwork by clicking below.</p>
+
+      <div class="artwork-list">
+
+        <ol>
+          <% @tour.artworks.each_with_index do |artwork, index| %>
+          <li class="clearfix">
+            <div class="position"><%= index + 1 %></div>
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="text"><%= artwork.title %></span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <% @artworks.each do |artwork_child| %>
+                <li><a tabindex="-1" href="#" data-id="<%= artwork_child.id %>"><%= artwork_child.title %></a></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="actions">
+              <button class="btn btn-mini btn-danger action-remove">Remove</button>
+            </div>
+            <input type="hidden" class="input-artwork-id" name="tour_artworks[][artwork_id]" value="<%= artwork.id %>">
+            <input type="hidden" class="input-position" name="tour_artworks[][position]" value="<%= index %>">
+          </li>
+          <% end %>
+        </ol>
+
+        <p class="submit"><button id="addArtwork" class="btn btn-mini btn-inverse">Add artwork</button></p>
+
+      </div>
+
+      <hr>
+      <p class="hint"><em>Hint:</em> You can change the order of the artwork by dragging its order number.</p>
+      <hr>
+
+      <p class="submit"><%= f.submit('Update this tour', :class => 'btn btn-primary') %></p>
+      <% end %>
+
+      <hr>
+
+      <p><%= link_to raw('&laquo; Back'), exhibition_tours_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to "Show: #{@tour.title}", [@exhibition, @tour], :class => 'btn btn-mini' %></p>
+    </div>
+  </div>
+</div>
+
+<div class="dropdown-sample">
+  <li class="clearfix">
+    <div class="position">1</div>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="text">Select artwork</span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <% @artworks.each do |artwork| %>
+        <li><a tabindex="-1" href="#" data-id="<%= artwork.id %>"><%= artwork.title %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="actions">
+      <button class="btn btn-mini btn-danger action-remove">Remove</button>
+    </div>
+    <input type="hidden" class="input-artwork-id" name="tour_artworks[][artwork_id]" value="">
+    <input type="hidden" class="input-position" name="tour_artworks[][position]" value="">
+  </li>
+</div>

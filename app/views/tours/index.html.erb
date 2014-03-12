@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Tours</h1>
+
+      <table class="table table-striped table-bordered table-tours">
+        <thead>
+          <tr>
+            <th class="title">Title</th>
+            <th class="artwork"># of Artwork</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @tours.size > 0 %>
+          <% @tours.each do |tour| %>
+            <tr>
+              <td class="title"><%= tour.title %></td>
+              <td class="artwork"><%= tour.artworks.size %> <%= link_to 'Modify artwork', edit_exhibition_tour_tour_artwork_path(@exhibition, tour), :class => 'btn btn-mini btn-success' %></td>
+              <td class="actions"><%= link_to 'Show', [@exhibition, tour], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_tour_path(@exhibition, tour), :class => 'btn btn-mini' %> <%= link_to 'Delete', [@exhibition, tour], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="3"><strong>No tours have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'New Tour', new_exhibition_tour_path(@exhibition), :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>

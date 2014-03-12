@@ -1,0 +1,38 @@
+<%= form_for([@exhibition, @artwork]) do |f| %>
+  <% if @artwork.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@artwork.errors.count, "error") %> prohibited this artwork from being saved:</h2>
+
+      <ul class="errors">
+      <% @artwork.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if (action_name == 'new') || (action_name == 'create') %>
+  <p class="lbl"><%= f.label :artist_id %></p>
+  <p class="input"><%= f.collection_select :artist_id, @exhibition.artists.order('last_name asc'), :id, :name, :selected => params[:artist_id], :prompt => 'Please select the artist:' %></p>
+  <% end %>
+
+  <p class="lbl"><%= f.label :category_id %></p>
+  <p class="input"><%= f.collection_select :category_id, Category.all.order('title asc'), :id, :title, :selected => @artwork.category.nil? ? nil : @artwork.category.id, :prompt => 'Please select the category:' %></p>
+
+  <p class="lbl"><%= f.label :location_id %></p>
+  <p class="input"><%= f.collection_select :location_id, Location.all.order('name asc'), :id, :name, :selected => @artwork.location.nil? ? nil : @artwork.location.id, :prompt => 'Please select the location:' %></p>
+
+  <p class="lbl"><%= f.label :title %></p>
+  <p class="input"><%= f.text_field :title, :class => 'input-xlarge' %></p>
+
+  <p class="lbl"><%= f.label :code %></p>
+  <p class="input"><%= f.text_field :code, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :share_url %></p>
+  <p class="input"><%= f.text_field :share_url, :class => 'input-xlarge' %></p>
+
+  <p class="lbl"><%= f.label :body, 'Description' %></p>
+  <p class="input"><%= f.text_area :body, :class => 'input-xxlarge', :rows => 5 %></p>
+
+  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+<% end %>

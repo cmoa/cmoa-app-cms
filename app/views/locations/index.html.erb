@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Locations</h1>
+
+      <table class="table table-striped table-bordered table-locations">
+        <thead>
+          <tr>
+            <th class="name">Name</th>
+            <th class="artwork"># of Artwork</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @locations.size > 0 %>
+          <% @locations.each do |location| %>
+            <tr>
+              <td class="name"><%= location.name %></td>
+              <td class="artwork"><%= location.artworks.size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_location => location.id), :class => 'btn btn-mini btn-info') %></td>
+              <td class="actions"><%= link_to 'Show', [@exhibition, location], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_location_path(@exhibition, location), :class => 'btn btn-mini' %> <%= link_to 'Delete', [@exhibition, location], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="4"><strong>No locations have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'New Location', new_exhibition_location_path(@exhibition), :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>
