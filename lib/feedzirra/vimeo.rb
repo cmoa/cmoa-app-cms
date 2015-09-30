@@ -27,11 +27,11 @@ module Feedzirra
       element :"media:thumbnail", :as => :thumbnail, :value => :url
 
       def embed_code
-        "<iframe src=\"http://player.vimeo.com/video/#{self.media_id}?byline=0&amp;portrait=0&amp;color=f26361\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>"
+        "<iframe src=\"https://player.vimeo.com/video/#{self.media_id}?byline=0&amp;portrait=0&amp;color=f26361\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>"
       end
 
       def media_id
-        if @url =~ /http:\/\/vimeo.com\/(\d*)/i
+        if @url =~ /https:\/\/vimeo.com\/(\d*)/i
           $1
         elsif @content =~ /http:\/\/vimeo.com\/moogaloop.swf?clip_id=(\d*)/i
           $1
