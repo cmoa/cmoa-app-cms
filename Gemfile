@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
+ruby "2.1.7"
 
 # Rails gems & helpers
 gem 'rails', '4.0.0'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.0'
-gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'compass-rails', '~> 2.0.0'
 gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
