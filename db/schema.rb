@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219211940) do
+ActiveRecord::Schema.define(version: 20160122191544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.datetime "deleted_at"
     t.integer  "location_id"
     t.string   "share_url"
+    t.integer  "beacon_major"
+    t.integer  "beacon_minor"
   end
 
   create_table "categories", force: true do |t|
@@ -100,6 +102,35 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.string   "sponsor"
   end
 
+  create_table "hours", force: true do |t|
+    t.integer  "hours_id"
+    t.datetime "start_schedule"
+    t.datetime "end_schedule"
+    t.time     "sunday_start"
+    t.time     "sunday_end"
+    t.binary   "sunday_isopen"
+    t.time     "monday_start"
+    t.time     "monday_end"
+    t.binary   "monday_isopen"
+    t.time     "tuesday_start"
+    t.time     "tuesday_end"
+    t.binary   "tuesday_isopen"
+    t.time     "wednesday_start"
+    t.time     "wednesday_end"
+    t.binary   "wednesday_isopen"
+    t.time     "thursday_start"
+    t.time     "thursday_end"
+    t.binary   "thursday_isopen"
+    t.time     "friday_start"
+    t.time     "friday_end"
+    t.binary   "friday_isopen"
+    t.time     "saturday_start"
+    t.time     "saturday_end"
+    t.binary   "saturday_isopen"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "likes", force: true do |t|
     t.integer  "exhibition_id"
     t.integer  "artwork_id"
@@ -122,10 +153,12 @@ ActiveRecord::Schema.define(version: 20140219211940) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.string   "uuid",       null: false
+    t.string   "uuid",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.integer  "beacon_major"
+    t.integer  "beacon_minor"
   end
 
   create_table "media", force: true do |t|
