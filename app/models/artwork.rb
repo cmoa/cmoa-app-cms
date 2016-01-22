@@ -16,7 +16,7 @@ class Artwork < ActiveRecord::Base
   has_many :artists, -> { order('"artists"."last_name" asc') }, :through => :artist_artworks
 
   # API
-  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'code', 'body', 'share_url'].freeze
+  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'code', 'body', 'beacon_major', 'beacon_minor', 'share_url'].freeze
 
   # Soft delete
   acts_as_paranoid
