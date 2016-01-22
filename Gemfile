@@ -1,6 +1,5 @@
 ruby '1.9.3'
 source 'https://rubygems.org'
-ruby "2.1.7"
 
 # Rails gems & helpers
 gem 'rails', '4.0.0'

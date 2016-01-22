@@ -192,6 +192,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   uuidtools
   whenever
-
-BUNDLED WITH
-   1.11.0
