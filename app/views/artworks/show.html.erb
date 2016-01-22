@@ -41,6 +41,9 @@
       <h3>Code</h3>
       <p class="sub"><%= @artwork.code %></p>
 
+      <h3>Beacon</h3>
+      <p class="sub"><%= @artwork.beacon_major %>.<%= @artwork.beacon_minor %></p>
+
       <h3>Share URL</h3>
       <% if @artwork.share_url.nil? %>
       <p class="sub"><em>Not set</em></p>
