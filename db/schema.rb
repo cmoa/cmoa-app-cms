@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122191544) do
+ActiveRecord::Schema.define(version: 20160122202210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,9 +70,18 @@ ActiveRecord::Schema.define(version: 20160122191544) do
     t.datetime "deleted_at"
     t.integer  "location_id"
     t.string   "share_url"
-    t.integer  "beacon_major"
-    t.integer  "beacon_minor"
+    t.integer  "beacons_id"
   end
+
+  add_index "artworks", ["beacons_id"], name: "index_artworks_on_beacons_id", using: :btree
+
+  create_table "beacons", force: true do |t|
+    t.integer "major",        null: false
+    t.integer "minor",        null: false
+    t.string  "beacon_ident", null: false
+  end
+
+  add_index "beacons", ["beacon_ident"], name: "index_beacons_on_beacon_ident", unique: true, using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "title"
@@ -153,13 +162,14 @@ ActiveRecord::Schema.define(version: 20160122191544) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.string   "uuid",         null: false
+    t.string   "uuid",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
-    t.integer  "beacon_major"
-    t.integer  "beacon_minor"
+    t.integer  "beacons_id"
   end
+
+  add_index "locations", ["beacons_id"], name: "index_locations_on_beacons_id", using: :btree
 
   create_table "media", force: true do |t|
     t.integer  "exhibition_id"
