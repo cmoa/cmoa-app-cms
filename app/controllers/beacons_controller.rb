@@ -12,6 +12,7 @@ class BeaconsController < ApplicationController
 
   def create
     @beacon = Beacon.new
+    render action: 'new'
   end
 
   def edit
