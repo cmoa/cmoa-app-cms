@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122202210) do
+ActiveRecord::Schema.define(version: 20160125161615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,12 +76,11 @@ ActiveRecord::Schema.define(version: 20160122202210) do
   add_index "artworks", ["beacons_id"], name: "index_artworks_on_beacons_id", using: :btree
 
   create_table "beacons", force: true do |t|
-    t.integer "major",        null: false
-    t.integer "minor",        null: false
-    t.string  "beacon_ident", null: false
+    t.integer "major", null: false
+    t.integer "minor", null: false
   end
 
-  add_index "beacons", ["beacon_ident"], name: "index_beacons_on_beacon_ident", unique: true, using: :btree
+  add_index "beacons", ["major", "minor"], name: "index_beacons_on_major_and_minor", unique: true, using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "title"
