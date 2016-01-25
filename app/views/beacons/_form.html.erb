@@ -11,6 +11,9 @@
     </div>
   <% end %>
 
+  <p class="lbl"><%= f.label :name %></p>
+  <p class="input"><%= f.text_field :name, :class => 'input-xlarge' %></p>
+
   <p class="lbl"><%= f.label :major %></p>
   <p class="input"><%= f.number_field :major, in: 1..65535, step: 1, :class => 'input-xlarge' %></p>
 
