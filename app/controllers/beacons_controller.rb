@@ -7,9 +7,11 @@ class BeaconsController < ApplicationController
   end
 
   def new
+    @beacon = Beacon.new
   end
 
   def create
+    @beacon = Beacon.new
   end
 
   def edit
