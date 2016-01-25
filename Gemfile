@@ -1,4 +1,4 @@
-ruby '1.9.3'
+ruby '2.1.7'
 source 'https://rubygems.org'
 
 # Rails gems & helpers
