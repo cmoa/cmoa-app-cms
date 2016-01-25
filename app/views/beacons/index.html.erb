@@ -7,6 +7,7 @@
         <thead>
           <tr>
             <th class="position">#</th>
+            <th>Name</th>
             <th >Major</th>
             <th >Minor</th>
             <th class="actions">Actions</th>
@@ -18,6 +19,7 @@
           <% @beacons.each_with_index do |beacon, index| %>
             <tr data-id="<%= beacon.id %>">
               <td class="position"><span><%= (index + 1) %></span></td>
+              <td><%= beacon.name %></td>
               <td><%= beacon.major %></td>
               <td><%= beacon.minor %></td>
               <td class="actions"><%= link_to 'Show', beacon, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_beacon_path(beacon), :class => 'btn btn-mini' %> <%= link_to 'Delete', beacon, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
