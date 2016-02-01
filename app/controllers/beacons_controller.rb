@@ -30,6 +30,6 @@ class BeaconsController < ApplicationController
   end
 
   def beacon_params
-      params.require(:beacon).require(:major).require(:minor).permit(:name)
+      params.require(:beacon).permit(:major, :minor, :name)
   end
 end
