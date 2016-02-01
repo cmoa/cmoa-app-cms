@@ -28,7 +28,7 @@ class BeaconsController < ApplicationController
 
   def update
     if @beacon.update(beacon_params)
-      redirect_to @beacon, notice: 'Artist was successfully updated.'
+      redirect_to @beacon, notice: 'Beacon was successfully updated.'
     else
       render action: 'edit'
     end
