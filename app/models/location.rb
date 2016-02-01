@@ -1,5 +1,6 @@
 class Location < ActiveRecord::Base
   has_many :artworks
+  belongs_to :beacons
 
   # API
   JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'name'].freeze
