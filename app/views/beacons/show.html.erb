@@ -9,6 +9,15 @@
       <h2>Minor</h2>
       <h3><%= @beacon.minor %></h3>
 
+      <h2>Attached to:</h2>
+      <% if @beacon.location.present? %>
+        <p class="sub"><%= link_to(@beacon.location.name, [@beacon.location]) %></p>
+      <% elsif @beacon.artwork.present? %>
+        <p class="sub"><%= link_to(@beacon.artwork.name, [@beacon.artwork]) %></p>
+      <% else %>
+
+      <% end %>
+
 
     </div>
   </div>
