@@ -1,5 +1,5 @@
 class BeaconsController < ApplicationController
-
+  before_action :set_exhibition
   before_action :set_beacon, only: [:show, :edit, :update, :destroy]
 
   def index
