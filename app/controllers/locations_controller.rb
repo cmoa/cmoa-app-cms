@@ -56,6 +56,6 @@ class LocationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def location_params
-      params.require(:location).permit(:name)
+      params.require(:location).permit(:name, :beacon_id)
     end
 end

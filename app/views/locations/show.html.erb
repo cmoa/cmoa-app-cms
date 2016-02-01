@@ -5,6 +5,11 @@
 
       <h2><%= @location.name %></h2>
 
+      <% if @location.beacon.present? %>
+        <h3>Beacon</h3>
+        <p class="sub"><%= link_to(@location.beacon.name, [@location.beacon]) %></p>
+      <% end %>
+
       <hr>
 
       <p><%= link_to raw('&laquo; Back'), exhibition_locations_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_location_path(@exhibition, @location), :class => 'btn btn-mini' %></p>
