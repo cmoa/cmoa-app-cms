@@ -7,4 +7,11 @@ class Beacon < ActiveRecord::Base
   validates :major, :presence => true
   validates :minor, :presence => true
   validates :name, :presence => true
+
+  JSON_ATTRS = ["major", "minor", "name"]
+
+
+  def as_json(options=nil)
+
+  end
 end
