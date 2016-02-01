@@ -29,7 +29,7 @@ class BeaconsController < ApplicationController
   def update
   end
 
-  def delete
+  def destroy
     @beacon.destroy
 
     redirect_to @beacon
