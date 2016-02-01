@@ -12,4 +12,5 @@ class ApplicationController < ActionController::Base
   def exhibition_is_set
     return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
   end
+  
 end
