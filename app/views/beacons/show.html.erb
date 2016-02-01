@@ -11,7 +11,7 @@
 
       <h2>Attached to:</h2>
       <% if @beacon.location.present? %>
-        <p class="sub"><%= link_to(@beacon.location.name, [@beacon.location.exhibition, @beacon.location]) %></p>
+        <p class="sub"><%= link_to @beacon.location.name, exhibition_location_path(@beacon.location.exhibition, @beacon.location) %></p>
       <% elsif @beacon.artwork.present? %>
         <p class="sub"><%= link_to(@beacon.artwork.title, [@beacon.artwork.exhibition, @beacon.artwork]) %></p>
       <% else %>
