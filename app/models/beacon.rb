@@ -12,6 +12,6 @@ class Beacon < ActiveRecord::Base
 
 
   def as_json(options=nil)
-
+    attributes.slice(*JSON_ATTRS)
   end
 end
