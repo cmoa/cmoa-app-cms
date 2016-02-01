@@ -2,6 +2,9 @@ class Location < ActiveRecord::Base
   has_many :artworks
   belongs_to :beacon
 
+  belongs_to :exhibition
+  belongs_to :exhibition_including_deleted, :class_name => 'Exhibition', :foreign_key => 'exhibition_id', :with_deleted => true
+
   # API
   JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'name', 'beacon_id'].freeze
 
