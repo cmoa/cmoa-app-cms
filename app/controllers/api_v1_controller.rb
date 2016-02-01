@@ -17,6 +17,7 @@ class ApiV1Controller < ApplicationController
       artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
       artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
       artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
+      beacons = Beacon.where('date_trunc(\'second\', beacons.updated_at) > ? AND ', since)
       categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since).with_deleted
       locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since).with_deleted
       links = Link.where('date_trunc(\'second\', links.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
@@ -31,6 +32,7 @@ class ApiV1Controller < ApplicationController
         :artists           => artists,
         :artwork           => artwork,
         :artistArtworks    => artist_artworks,
+        :beacons           => beacons,
         :categories        => categories,
         :locations         => locations,
         :links             => links,
