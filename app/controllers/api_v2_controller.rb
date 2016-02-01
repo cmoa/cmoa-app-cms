@@ -25,7 +25,7 @@ class ApiV2Controller < ApplicationController
         artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ?', since)
         artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ?', since)
         artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ?', since)
-        beacons = Beacons.all
+        beacons = Beacon.all
         categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since)
         locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since)
         links = Link.where('date_trunc(\'second\', links.updated_at) > ?', since)
@@ -38,7 +38,7 @@ class ApiV2Controller < ApplicationController
         artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ?', since).with_deleted
         artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ?', since).with_deleted
         artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ?', since).with_deleted
-        beacons = Beacons.all
+        beacons = Beacon.all
         categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since).with_deleted
         locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since).with_deleted
         links = Link.where('date_trunc(\'second\', links.updated_at) > ?', since).with_deleted
