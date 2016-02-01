@@ -30,6 +30,7 @@ class BeaconsController < ApplicationController
   end
 
   def delete
+    @beacon.destroy
   end
 
 private
