@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125222621) do
+ActiveRecord::Schema.define(version: 20160201141026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20160125222621) do
   create_table "beacons", force: true do |t|
     t.integer "major", null: false
     t.integer "minor", null: false
+    t.string  "name"
   end
 
   add_index "beacons", ["major", "minor"], name: "index_beacons_on_major_and_minor", unique: true, using: :btree
