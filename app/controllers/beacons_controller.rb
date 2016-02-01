@@ -1,4 +1,7 @@
 class BeaconsController < ApplicationController
+
+  before_action :set_beacon, only: [:show, :edit, :update, :destroy]
+
   def index
     @beacons = Beacon.all
   end
@@ -29,7 +32,11 @@ class BeaconsController < ApplicationController
   def delete
   end
 
+private
   def beacon_params
       params.require(:beacon).permit(:major, :minor, :name)
+  end
+  def set_beacon
+    @beacon= Beacon.find(params[:id])
   end
 end
