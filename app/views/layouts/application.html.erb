@@ -24,7 +24,7 @@
   <nav>
     <ul>
       <li class="home no-text"><a href="<%= url_for(root_path) %>" data-gravity="w">Home</a></li>
-      <% if admin_signed_in? && !(controller_name == 'exhibitions' && action_name != 'show') %>
+      <% if admin_signed_in? && exhibition_is_set %>
       <li class="artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w">Artists</a></li>
       <li class="artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w">Artwork</a></li>
       <li class="tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w">Tours</a></li>

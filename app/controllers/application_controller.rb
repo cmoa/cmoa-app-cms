@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
   def set_exhibition
     @exhibition = Exhibition.find(params[:exhibition_id])
   end
+
+  def exhibition_is_set
+    return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
+  end
 end
