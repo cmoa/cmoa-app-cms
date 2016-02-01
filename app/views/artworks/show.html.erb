@@ -39,7 +39,7 @@
       <p class="sub"><%= link_to(@artwork.location.name, [@exhibition, @artwork.location]) %></p>
 
       <h3>Beacon</h3>
-      <p class="sub"><%= link_to(@artwork.beacon.name, [@artwork.beacon]) %></p>
+      <p class="sub"><%= @artwork.beacon.name %></p>
 
       <h3>Code</h3>
       <p class="sub"><%= @artwork.code %></p>
