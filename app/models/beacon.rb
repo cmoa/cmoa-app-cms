@@ -16,16 +16,17 @@ class Beacon < ActiveRecord::Base
 
   JSON_ATTRS = ["major", "minor", "name"]
 
-  def self.unassigned(selected=nil)
-    @where = "(id NOT IN ( (SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations) )"
-    if @selected.blank?
-      @where += " )"
+  scope :unassigned, ->(selected)
+  {
+    where_clause = "(id NOT IN ( (SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations) )"
+    if selected.blank?
+      where_clause += " )"
     else
-      @where += " OR (id = '#{@selected.id}') )"
+      where_clause += " OR (id = '#{selected.id}') )"
     end
 
-    return Beacon.where(@where)
-  end
+    where(where_clause)
+  }
 
 
 
