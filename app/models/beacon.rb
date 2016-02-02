@@ -17,7 +17,7 @@ class Beacon < ActiveRecord::Base
   JSON_ATTRS = ["major", "minor", "name"]
 
 
-  def unassigned(selected)
+  def self.unassigned(selected)
     where_clause = "(id NOT IN ( (SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations) )"
     if selected.blank?
       where_clause += " )"
