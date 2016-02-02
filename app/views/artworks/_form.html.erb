@@ -35,7 +35,7 @@
   <p class="input"><%= f.text_area :body, :class => 'input-xxlarge', :rows => 5 %></p>
 
   <p class="lbl"><%= f.label :beacon_id %></p>
-  <p class="input"><%= f.collection_select :beacon_id, Beacon.unassigned(params[:beacon_id]).order('name asc'), :id, :name, :selected => params[:beacon_id], :prompt => 'Please select a beacon:' %></p>
+  <p class="input"><%= f.collection_select :beacon_id, Beacon.unassigned(@artwork.beacon.id).order('name asc'), :id, :name, :selected => params[:beacon_id], :prompt => 'Please select a beacon:' %></p>
 
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
