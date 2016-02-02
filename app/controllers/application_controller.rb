@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def set_exhibition
     if params.has_key?(:exhibition_id)
       @exhibition = Exhibition.find(params[:exhibition_id])
-      session[:exhibition] = :exhibition_id
+      session[:exhibition] = params[:exhibition_id]
     else
       if session.has_key?(:exhibition)
         @exhibition = Exhibition.find(session[:exhibition])
