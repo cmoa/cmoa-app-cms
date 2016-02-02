@@ -24,8 +24,15 @@ class ApplicationController < ActionController::Base
 
     if @locs.count >= 1
       @loc = @locs.first
-      flash.now[:notice] = "This beacon is already attached to #{@loc.name} do you want to overwrite?"
+      return @loc
     end
+
+    if @arts.count >= 1
+      @art = @arts.first
+      return @art
+    end
+
+    return nil
   end
 
   def exhibition_is_set

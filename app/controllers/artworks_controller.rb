@@ -43,6 +43,7 @@ class ArtworksController < ApplicationController
   end
 
   def edit
+  
   end
 
   def create
@@ -53,7 +54,15 @@ class ArtworksController < ApplicationController
       return
     end
 
-    check_unique_beacon(artwork_params[:beacon_id])
+    @dup = check_unique_beacon(artwork_params[:beacon_id])
+
+    if @dup.nil?
+
+    else
+      flash.now[:notice] = "Beacon would be overwritten"
+      render action: 'new'
+      return
+    end
 
     @artwork = Artwork.new(artwork_params)
 
