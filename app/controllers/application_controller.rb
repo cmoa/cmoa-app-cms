@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
   end
 
   def check_unique_beacon(beacon)
+
+    if @beacon.nil?
+      return nil
+    end
+
     @locs = Location.where(beacon_id: @beacon)
     @arts = Artwork.where(beacon_id: @beacon)
 
