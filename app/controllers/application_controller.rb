@@ -18,6 +18,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_unique_beacon(beacon)
+    @locs = Location.where(beacon_id: @beacon)
+    @arts = Artwork.where(beacon_id: @beacon)
+
+    if @locs.count >= 1
+      @loc = @locs.first
+      flash.now[:notice] = "This beacon is already attached to #{@loc.name} do you want to overwrite?"
+    end
+  end
+
   def exhibition_is_set
     return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
   end

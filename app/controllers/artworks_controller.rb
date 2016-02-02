@@ -53,6 +53,8 @@ class ArtworksController < ApplicationController
       return
     end
 
+    check_unique_beacon(artwork_params[:beacon_id])
+
     @artwork = Artwork.new(artwork_params)
 
     # Set the exhibition
