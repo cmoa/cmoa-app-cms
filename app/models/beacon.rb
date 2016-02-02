@@ -24,7 +24,7 @@ class Beacon < ActiveRecord::Base
       @where += " OR (id = '#{@selected.id}') )"
     end
 
-    return Beacon.where(@where)
+    where(@where)
   end
 
 
