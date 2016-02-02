@@ -16,9 +16,11 @@ class Beacon < ActiveRecord::Base
 
   JSON_ATTRS = ["major", "minor", "name"]
 
-  def self.unassigned
-    return Beacon.where('id NOT IN ((SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations))') 
+  def self.unassigned(@selected)
+    return Beacon.where('(id NOT IN ((SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations))) OR (id = #{@selected})')
   end
+
+
 
   def as_json(options=nil)
     attributes.slice(*JSON_ATTRS)
