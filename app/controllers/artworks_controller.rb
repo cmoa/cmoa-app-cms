@@ -47,7 +47,7 @@ class ArtworksController < ApplicationController
   end
 
   def create
-    @artwork = Artwork.new(artwork_params)
+
     # Verity artistArtwork relation
     if artwork_params[:artist_id].nil?
       flash.now[:notice] = 'Please specify an artist for this artwork'
@@ -65,7 +65,7 @@ class ArtworksController < ApplicationController
       return
     end
 
-
+    @artwork = Artwork.new(artwork_params)
 
     # Set the exhibition
     @artwork.exhibition_id = @exhibition.id

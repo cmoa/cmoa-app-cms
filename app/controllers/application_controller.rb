@@ -18,27 +18,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_unique_beacon(beacon)
 
-    if @beacon.nil?
-      return nil
-    end
-
-    @locs = Location.where(beacon_id: @beacon)
-    @arts = Artwork.where(beacon_id: @beacon)
-
-    if @locs.count >= 1
-      @loc = @locs.first
-      return @loc
-    end
-
-    if @arts.count >= 1
-      @art = @arts.first
-      return @art
-    end
-
-    return nil
-  end
 
   def exhibition_is_set
     return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
