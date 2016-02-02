@@ -19,11 +19,11 @@ class Beacon < ActiveRecord::Base
   def self.unassigned(selected)
 
 
-    @where = "(id NOT IN ((SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations)))"
+    @where = "(id NOT IN ( (SELECT DISTINCT(beacon_id) FROM artworks) UNION (SELECT DISTINCT(beacon_id) FROM locations) )"
     if @selected.blank?
       @where += ")"
     else
-      @where += " OR (id = '#{@selected}')"
+      @where += " OR (id = '#{@selected}') )"
     end
 
     return Beacon.where(@where)
