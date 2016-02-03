@@ -10,6 +10,7 @@
             <th>Name</th>
             <th >Major</th>
             <th >Minor</th>
+            <th>Attached Object</th>
             <th class="actions">Actions</th>
           </tr>
         </thead>
@@ -22,6 +23,13 @@
               <td><%= beacon.name %></td>
               <td><%= beacon.major %></td>
               <td><%= beacon.minor %></td>
+              <% if beacon.location.present? %>
+                <td><%= link_to beacon.location.name, location_path(beacon.location) %> <%= link_to 'Detach', detach_beacon_path(beacon), method: :get, :class => 'btn btn-mini btn-danger' %></td>
+              <% elsif beacon.artwork.present? %>
+                <td><%= link_to(beacon.artwork.title, [beacon.artwork.exhibition, beacon.artwork]) %> <%= link_to 'Detach', detach_beacon_path(beacon), method: :get, :class => 'btn btn-mini btn-danger' %></td>
+              <% else %>
+                <td>None</td>
+              <% end %>
               <td class="actions"><%= link_to 'Show', beacon, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_beacon_path(beacon), :class => 'btn btn-mini' %> <%= link_to 'Delete', beacon, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>

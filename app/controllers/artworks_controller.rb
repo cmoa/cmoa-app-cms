@@ -43,9 +43,11 @@ class ArtworksController < ApplicationController
   end
 
   def edit
+
   end
 
   def create
+
     # Verity artistArtwork relation
     if artwork_params[:artist_id].nil?
       flash.now[:notice] = 'Please specify an artist for this artwork'

@@ -6,11 +6,22 @@ class ApplicationController < ActionController::Base
   helper_method :exhibition_is_set
 
   def set_exhibition
-    @exhibition = Exhibition.find(params[:exhibition_id])
+    if params.has_key?(:exhibition_id)
+      @exhibition = Exhibition.find(params[:exhibition_id])
+      session[:exhibition] = params[:exhibition_id]
+    else
+      if session.has_key?(:exhibition)
+        @exhibition = Exhibition.find(session[:exhibition])
+      else
+        @exhibition = nil #There isn't an exhibition
+      end
+    end
   end
+
+
 
   def exhibition_is_set
     return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
   end
-  
+
 end
