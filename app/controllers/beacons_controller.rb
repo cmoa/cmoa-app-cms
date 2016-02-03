@@ -45,8 +45,7 @@ class BeaconsController < ApplicationController
     @beacon= Beacon.find(params[:beacon_id])
     @beacon.detach
 
-    @beacons = Beacon.all
-    render action: 'index', notice: 'Beacon was successfully detached.'
+    redirect_to action :index, notice: 'Beacon was successfully detached.'
   end
 
 private
