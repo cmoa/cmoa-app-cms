@@ -17,7 +17,7 @@ class HoursController < ApplicationController
   end
 
   def create
-  
+
   end
 
   def destroy
@@ -29,6 +29,25 @@ class HoursController < ApplicationController
 
 
     def hours_params
-      params.require(:hour).permit(:)
+      params.require(:hour).permit(
+            :start_schedule,
+            :end_schedule,
+            :sunday_start,
+            :sunday_end,
+            :monday_start,
+            :monday_end,
+            :tuesday_start,
+            :tuesday_end,
+            :wednesday_start,
+            :wednesday_end,
+            :thursday_start,
+            :thursday_end,
+            :friday_start,
+            :friday_end,
+            :saturday_start,
+            :saturday_end
+          )
+
+
     end
 end
