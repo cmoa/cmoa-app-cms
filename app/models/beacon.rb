@@ -28,6 +28,11 @@ class Beacon < ActiveRecord::Base
     where(where_clause)
   end
 
+  def self.attached
+    where_clause = "id in (SELECT beacon_id FROM artworks where beacon_id is not null) OR id  in (SELECT beacon_id FROM locations where beacon_id is not null)"
+    where(where_clause)
+  end
+
   def detach
     beacon = self.id
     Location.where(beacon_id: beacon).update_all(beacon_id: nil)
