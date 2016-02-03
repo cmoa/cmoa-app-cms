@@ -26,7 +26,9 @@ CMOA::Application.routes.draw do
     end
   end
 
-  resources :beacons
+  resources :beacons do
+    get :detach
+  end
   resources :locations
 
   # API 1.0

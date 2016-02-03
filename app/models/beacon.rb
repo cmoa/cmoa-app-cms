@@ -28,6 +28,12 @@ class Beacon < ActiveRecord::Base
     where(where_clause)
   end
 
+  def self.detach
+    beacon = self.id
+    Location.where(beacon_id: beacon).update_all(beacon_id: nil)
+    Artwork.where(beacon_id: beacon).update_all(beacon_id: nil)
+  end
+
 
 
 

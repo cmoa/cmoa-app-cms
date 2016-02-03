@@ -1,6 +1,6 @@
 class BeaconsController < ApplicationController
   before_action :set_exhibition
-  before_action :set_beacon, only: [:show, :edit, :update, :destroy]
+  before_action :set_beacon, only: [:show, :edit, :update, :destroy, :detach]
 
   def index
     @beacons = Beacon.all
@@ -38,6 +38,12 @@ class BeaconsController < ApplicationController
     @beacon.destroy
 
     redirect_to @beacon, notice: 'Beacon was successfully deleted.'
+  end
+
+  def detach
+    @beacon.detach
+
+    redirect_to @beacon, notice: 'Beacon was successfully detached.'
   end
 
 private

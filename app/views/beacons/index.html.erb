@@ -24,9 +24,9 @@
               <td><%= beacon.major %></td>
               <td><%= beacon.minor %></td>
               <% if beacon.location.present? %>
-                <td><%= link_to beacon.location.name, location_path(beacon.location) %></td>
+                <td><%= link_to beacon.location.name, location_path(beacon.location) %> <%= link_to 'Detach', beacon, method: :detach, :class => 'btn btn-mini btn-danger' %></td>
               <% elsif beacon.artwork.present? %>
-                <td><%= link_to(beacon.artwork.title, [beacon.artwork.exhibition, beacon.artwork]) %></td>
+                <td><%= link_to(beacon.artwork.title, [beacon.artwork.exhibition, beacon.artwork]) %> <%= link_to 'Detach', beacon, method: :detach, :class => 'btn btn-mini btn-danger' %></td>
               <% else %>
                 <td>None</td>
               <% end %>
