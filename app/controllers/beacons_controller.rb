@@ -1,6 +1,7 @@
 class BeaconsController < ApplicationController
   before_action :set_exhibition
-  before_action :set_beacon, only: [:show, :edit, :update, :destroy, :detach]
+  before_action :set_beacon, only: [:show, :edit, :update, :destroy]
+  helper_method :detach
 
   def index
     @beacons = Beacon.all
@@ -41,8 +42,8 @@ class BeaconsController < ApplicationController
   end
 
   def detach
+    @beacon= Beacon.find(params[:beacon_id])
     @beacon.detach
-
     redirect_to @beacon, notice: 'Beacon was successfully detached.'
   end
 
