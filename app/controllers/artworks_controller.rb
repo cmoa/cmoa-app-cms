@@ -55,16 +55,6 @@ class ArtworksController < ApplicationController
       return
     end
 
-    @dup = check_unique_beacon(artwork_params[:beacon_id])
-
-    if @dup.nil?
-
-    else
-      flash.now[:notice] = "Beacon would be overwritten"
-      render action: 'new'
-      return
-    end
-
     @artwork = Artwork.new(artwork_params)
 
     # Set the exhibition

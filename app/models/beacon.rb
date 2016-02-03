@@ -25,7 +25,7 @@ class Beacon < ActiveRecord::Base
       where_clause += " OR (id = '#{selected.id}') )"
     end
 
-    where(where_clause)
+    return Beacon.where(where_clause).to_sql
   end
 
 
