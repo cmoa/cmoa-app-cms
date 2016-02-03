@@ -1,5 +1,5 @@
 class Beacon < ActiveRecord::Base
-  has_one :artwork
+  has_one :artwork, :dependent => :nullify
   has_one :location
 
 
@@ -14,7 +14,7 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  JSON_ATTRS = ["major", "minor", "name"]
+  JSON_ATTRS = ["id", "major", "minor", "name"]
 
 
   def self.unassigned(selected)
@@ -25,6 +25,11 @@ class Beacon < ActiveRecord::Base
       where_clause += " OR (id = '#{selected.id}')"
     end
 
+    where(where_clause)
+  end
+
+  def self.attached
+    where_clause = "id in (SELECT beacon_id FROM artworks where beacon_id is not null) OR id  in (SELECT beacon_id FROM locations where beacon_id is not null)"
     where(where_clause)
   end
 
