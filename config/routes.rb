@@ -26,6 +26,8 @@ CMOA::Application.routes.draw do
     end
   end
 
+resources :hours
+
   # API 1.0
   scope '/api' do
     match 'sync'      => 'api_v1#sync',          :as => 'api_sync',         via: [:get, :post]
