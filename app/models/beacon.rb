@@ -1,5 +1,5 @@
 class Beacon < ActiveRecord::Base
-  has_one :artwork
+  has_one :artwork, :dependent => :nullify
   has_one :location
 
 
@@ -14,7 +14,7 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  JSON_ATTRS = ["major", "minor", "name"]
+  JSON_ATTRS = ["id", "major", "minor", "name"]
 
 
   def self.unassigned(selected)
