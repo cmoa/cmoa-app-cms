@@ -1,3 +1,3 @@
-class Exhibition < ActiveRecord::Base
+class Hour < ActiveRecord::Base
 
 end
