@@ -25,14 +25,14 @@
           <% if @hours.size > 0 %>
           <% @hours.each_with_index do |hour, index| %>
             <tr data-id="<%= hour.id %>">
-              <td><%= hour.start_schedule %> to <%= hour.end_schedule %></td>
-              <td><%= hour.sunday_start %> to <%= hour.sunday_end %></td>
-              <td><%= hour.monday_start %> to <%= hour.monday_end %></td>
-              <td><%= hour.tuesday_start %> to <%= hour.tuesday_end %></td>
-              <td><%= hour.wednesday_start %> to <%= hour.wednesday_end %></td>
-              <td><%= hour.thursday_start %> to <%= hour.thursday_end %></td>
-              <td><%= hour.friday_start %> to <%= hour.friday_end %></td>
-              <td><%= hour.saturday_start %> to <%= hour.saturday_end %></td>
+              <td><%= hour.start_schedule.strftime("%F") %> to <%= hour.end_schedule.strftime("%F") %></td>
+              <td><%= hour.sunday_start.strftime("%H:%M") %> to <%= hour.sunday_end.strftime("%H:%M") %></td>
+              <td><%= hour.monday_start.strftime("%H:%M") %> to <%= hour.monday_end.strftime("%H:%M") %></td>
+              <td><%= hour.tuesday_start.strftime("%H:%M") %> to <%= hour.tuesday_end.strftime("%H:%M") %></td>
+              <td><%= hour.wednesday_start.strftime("%H:%M") %> to <%= hour.wednesday_end.strftime("%H:%M") %></td>
+              <td><%= hour.thursday_start.strftime("%H:%M") %> to <%= hour.thursday_end.strftime("%H:%M") %></td>
+              <td><%= hour.friday_start.strftime("%H:%M") %> to <%= hour.friday_end.strftime("%H:%M") %></td>
+              <td><%= hour.saturday_start.strftime("%H:%M") %> to <%= hour.saturday_end.strftime("%H:%M") %></td>
               <td class="actions"><%= link_to 'Show', hour, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_hour_path(hour), :class => 'btn btn-mini' %><%= link_to 'Delete', hour, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>
