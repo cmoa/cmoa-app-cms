@@ -23,6 +23,7 @@ class HoursController < ApplicationController
       redirect_to action: :index
     else
       render action: 'new'
+    end
   end
 
   def destroy
