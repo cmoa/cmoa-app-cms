@@ -35,7 +35,8 @@ class HoursController < ApplicationController
   end
 
   def destroy
-
+    @hour.destroy
+    redirect_to action: :index
   end
 
 
