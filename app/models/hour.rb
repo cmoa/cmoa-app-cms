@@ -41,8 +41,8 @@ validates :end_schedule, :presence => true
 
     times = self.get_dow(dow)
 
-    start_time = times.start
-    end_time = times.end_time
+    start_time = times['start']
+    end_time = times['end']
 
     if start_time.blank? || end_time.blank?
       return 'Closed'
@@ -68,16 +68,16 @@ validates :end_schedule, :presence => true
       times = self.get_dow(i)
       temp = {}
 
-      if times.start.blank?
+      if times['start'].blank?
         temp['open'] = nil
       else
-        temp['open'] = times.start.strftime("%H:%M")
+        temp['open'] = times['start'].strftime("%H:%M")
       end
 
-      if times.end.blank?
+      if times['end'].blank?
         temp['close'] = nil
       else
-        temp['close'] = times.end.strftime("%H:%M")
+        temp['close'] = times['end'].strftime("%H:%M")
       end
 
 
