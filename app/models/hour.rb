@@ -1,6 +1,6 @@
 class Hour < ActiveRecord::Base
 
-  def print_dow(dow)
+  def print_dow(dow, fmt = "%I:%M %P")
 
     if dow == 1
       start_time = self.sunday_start
@@ -30,6 +30,6 @@ class Hour < ActiveRecord::Base
       return 'Closed'
     end
 
-    return start_time.strftime("%H:%M") + " to " + end_time.strftime("%H:%M")
+    return start_time.strftime(fmt) + " to " + end_time.strftime(fmt)
   end
 end
