@@ -1,5 +1,5 @@
 class RemoveHoursId < ActiveRecord::Migration
   def change
-    remove_column :hous, :hours_id, :integer
+    remove_column :hours, :hours_id, :integer
   end
 end
