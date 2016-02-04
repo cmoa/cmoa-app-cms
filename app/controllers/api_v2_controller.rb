@@ -92,7 +92,7 @@ class ApiV2Controller < ApplicationController
 
     #get the valid schedule
      datestamp = s_date.strftime("'%F'")
-    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " desc").limit(1).to_sql
+    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " desc").first
 
     #json = {'sql' => @sch}
     json = @sch.to_json
