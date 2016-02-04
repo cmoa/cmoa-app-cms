@@ -77,31 +77,31 @@ class ApiV2Controller < ApplicationController
     return render :json => response
   end
 
-    def hours
-      #Vars
-      s_date = params[:date]
+  def hours
+    #Vars
+    s_date = params[:date]
 
-      #Convert to date
-      if s_date.blank?
-        s_date = DateTime.now
-      else
-        s_date = DateTime.parse(s_date)
-      end
-
-      date_diff = "@(end_schedule::timestamp - start_schedule::timestamp)"
-
-      #get the valid schedule
-      ts = s_date.to_time.to_i
-      @sch = Hour.where(ts + " BETWEEN start_schedule::timestamp AND end_schedule::timestamp").order(date_diff + " desc").limit(1).to_sql
-
-      json = {'sql' => @sch}
-        #json = @sch.to_json
-
-      # Configure gzipped response
-      request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
-
-      return render :json => json
+    #Convert to date
+    if s_date.blank?
+      s_date = DateTime.now
+    else
+      s_date = DateTime.parse(s_date)
     end
+
+    date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
+
+    #get the valid schedule
+     datestamp = s_date.strftime("'%F'")
+    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " desc").limit(1).to_sql
+
+    json = {'sql' => @sch}
+      #json = @sch.to_json
+
+    # Configure gzipped response
+    request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
+
+    return render :json => json
+  end
 
   def like
     # Vars
