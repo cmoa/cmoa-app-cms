@@ -18,7 +18,7 @@ class HoursController < ApplicationController
 
   def update
     if @hour.update(hour_params)
-      redirect_to @hour, notice: 'Exhibition was successfully updated.'
+      redirect_to @hour, notice: 'Schedule was successfully updated.'
     else
       render action: 'edit'
     end
@@ -28,7 +28,7 @@ class HoursController < ApplicationController
     @hour = Hour.new(hour_params)
 
     if @hour.save
-      redirect_to action: :index
+      redirect_to @hour, notice: 'Schedule was successfully created.'
     else
       render action: 'new'
     end
