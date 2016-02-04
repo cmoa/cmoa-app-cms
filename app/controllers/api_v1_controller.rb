@@ -1,7 +1,7 @@
 class ApiV1Controller < ApplicationController
   skip_before_filter :authenticate_admin!
-  before_filter :check_params, :except => [:sync]
-  protect_from_forgery :except => [:sync, :like, :subscribe]
+  before_filter :check_params, :except => [:sync, :hours]
+  protect_from_forgery :except => [:sync, :like, :subscribe, :hours]
 
   def sync
     since = (!params[:since].nil? && params[:since] != '') ? params[:since].to_datetime : Date.new(2011, 1, 1)
@@ -74,6 +74,9 @@ class ApiV1Controller < ApplicationController
     @sch = Hour.where(s_date => :start_schedule..:end_schedule).order(date_diff + " desc").limit(1)
 
     json = @sch.to_json
+
+    # Configure gzipped response
+    request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
     return render :json => json
   end
