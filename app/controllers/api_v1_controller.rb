@@ -72,10 +72,10 @@ class ApiV1Controller < ApplicationController
 
     #get the valid schedule
      datestamp = s_date.strftime("'%F'")
-    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " desc").limit(1).to_sql
+    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " desc").limit(1)
 
-    json = {'sql' => @sch}
-      #json = @sch.to_json
+    #json = {'sql' => @sch}
+    json = @sch.to_json
 
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
