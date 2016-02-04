@@ -63,15 +63,16 @@ class ApiV1Controller < ApplicationController
 
     #Convert to date
     if s_date.blank?
-      s_date = DateTime.now.to_date
+      s_date = DateTime.now
     else
-      s_date = Date.parse(s_date)
+      s_date = DateTime.parse(s_date)
     end
 
     date_diff = "@(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
-    @sch = Hour.where(s_date.to_time.to_i  + " BETWEEN start_schedule::timestamp AND end_schedule::timestamp").order(date_diff + " desc").limit(1)
+    ts = s_date.to_time.to_i
+    @sch = Hour.where(ts + " BETWEEN start_schedule::timestamp AND end_schedule::timestamp").order(date_diff + " desc").limit(1)
 
     json = @sch.to_json
 
