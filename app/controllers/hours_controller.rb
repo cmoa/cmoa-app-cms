@@ -1,5 +1,5 @@
 class HoursController < ApplicationController
-
+  before_action :set_hour, only: [:show, :edit, :update, :destroy]
 
   def index
     @hours = Hour.all
@@ -17,7 +17,12 @@ class HoursController < ApplicationController
   end
 
   def create
+    @hour = Hour.new(hours_params)
 
+    if @hour.save
+      redirect_to action: :index
+    else
+      render action: 'new'
   end
 
   def destroy
@@ -50,4 +55,9 @@ class HoursController < ApplicationController
 
 
     end
+
+    private
+      def set_hour
+        @hour = Hour.find(params[:id])
+      end
 end
