@@ -1,7 +1,9 @@
 class Hour < ActiveRecord::Base
 
-  def print_dow(dow, fmt = "%I:%M %P")
+validates :start_schedule, :presence => true
+validates :end_schedule, :presence => true
 
+  def get_dow(dow)
     if dow == 1
       start_time = self.sunday_start
       end_time = self.sunday_end
@@ -24,8 +26,24 @@ class Hour < ActiveRecord::Base
       start_time = self.saturday_start
       end_time = self.saturday_end
     else
-      return ''
+      return nil
     end
+
+    ret = {}
+    ret['start'] = start_time
+    ret['end'] = end_time
+
+    return ret
+  end
+
+
+  def print_dow(dow, fmt = "%I:%M %P")
+
+    times = self.get_dow(dow)
+
+    start_time = times.start
+    end_time = times.end_time
+
     if start_time.blank? || end_time.blank?
       return 'Closed'
     end
@@ -41,5 +59,32 @@ class Hour < ActiveRecord::Base
     end
 
     return nil
+  end
+
+
+  def to_json
+    json_hour = {}
+    for i in 1..7 do
+      times = self.get_dow(i)
+      temp = {}
+
+      if times.start.blank?
+        temp['open'] = nil
+      else
+        temp['open'] = times.start.strftime("%H:%M")
+      end
+
+      if times.end.blank?
+        temp['close'] = nil
+      else
+        temp['close'] = times.end.strftime("%H:%M")
+      end
+
+
+      json_hour[Hour.dow(i)] = temp
+    end
+
+    return json_hour
+
   end
 end
