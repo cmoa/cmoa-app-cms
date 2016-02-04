@@ -2,7 +2,7 @@ class HoursController < ApplicationController
 
 
   def index
-
+    @hours = Hour.all
   end
 
   def show
@@ -10,7 +10,7 @@ class HoursController < ApplicationController
   end
 
   def new
-
+    @hour = Hour.new
   end
 
   def edit
