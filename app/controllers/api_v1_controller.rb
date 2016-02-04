@@ -57,6 +57,27 @@ class ApiV1Controller < ApplicationController
     return render :json => response
   end
 
+  def hours
+    #Vars
+    s_date = params[:date]
+
+    #Convert to date
+    if s_date.blank?
+      s_date = DateTime.now.to_date
+    else
+      s_date = Date.parse(s_date)
+    end
+
+    date_diff = "@(end_schedule::timestamp - start_schedule::timestamp)"
+
+    #get the valid schedule
+    @sch = Hour.where(s_date => :start_schedule..:end_schedule).order(date_diff + " desc").limit(1)
+
+    json = @sch.to_json
+
+    return render :json => json
+  end
+
   def like
     # Vars
     artwork_uuid = params[:artwork]

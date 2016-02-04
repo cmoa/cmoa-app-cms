@@ -93,10 +93,9 @@ class ApiV2Controller < ApplicationController
     #get the valid schedule
     @sch = Hour.where(s_date => :start_schedule..:end_schedule).order(date_diff + " desc").limit(1)
 
+    json = @sch.to_json
 
-
-
-
+    return render :json => json
   end
 
   def like
