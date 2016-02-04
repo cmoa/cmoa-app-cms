@@ -91,7 +91,7 @@ class ApiV2Controller < ApplicationController
     date_diff = "@(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
-    @sch = Hour.where(s_date.strftime("%F")  + " BETWEEN start_schedule AND end_schedule").order(date_diff + " desc").limit(1)
+    @sch = Hour.where(s_date.to_time.to_i  + " BETWEEN start_schedule::timestamp AND end_schedule::timestamp").order(date_diff + " desc").limit(1)
 
     json = @sch.to_json
 
