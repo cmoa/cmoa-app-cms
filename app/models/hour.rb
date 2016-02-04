@@ -32,4 +32,11 @@ class Hour < ActiveRecord::Base
 
     return start_time.strftime(fmt) + " to " + end_time.strftime(fmt)
   end
+
+  def self.dow(dow)
+    days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+    return days_of_week[dow]
+
+  end
 end

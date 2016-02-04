@@ -16,8 +16,16 @@ class HoursController < ApplicationController
   def edit
   end
 
+  def update
+    if @hour.update(hour_params)
+      redirect_to @hour, notice: 'Exhibition was successfully updated.'
+    else
+      render action: 'edit'
+    end
+  end
+
   def create
-    @hour = Hour.new(hours_params)
+    @hour = Hour.new(hour_params)
 
     if @hour.save
       redirect_to action: :index
@@ -34,7 +42,7 @@ class HoursController < ApplicationController
 
 
 
-    def hours_params
+    def hour_params
       params.require(:hour).permit(
             :start_schedule,
             :end_schedule,
