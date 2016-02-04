@@ -1,0 +1,52 @@
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Carnegie Museum of Art iOS App</h1>
+
+      <h2>Schedules</h2>
+
+      <table class="table table-striped table-bordered table-hours">
+        <thead>
+          <tr>
+            <th >Schedule Period</th>
+            <th >Sunday Hours</th>
+            <th >Monday Hours</th>
+            <th >Tuesday Hours</th>
+            <th >Wednesday Hours</th>
+            <th >Thursday Hours</th>
+            <th >Friday Hours</th>
+            <th >Saturday Hours</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @hours.size > 0 %>
+          <% @hours.each_with_index do |hour, index| %>
+            <tr data-id="<%= hour.id %>">
+              <td><%= hour.start_schedule %> to <%= hour.end_schedule %></td>
+              <td><%= hour.sunday_start %> to <%= hour.sunday_end %></td>
+              <td><%= hour.monday_start %> to <%= hour.monday_end %></td>
+              <td><%= hour.tuesday_start %> to <%= hour.tuesday_end %></td>
+              <td><%= hour.wednesday_start %> to <%= hour.wednesday_end %></td>
+              <td><%= hour.thursday_start %> to <%= hour.thursday_end %></td>
+              <td><%= hour.friday_start %> to <%= hour.friday_end %></td>
+              <td><%= hour.saturday_start %> to <%= hour.saturday_end %></td>
+              <td class="actions"><%= link_to 'Show', hour, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_hour_path(hour), :class => 'btn btn-mini' %><%= link_to 'Delete', hour, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="4"><strong>No hours have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'New Schedule', new_hour_path, :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>
