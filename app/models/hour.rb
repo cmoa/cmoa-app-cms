@@ -36,7 +36,10 @@ class Hour < ActiveRecord::Base
   def self.dow(dow)
     days_of_week = ['', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-    return days_of_week[dow]
+    if dow in 1..7
+      return days_of_week[dow]
+    end
 
+    return nil
   end
 end
