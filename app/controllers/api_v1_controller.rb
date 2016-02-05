@@ -59,19 +59,19 @@ class ApiV1Controller < ApplicationController
 
   def hours
     #Vars
-    s_date = params[:date]
+    schedule_date = params[:date]
 
     #Convert to date
-    if s_date.blank?
-      s_date = DateTime.now
+    if schedule_date.blank?
+      schedule_date = DateTime.now
     else
-      s_date = DateTime.parse(s_date)
+      schedule_date = DateTime.parse(schedule_date)
     end
 
     date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
-     datestamp = s_date.strftime("'%F'")
+     datestamp = schedule_date.strftime("'%F'")
     @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
 
     #json = {'sql' => @sch}
@@ -82,7 +82,7 @@ class ApiV1Controller < ApplicationController
 
     return render :json => json
   end
-
+  
   def like
     # Vars
     artwork_uuid = params[:artwork]
