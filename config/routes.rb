@@ -26,16 +26,21 @@ CMOA::Application.routes.draw do
     end
   end
 
-  resources :beacons do
+
+resources :beacons do
     get :detach
-  end
-  resources :locations
+end
+resources :locations
+
+resources :hours
+
 
   # API 1.0
   scope '/api' do
     match 'sync'      => 'api_v1#sync',          :as => 'api_sync',         via: [:get, :post]
     match 'like'      => 'api_v1#like',          :as => 'api_like',         via: [:get, :post]
     match 'subscribe' => 'api_v1#subscribe',     :as => 'api_subscribe',    via: [:get, :post]
+    match 'hours'     => 'api_v1#hours',         :as => 'api_hours',        via: [:get, :post]
   end
 
   # API 2.0
@@ -43,6 +48,7 @@ CMOA::Application.routes.draw do
     match 'sync'      => 'api_v2#sync',          :as => 'api_sync_v2',      via: [:get, :post]
     match 'like'      => 'api_v2#like',          :as => 'api_like_v2',      via: [:get, :post]
     match 'subscribe' => 'api_v2#subscribe',     :as => 'api_subscribe_v2', via: [:get, :post]
+    match 'hours'     => 'api_v2#hours',         :as => 'api_hours_v2',     via: [:get, :post]
   end
 
   # Base

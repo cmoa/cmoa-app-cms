@@ -12,7 +12,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 20160201141026) do
+ActiveRecord::Schema.define(version: 20160204161515) do
 
 
   # These are extensions that must be enabled in order to support this database
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160201141026) do
 
   add_index "artworks", ["beacons_id"], name: "index_artworks_on_beacons_id", using: :btree
 
+
   create_table "beacons", force: true do |t|
     t.integer "major", null: false
     t.integer "minor", null: false
@@ -114,30 +115,23 @@ ActiveRecord::Schema.define(version: 20160201141026) do
   end
 
   create_table "hours", force: true do |t|
-    t.integer  "hours_id"
+
     t.datetime "start_schedule"
     t.datetime "end_schedule"
     t.time     "sunday_start"
     t.time     "sunday_end"
-    t.binary   "sunday_isopen"
     t.time     "monday_start"
     t.time     "monday_end"
-    t.binary   "monday_isopen"
     t.time     "tuesday_start"
     t.time     "tuesday_end"
-    t.binary   "tuesday_isopen"
     t.time     "wednesday_start"
     t.time     "wednesday_end"
-    t.binary   "wednesday_isopen"
     t.time     "thursday_start"
     t.time     "thursday_end"
-    t.binary   "thursday_isopen"
     t.time     "friday_start"
     t.time     "friday_end"
-    t.binary   "friday_isopen"
     t.time     "saturday_start"
     t.time     "saturday_end"
-    t.binary   "saturday_isopen"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -172,6 +166,7 @@ ActiveRecord::Schema.define(version: 20160201141026) do
   end
 
   add_index "locations", ["beacons_id"], name: "index_locations_on_beacons_id", using: :btree
+
 
   create_table "media", force: true do |t|
     t.integer  "exhibition_id"

@@ -1,7 +1,7 @@
 class ApiV1Controller < ApplicationController
   skip_before_filter :authenticate_admin!
-  before_filter :check_params, :except => [:sync]
-  protect_from_forgery :except => [:sync, :like, :subscribe]
+  before_filter :check_params, :except => [:sync, :hours]
+  protect_from_forgery :except => [:sync, :like, :subscribe, :hours]
 
   def sync
     since = (!params[:since].nil? && params[:since] != '') ? params[:since].to_datetime : Date.new(2011, 1, 1)
@@ -59,6 +59,32 @@ class ApiV1Controller < ApplicationController
     return render :json => response
   end
 
+  def hours
+    #Vars
+    schedule_date = params[:date]
+
+    #Convert to date
+    if schedule_date.blank?
+      schedule_date = DateTime.now
+    else
+      schedule_date = DateTime.parse(schedule_date)
+    end
+
+    date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
+
+    #get the valid schedule
+     datestamp = schedule_date.strftime("'%F'")
+    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
+
+    #json = {'sql' => @sch}
+    json = @sch.to_json
+
+    # Configure gzipped response
+    request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
+
+    return render :json => json
+  end
+  
   def like
     # Vars
     artwork_uuid = params[:artwork]
