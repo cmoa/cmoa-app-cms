@@ -68,18 +68,13 @@ validates :end_schedule, :presence => true
       times = self.get_dow(i)
       temp = {}
 
-      if times['start'].blank?
+      if times['start'].blank? || times['end'].blank?
         temp['open'] = nil
-      else
-        temp['open'] = times['start'].strftime("%H:%M")
-      end
-
-      if times['end'].blank?
         temp['close'] = nil
       else
+        temp['open'] = times['start'].strftime("%H:%M")
         temp['close'] = times['end'].strftime("%H:%M")
       end
-
 
       json_hour[Hour.dow(i)] = temp
     end
