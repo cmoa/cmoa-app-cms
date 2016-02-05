@@ -13,7 +13,7 @@
         <h3><%= Hour.dow(dow) %></h3>
         <p class="sub"><%= @hour.print_dow(dow) %></p>
       <% end %>
-      <pre> <%= debug(@hour.to_json) %> </pre>
+      
       <p><%= link_to raw('&laquo; Back'), hours_path, :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_hour_path(@hour), :class => 'btn btn-mini' %>  </p>
 
     </div>
