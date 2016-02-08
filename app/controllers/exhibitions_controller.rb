@@ -74,10 +74,6 @@ class ExhibitionsController < ApplicationController
     render :json => {:success => true}
   end
 
-  private
-    def set_exhibition
-      @exhibition = Exhibition.find(params[:id])
-    end
 
     def exhibition_params
       params.require(:exhibition).permit(:title, :subtitle, :sponsor, :is_live, :bg_iphone, :bg_ipad)
