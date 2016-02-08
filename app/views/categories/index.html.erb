@@ -22,7 +22,7 @@
               <% if exhibition_is_set %>
               <td class="artwork"><%= category.artworks.size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_category => category.id), :class => 'btn btn-mini btn-info') %></td>
               <% end %>
-              <td class="actions"><%= link_to 'Show', [category], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_category_path(@exhibition, category), :class => 'btn btn-mini' %> <%= link_to 'Delete', [category], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+              <td class="actions"><%= link_to 'Show', [category], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_category_path(category), :class => 'btn btn-mini' %> <%= link_to 'Delete', [category], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>
           <% else %>
