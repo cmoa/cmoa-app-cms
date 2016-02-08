@@ -119,10 +119,12 @@ nav {
 
         color: $color-nav-text;
         text-decoration: none;
+
         .sub
         {
-          background-color: $color-sub-nav
+          background-color: $color-sub-nav;
         }
+
       }
 
       a:hover, a:active {
