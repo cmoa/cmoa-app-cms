@@ -140,6 +140,13 @@ nav {
         color: $color-nav-text;
         text-decoration: none;
       }
+
+      a:hover, a:active {
+        background-color: $color-nav-active;
+
+        color: #ffffff;
+        text-decoration: none;
+      }
     }
 
     li.no-text {
