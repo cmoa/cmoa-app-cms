@@ -20,6 +20,10 @@ class Location < ActiveRecord::Base
     attributes.slice(*JSON_ATTRS)
   end
 
+  def exhibition_artworks(exhibition)
+    self.artworks.where(exhibition_id: exhibition)
+  end
+
   private
     def set_uuid
       self.uuid = UUIDTools::UUID.timestamp_create().to_s

@@ -7,9 +7,7 @@
         <thead>
           <tr>
             <th class="title">Title</th>
-            <% if exhibition_is_set %>
             <th class="artwork"># of Artwork</th>
-            <% end %>
             <th class="actions"></th>
           </tr>
         </thead>
@@ -20,7 +18,9 @@
             <tr>
               <td class="title"><%= category.title %></td>
               <% if exhibition_is_set %>
-              <td class="artwork"><%= category.artworks.size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_category => category.id), :class => 'btn btn-mini btn-info') %></td>
+              <td class="artwork"><%= category.exhibition_artworks(@exhibition).size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_category => category.id), :class => 'btn btn-mini btn-info') %></td>
+              <% else %>
+              <td class="artwork"><%= category.artworks.size %> </td>
               <% end %>
               <td class="actions"><%= link_to 'Show', [category], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_category_path(category), :class => 'btn btn-mini' %> <%= link_to 'Delete', [category], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
