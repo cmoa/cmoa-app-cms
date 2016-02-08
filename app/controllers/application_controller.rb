@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
 
   def exhibition_is_set
-    set_exhibition() #First try to set the exhibition
+    set_exhibition #First try to set the exhibition
     return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
   end
 
