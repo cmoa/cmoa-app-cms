@@ -124,17 +124,7 @@ nav {
 
       }
 
-      .sub
-      {
-        a:link, a:visited {
-          background-color: $color-sub-nav;
 
-          color: $color-nav-text;
-          text-decoration: none;
-
-
-
-        }
 
       }
 
@@ -144,6 +134,14 @@ nav {
         color: #ffffff;
         text-decoration: none;
       }
+    }
+
+    li.sub
+    {
+        background-color: $color-sub-nav;
+
+        color: $color-nav-text;
+        text-decoration: none;
     }
 
     li.no-text {
