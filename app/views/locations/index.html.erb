@@ -22,7 +22,7 @@
               <% if exhibition_is_set %>
               <td class="artwork"><%= location.artworks.size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_location => location.id), :class => 'btn btn-mini btn-info') %></td>
               <% end %>
-              <td class="actions"><%= link_to 'Show', [@exhibition, location], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-mini' %> <%= link_to 'Delete', [@exhibition, location], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+              <td class="actions"><%= link_to 'Show', [location], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-mini' %> <%= link_to 'Delete', [location], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>
           <% else %>
