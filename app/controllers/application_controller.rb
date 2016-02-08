@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
 
   def exhibition_is_set
-    set_exhibition #First try to set the exhibition
+    
 
     if @exhibition.blank?
       return false
