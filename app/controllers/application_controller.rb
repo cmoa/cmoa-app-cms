@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def unset_exhibition
-    session[:exhibition] = nil
+    session.data.delete :exhibition
     @exhibition = nil
   end
 
