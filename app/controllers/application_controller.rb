@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def unset_exhibition
+    session[:exhibition] = nil
+    @exhibition = nil
+  end
+
 
 
   def exhibition_is_set

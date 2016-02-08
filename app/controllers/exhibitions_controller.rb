@@ -3,6 +3,7 @@ class ExhibitionsController < ApplicationController
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy, :positions]
 
   def index
+    unset_exhibition
     @exhibitions = Exhibition.order('position asc').all
   end
 
@@ -73,6 +74,7 @@ class ExhibitionsController < ApplicationController
 
     render :json => {:success => true}
   end
+
 
 
     def exhibition_params
