@@ -38,14 +38,14 @@ class LocationsController < ApplicationController
   def destroy
     # Check if this object related to any non-deleted objects
     unless @location.artworks.empty?
-      return redirect_to exhibition_locations_url(@exhibition), alert: "At least one artwork relies on this location – cannot delete '#{@location.name}'"
+      return redirect_to locations_url, alert: "At least one artwork relies on this location – cannot delete '#{@location.name}'"
     end
 
     @location.destroy
     # Acts_as_paranoid bug workaround
     @location.updated_at = DateTime.now
     @location.save
-    redirect_to exhibition_locations_url(@exhibition), notice: 'Location was successfully deleted.'
+    redirect_to locations_url, notice: 'Location was successfully deleted.'
   end
 
   private
