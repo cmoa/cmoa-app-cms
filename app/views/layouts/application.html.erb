@@ -29,14 +29,14 @@
       <% if exhibition_is_set %>
       <li class="sub artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w">Artists</a></li>
       <li class="sub artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w">Artwork</a></li>
-      <li class="sub locations"><a href="<%= url_for(locations_path) %>" data-gravity="w">Locations</a></li>
       <li class="sub tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w">Tours</a></li>
-      <li class="sub categories"><a href="<%= url_for(exhibition_categories_path(@exhibition)) %>" data-gravity="w">Categories</a></li>
       <% else %>
 
       <% end %>
-      <li class="hours"><a href="<%= url_for(hours_path) %>" data-gravity="w">Hours</a></li>
       <li class="beacons"><a href="<%= url_for(beacons_path) %>" data-gravity="w">Beacons</a></li>
+      <li class="categories"><a href="<%= url_for(categories_path) %>" data-gravity="w">Categories</a></li>
+      <li class="hours"><a href="<%= url_for(hours_path) %>" data-gravity="w">Hours</a></li>
+      <li class="locations"><a href="<%= url_for(locations_path) %>" data-gravity="w">Locations</a></li>
       <% end %>
     </ul>
   </nav>
