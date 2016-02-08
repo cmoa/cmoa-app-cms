@@ -21,7 +21,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to [@exhibition, @location], notice: 'Location was successfully created.'
+      redirect_to @location, notice: 'Location was successfully created.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class LocationsController < ApplicationController
 
   def update
     if @location.update(location_params)
-      redirect_to [@exhibition, @location], notice: 'Location was successfully updated.'
+      redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
     end
