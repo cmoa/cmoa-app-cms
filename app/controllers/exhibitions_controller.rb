@@ -75,7 +75,19 @@ class ExhibitionsController < ApplicationController
     render :json => {:success => true}
   end
 
-
+  private def set_exhibition
+    if params.has_key?(:id)
+      @exhibition = Exhibition.find(params[:id])
+      session[:exhibition] = params[:id]
+    else
+      if session.has_key?(:exhibition)
+        @exhibition = Exhibition.find(session[:exhibition])
+      else
+        @exhibition = nil #There isn't an exhibition
+      end
+      ###
+    end
+  end
 
     def exhibition_params
       params.require(:exhibition).permit(:title, :subtitle, :sponsor, :is_live, :bg_iphone, :bg_ipad)
