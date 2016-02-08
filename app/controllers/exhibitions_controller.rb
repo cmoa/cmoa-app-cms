@@ -3,6 +3,7 @@ class ExhibitionsController < ApplicationController
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy, :positions]
 
   def index
+    unset_exhibition
     @exhibitions = Exhibition.order('position asc').all
   end
 
@@ -74,10 +75,19 @@ class ExhibitionsController < ApplicationController
     render :json => {:success => true}
   end
 
-  private
-    def set_exhibition
+  private def set_exhibition
+    if params.has_key?(:id)
       @exhibition = Exhibition.find(params[:id])
+      session[:exhibition] = params[:id]
+    else
+      if session.has_key?(:exhibition)
+        @exhibition = Exhibition.find(session[:exhibition])
+      else
+        @exhibition = nil #There isn't an exhibition
+      end
+      ###
     end
+  end
 
     def exhibition_params
       params.require(:exhibition).permit(:title, :subtitle, :sponsor, :is_live, :bg_iphone, :bg_ipad)

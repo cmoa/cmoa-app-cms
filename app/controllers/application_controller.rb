@@ -15,13 +15,23 @@ class ApplicationController < ActionController::Base
       else
         @exhibition = nil #There isn't an exhibition
       end
+      ###
     end
+  end
+
+  def unset_exhibition
+    session.delete :exhibition
+    @exhibition = nil
   end
 
 
 
   def exhibition_is_set
-    return !((defined?(@exhibition)).nil?) #returns true if set otherwise false
+    if @exhibition.blank?
+      return false
+    else
+      return true
+    end
   end
 
 end
