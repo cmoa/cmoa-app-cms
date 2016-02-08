@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
       else
         @exhibition = nil #There isn't an exhibition
       end
-
+      ###
+    end
   end
 
 
