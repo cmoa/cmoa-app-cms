@@ -74,15 +74,16 @@ class ApiV1Controller < ApplicationController
      datestamp = schedule_date.strftime("'%F'")
     @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
 
-    #json = {'sql' => @sch}
+    #Form response
     json = @sch.to_json
+    json['request date'] = datestamp
 
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
     return render :json => json
   end
-  
+
   def like
     # Vars
     artwork_uuid = params[:artwork]
