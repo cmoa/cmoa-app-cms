@@ -75,8 +75,9 @@ class ApiV1Controller < ApplicationController
     @sch = Hour.where("'" + datestamp + "' BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
 
     #Form response
+    json = {}
     json['requested date'] = datestamp
-    json = @sch.to_json
+    json['data'] = @sch.to_json
 
 
     # Configure gzipped response
