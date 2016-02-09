@@ -33,11 +33,11 @@ class ArtworksController < ApplicationController
     end
     # Category check
     if Category.count == 0
-      return redirect_to exhibition_categories_path(@exhibition), alert: 'Please add at least one category before adding artwork.'
+      return redirect_to categories_path, alert: 'Please add at least one category before adding artwork.'
     end
     # Location check
     if Location.count == 0
-      return redirect_to exhibition_locations_path(@exhibition), alert: 'Please add at least one location before adding artwork.'
+      return redirect_to locations_path, alert: 'Please add at least one location before adding artwork.'
     end
     @artwork = Artwork.new
   end
