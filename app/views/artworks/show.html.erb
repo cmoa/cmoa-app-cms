@@ -33,7 +33,7 @@
       <% end %>
 
       <h3>Category</h3>
-      <p class="sub"><%= link_to(@artwork.category.title, [@exhibition, @artwork.category]) %></p>
+      <p class="sub"><%= link_to(@artwork.category.title, @artwork.category) %></p>
 
       <h3>Location</h3>
       <p class="sub"><%= link_to(@artwork.location.name, [@exhibition, @artwork.location]) %></p>
