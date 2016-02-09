@@ -91,13 +91,14 @@ class ApiV2Controller < ApplicationController
     date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
-     datestamp = schedule_date.strftime("'%F'")
-    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
+     datestamp = schedule_date.strftime("%F")
+    @sch = Hour.where("'" + datestamp + "' BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
 
     #Form response
+    json['requested date'] = datestamp
     json = @sch.to_json
-    json['request date'] = datestamp
-    
+
+
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
