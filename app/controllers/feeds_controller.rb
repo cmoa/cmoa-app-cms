@@ -21,6 +21,9 @@ class FeedsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
 
   def feed_params
     params.require(:feed).permit(:name, :url, :feed_type)
