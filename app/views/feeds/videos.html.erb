@@ -1,8 +1,8 @@
 <ul>
   <% @entries.each do |entry| %>
   <li>
-    <% if entry.title.blank? %>
 
+    <% if entry.has_key?("title") %>
     <% else %>
     <h1><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
     <% end %>
