@@ -21,7 +21,7 @@ namespace :feeds do
 
     # Parse feeds
     puts '- Parsing RSS feeds'
-    feed_urls = ['http://blog.cmoa.org/feed', 'http://director.cmoa.org/feed']
+    feed_urls = Feed.newsFeedsURLs
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     # Join entries from both news feeds and sort by date
@@ -48,7 +48,8 @@ namespace :feeds do
     # Parse feed
     puts '- Parsing RSS feed'
     Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
-    feed = Feedzirra::Feed.fetch_and_parse('http://vimeo.com/cmoa/videos/rss')
+    feed_urls = Feed.videoFeedsURLs
+    feed = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     # Render feed template
     puts '- Rendering HTML'

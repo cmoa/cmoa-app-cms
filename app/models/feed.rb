@@ -13,5 +13,23 @@ class Feed < ActiveRecord::Base
       return type
     end
 
+    def self.newsFeedsURLs
+      feeds = Feed.where(feed_type: 0)
+      return feeds.getURLs
+    end
+
+    def self.videoFeedsURLs
+      feeds = Feed.where(feed_type: 1)
+      return feeds.getURLs
+    end
+
+    def getURLs
+      feed_urls = []
+      self.each do |f|
+        feed_urls.push(f.url)
+      end
+      return feed_urls
+    end
+
 
 end
