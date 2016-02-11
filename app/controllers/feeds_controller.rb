@@ -26,7 +26,7 @@ class FeedsController < ApplicationController
 
   def destroy
     @feed.destroy
-    redirect_to root_path
+    redirect_to @feed, notice: 'Feed was successfully deleted.'
   end
 
 
