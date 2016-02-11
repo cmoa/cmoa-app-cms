@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Feed: <%=@feed.name%></h1>
+
+      <h2>URL</h2>
+      <h3><a href='<%= @feed.url %>'><%= @feed.url %></a></h3>
+
+      <h2>Type</h2>
+      <h3><%= Feed.types[@feed.feed_type] %></h3>
+
+    </div>
+  </div>
+</div>
