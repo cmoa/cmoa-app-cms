@@ -5,5 +5,6 @@ class SetupFeedsTable < ActiveRecord::Migration
       t.string    :url
       t.integer   :type
       t.timestamps
+    end
   end
 end
