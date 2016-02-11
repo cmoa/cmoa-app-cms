@@ -30,10 +30,14 @@ namespace :feeds do
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     # Join entries from both news feeds and sort by date
-    entries = []
-    feeds.each do |f|
-      entries.concat(f.entries)
+    entries = {}
+    feeds.each do |key, value|
+      puts "#{key} =  #{value}"
+      entries.concat(value.entries)
     end
+
+    p entries
+
     entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
