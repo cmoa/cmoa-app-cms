@@ -24,6 +24,14 @@ class FeedsController < ApplicationController
   def edit
   end
 
+  def update
+    if @feed.update(feed_params)
+      redirect_to @feed, notice: 'Feed was successfully updated.'
+    else
+      render action: 'edit'
+    end
+  end
+
   def destroy
     @feed.destroy
     redirect_to @feed, notice: 'Feed was successfully deleted.'
