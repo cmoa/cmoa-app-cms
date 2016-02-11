@@ -18,6 +18,6 @@
   <p class="input"><%= f.url_field :url, :class => 'input-xxlarge' %></p>
 
   <p class="lbl"><%= f.label :type %></p>
-  <p class="input"><%= f.input :type, :as => :select, :collection => Feed.type.keys.to_a %></p>
-  
+  <p class="input"><%= f.collection_select :type, Feed.types, :id, :name, prompt: true  %></p>
+
 <% end %>
