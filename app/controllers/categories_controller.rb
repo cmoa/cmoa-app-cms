@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      redirect_to [@exhibition, @category], notice: 'Category was successfully created.'
+      redirect_to @category, notice: 'Category was successfully created.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to [@exhibition, @category], notice: 'Category was successfully updated.'
+      redirect_to @category, notice: 'Category was successfully updated.'
     else
       render action: 'edit'
     end
@@ -38,14 +38,14 @@ class CategoriesController < ApplicationController
   def destroy
     # Check if this object related to any non-deleted objects
     unless @category.artworks.empty?
-      return redirect_to exhibition_categories_url(@exhibition), alert: "At least one artwork relies on this category – cannot delete '#{@category.title}'"
+      return redirect_to categories_url, alert: "At least one artwork relies on this category – cannot delete '#{@category.title}'"
     end
 
     @category.destroy
     # Acts_as_paranoid bug workaround
     @category.updated_at = DateTime.now
     @category.save
-    redirect_to exhibition_categories_url(@exhibition), notice: 'Category was successfully deleted.'
+    redirect_to categories_url, notice: 'Category was successfully deleted.'
   end
 
   private

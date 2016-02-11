@@ -3,7 +3,6 @@ CMOA::Application.routes.draw do
   resources :exhibitions do
     get :positions, :on => :collection
 
-    resources :locations
 
     resources :artists do
       resources :links do
@@ -11,7 +10,7 @@ CMOA::Application.routes.draw do
       end
     end
 
-    resources :categories
+
 
     resources :artworks, :path => '/artwork' do
       resources :media do
@@ -26,7 +25,16 @@ CMOA::Application.routes.draw do
     end
   end
 
+
+resources :beacons do
+    get :detach
+end
+
+resources :locations
+resources :categories
+
 resources :hours
+
 
   # API 1.0
   scope '/api' do

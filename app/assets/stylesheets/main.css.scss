@@ -9,6 +9,7 @@ $browser-context: 16;
 $color-bg: #ffffff;
 $color-font: #2c3e50;
 $color-nav: #2c3e50;
+$color-sub-nav: #1b2631;
 $color-nav-active: #566573;
 $color-nav-text: #75899c;
 $color-action: #f26361;
@@ -113,8 +114,28 @@ nav {
         font-family: $font-medium;
       }
 
-      a:link, a:visited {
+      a:link, a:visited
+      {
         background-color: $color-nav;
+
+        color: $color-nav-text;
+        text-decoration: none;
+      }
+
+
+
+      a:hover, a:active {
+        background-color: $color-nav-active;
+
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+
+    li.sub
+    {
+      a {
+        background-color: $color-sub-nav;
 
         color: $color-nav-text;
         text-decoration: none;

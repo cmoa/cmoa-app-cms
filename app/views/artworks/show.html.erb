@@ -33,10 +33,15 @@
       <% end %>
 
       <h3>Category</h3>
-      <p class="sub"><%= link_to(@artwork.category.title, [@exhibition, @artwork.category]) %></p>
+      <p class="sub"><%= link_to(@artwork.category.title, @artwork.category) %></p>
 
       <h3>Location</h3>
-      <p class="sub"><%= link_to(@artwork.location.name, [@exhibition, @artwork.location]) %></p>
+      <p class="sub"><%= link_to(@artwork.location.name, @artwork.location) %></p>
+
+      <% if @artwork.beacon.present? %>
+        <h3>Beacon</h3>
+        <p class="sub"><%= link_to(@artwork.beacon.name, [@artwork.beacon]) %></p>
+      <% end %>
 
       <h3>Code</h3>
       <p class="sub"><%= @artwork.code %></p>

@@ -23,13 +23,20 @@
   <!-- Nav -->
   <nav>
     <ul>
+      <% if admin_signed_in? %>
       <li class="home no-text"><a href="<%= url_for(root_path) %>" data-gravity="w">Home</a></li>
-      <% if admin_signed_in? && !(controller_name == 'exhibitions' && action_name != 'show') %>
-      <li class="artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w">Artists</a></li>
-      <li class="artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w">Artwork</a></li>
-      <li class="tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w">Tours</a></li>
-      <li class="categories"><a href="<%= url_for(exhibition_categories_path(@exhibition)) %>" data-gravity="w">Categories</a></li>
-      <li class="locations"><a href="<%= url_for(exhibition_locations_path(@exhibition)) %>" data-gravity="w">Locations</a></li>
+
+      <% if exhibition_is_set %>
+      <li class="sub artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w">Artists</a></li>
+      <li class="sub artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w">Artwork</a></li>
+      <li class="sub tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w">Tours</a></li>
+      <% else %>
+
+      <% end %>
+      <li class="beacons"><a href="<%= url_for(beacons_path) %>" data-gravity="w">Beacons</a></li>
+      <li class="categories"><a href="<%= url_for(categories_path) %>" data-gravity="w">Categories</a></li>
+      <li class="hours"><a href="<%= url_for(hours_path) %>" data-gravity="w">Hours</a></li>
+      <li class="locations"><a href="<%= url_for(locations_path) %>" data-gravity="w">Locations</a></li>
       <% end %>
     </ul>
   </nav>

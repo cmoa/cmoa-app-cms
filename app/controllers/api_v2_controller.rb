@@ -25,6 +25,7 @@ class ApiV2Controller < ApplicationController
         artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ?', since)
         artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ?', since)
         artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ?', since)
+        beacons = Beacon.attached
         categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since)
         locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since)
         links = Link.where('date_trunc(\'second\', links.updated_at) > ?', since)
@@ -32,10 +33,12 @@ class ApiV2Controller < ApplicationController
         media = Medium.where('date_trunc(\'second\', media.updated_at) > ?', since)
         tours = Tour.where('date_trunc(\'second\', tours.updated_at) > ?', since)
         tour_artworks = TourArtwork.where('date_trunc(\'second\', tour_artworks.updated_at) > ?', since)
+
       else
         artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ?', since).with_deleted
         artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ?', since).with_deleted
         artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ?', since).with_deleted
+        beacons = Beacon.attached
         categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since).with_deleted
         locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since).with_deleted
         links = Link.where('date_trunc(\'second\', links.updated_at) > ?', since).with_deleted
@@ -43,6 +46,7 @@ class ApiV2Controller < ApplicationController
         media = Medium.where('date_trunc(\'second\', media.updated_at) > ?', since).with_deleted
         tours = Tour.where('date_trunc(\'second\', tours.updated_at) > ?', since).with_deleted
         tour_artworks = TourArtwork.where('date_trunc(\'second\', tour_artworks.updated_at) > ?', since).with_deleted
+
       end
 
       # Prepare response
@@ -51,6 +55,7 @@ class ApiV2Controller < ApplicationController
         :artists           => artists,
         :artwork           => artwork,
         :artistArtworks    => artist_artworks,
+        :beacons           => beacons,
         :categories        => categories,
         :locations         => locations,
         :links             => links,
