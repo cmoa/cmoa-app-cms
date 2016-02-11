@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h2>Feeds</h2>
+
+      <table class="table table-striped table-bordered table-exhibitions">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th >Url</th>
+            <th >Type</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @feeds.size > 0 %>
+          <% @feeds.each_with_index do |feed, index| %>
+            <tr data-id="<%= feed.id %>">
+              <td><%= feed.name %></td>
+              <td><a href='<%= feed.url %>'><%= feed.url %></a></td>
+              <td><%= Feed.types[feed.feed_type] %></td>
+              <td class="actions"><%= link_to 'Show', feed, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_feed_path(feed), :class => 'btn btn-mini' %> <%= link_to 'Delete', feed, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="6"><strong>No feeds have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'Add a Beacon', new_feed_path, :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>
