@@ -24,6 +24,11 @@ class FeedsController < ApplicationController
   def edit
   end
 
+  def destroy
+    @feed.destroy
+    redirect_to root_path
+  end
+
 
   def feed_params
     params.require(:feed).permit(:name, :url, :feed_type)
