@@ -17,7 +17,7 @@
   <p class="lbl"><%= f.label :url %></p>
   <p class="input"><%= f.url_field :url, :class => 'input-xxlarge' %></p>
 
-  <p class="lbl"><%= f.label :type %></p>
+  <p class="lbl"><%= f.label :feed_type %></p>
   <p class="input"><%= f.collection_select :type, Feed.types, :first, :second, prompt: true  %></p>
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>

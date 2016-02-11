@@ -1,8 +1,8 @@
 class Feed < ActiveRecord::Base
     validates :name, :presence => true
     validates :url, :presence => true
-    validates :type, :presence => true
-    validates_inclusion_of :type, :in => 0..1
+    validates :feed_type, :presence => true
+    validates_inclusion_of :feed_type, :in => 0..1
 
     def self.types
       type = {
