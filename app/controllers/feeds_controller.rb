@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  before_action :set_feed, only: [:show, :edit, :update, :destroy]
 
   def index
     @feeds = Feed.all
@@ -8,8 +9,24 @@ class FeedsController < ApplicationController
     @feed = Feed.new
   end
 
+  def create
+    @feed = Feed.new(feed_params)
+    if @feed.save
+      redirect_to @feed, notice: 'Feed was successfully created.'
+    else
+      render action: 'new'
+    end
+  end
+
+  def show
+  end
+
 
   def feed_params
     params.require(:feed).permit(:name, :url, :type)
+  end
+
+  def set_feed
+    @feed = Feed.find(params[:id])
   end
 end

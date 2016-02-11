@@ -20,4 +20,5 @@
   <p class="lbl"><%= f.label :type %></p>
   <p class="input"><%= f.collection_select :type, Feed.types, :first, :second, prompt: true  %></p>
 
+  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
 <% end %>
