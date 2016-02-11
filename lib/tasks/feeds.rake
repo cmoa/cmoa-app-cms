@@ -2,6 +2,7 @@ include Rails.application.routes.url_helpers # brings ActionDispatch::Routing::U
 include ActionView::Helpers::TagHelper
 require "#{Rails.root}/lib/feedzirra/vimeo"
 require "#{Rails.root}/app/helpers/application_helper"
+require "pp"
 include ApplicationHelper
 
 namespace :feeds do
@@ -62,10 +63,13 @@ namespace :feeds do
 
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
-    entries = []
+    entries = {}
     feeds.each do |f|
       entries.concat(f.entries)
     end
+
+    p entries
+
     entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
