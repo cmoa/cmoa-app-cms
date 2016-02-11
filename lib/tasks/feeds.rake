@@ -29,8 +29,11 @@ namespace :feeds do
 
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
-    # Join entries from both news feeds and sort by date
-    entries = {}
+    # Join entries from all news feeds and sort by date
+    entries = feeds.pop
+
+    p entries
+
     feeds.each do |key, value|
       puts "#{key} =  #{value}"
       entries.concat(value.entries)
