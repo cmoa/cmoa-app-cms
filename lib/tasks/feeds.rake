@@ -22,6 +22,10 @@ namespace :feeds do
     # Parse feeds
     puts '- Parsing RSS feeds'
     feed_urls = Feed.newsFeedsURLs
+
+    #Debug
+    p feed_urls
+
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     # Join entries from both news feeds and sort by date
@@ -49,6 +53,10 @@ namespace :feeds do
     puts '- Parsing RSS feed'
     Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
     feed_urls = Feed.videoFeedsURLs
+
+    #Debug
+    p feed_urls
+
     feed = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     # Render feed template
