@@ -29,7 +29,10 @@ namespace :feeds do
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     # Join entries from both news feeds and sort by date
-    entries = feeds['http://blog.cmoa.org/feed'].entries.concat(feeds['http://director.cmoa.org/feed'].entries)
+    entries = []
+    feeds.each do |f|
+      entries.concat(f.entries)
+    end
     entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
@@ -57,13 +60,19 @@ namespace :feeds do
     #Debug
     p feed_urls
 
-    feed = Feedzirra::Feed.fetch_and_parse(feed_urls)
+    feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
+
+    entries = []
+    feeds.each do |f|
+      entries.concat(f.entries)
+    end
+    entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
     puts '- Rendering HTML'
     localFilename = "#{Rails.root}/tmp/videos.html"
     render_template("feeds/videos.html.erb", localFilename, {
-      :entries => feed.entries
+      :entries => entries
     })
 
     # Upload to S3
