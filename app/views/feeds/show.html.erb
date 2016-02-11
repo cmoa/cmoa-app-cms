@@ -9,6 +9,7 @@
       <h2>Type</h2>
       <h3><%= Feed.types[@feed.feed_type] %></h3>
 
+      <p><%= link_to raw('&laquo; Back'), feeds_path, :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_feed_path(@feed), :class => 'btn btn-mini' %> </p>
     </div>
   </div>
 </div>
