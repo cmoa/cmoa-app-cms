@@ -64,8 +64,9 @@ namespace :feeds do
     feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
     entries = {}
-    feeds.each do |f|
-      entries.concat(f.entries)
+    feeds.each do |key, value|
+      puts "#{key} =  #{value}"
+      entries.concat(value.entries)
     end
 
     p entries
