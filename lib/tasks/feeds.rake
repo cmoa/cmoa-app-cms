@@ -32,10 +32,11 @@ namespace :feeds do
     # Join entries from all news feeds and sort by date
     entries = feeds.shift.entries
 
-    feeds.each do |key, value|
-      puts "#{key} =  #{value}"
-      entries.concat(value.entries)
-    end
+    #feeds.each do |key, value|
+    #  puts "#{key} =  #{value}"
+    #  entries.concat(value.entries)
+
+    #  end
 
     entries.sort! { |x,y| y.published <=> x.published }
 
