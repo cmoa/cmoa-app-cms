@@ -38,6 +38,8 @@ namespace :feeds do
 
     #  end
 
+    p entries
+    
     entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
