@@ -57,13 +57,15 @@ namespace :feeds do
     feed_urls = Feed.videoFeedsURLs
     entries = []
 
+    Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
     feed_urls.each do |url|
       puts "-- Parsing feed: #{url}"
-      Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
       feed = Feedzirra::Feed.fetch_and_parse(url)
       entries.concat(feed.entries)
     end
 
+    pp(entries)
+    
     entries.sort! { |x,y| y.published <=> x.published }
     # Render feed template
     puts '- Rendering HTML'
