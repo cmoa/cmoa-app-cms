@@ -23,12 +23,15 @@ namespace :feeds do
     # Parse feeds
     puts '- Parsing RSS feeds'
 
-    entries = []
+
 
     #Debug
+    feed_urls = Feed.newsFeedsURLs
+    entries = []
     p feed_urls
 
     feed_urls.each do |url|
+      puts "-- Parsing feed: #{url}"
       feed = Feedzirra::Feed.fetch_and_parse(url)
       p feed.entries
       entries.concat(feed.entries)
