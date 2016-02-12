@@ -22,22 +22,17 @@ namespace :feeds do
 
     # Parse feeds
     puts '- Parsing RSS feeds'
-    feed_urls = Feed.newsFeedsURLs
+
+    entries = []
 
     #Debug
     p feed_urls
 
-    feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
-
-    # Join entries from all news feeds and sort by date
-    feed = feeds.shift
-    entries = feed.entries
-
-    #feeds.each do |key, value|
-    #  puts "#{key} =  #{value}"
-    #  entries.concat(value.entries)
-
-    #  end
+    feed_urls.each do |url|
+      feed = Feedzirra::Feed.fetch_and_parse(url)
+      p feed.entries
+      entries.concat(feed.entries)
+    end
 
     p entries
 
