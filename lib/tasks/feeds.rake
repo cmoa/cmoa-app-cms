@@ -23,21 +23,14 @@ namespace :feeds do
     # Parse feeds
     puts '- Parsing RSS feeds'
 
-
-
-    #Debug
     feed_urls = Feed.newsFeedsURLs
     entries = []
-    p feed_urls
 
     feed_urls.each do |url|
       puts "-- Parsing feed: #{url}"
       feed = Feedzirra::Feed.fetch_and_parse(url)
-      p feed.entries
       entries.concat(feed.entries)
     end
-
-    p entries
 
     entries.sort! { |x,y| y.published <=> x.published }
 
@@ -61,22 +54,15 @@ namespace :feeds do
     # Parse feed
     puts '- Parsing RSS feed'
     Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
+
     feed_urls = Feed.videoFeedsURLs
+    entries = []
 
-    #Debug
-    p feed_urls
-
-    feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
-
-    entries = {}
-    feeds.each do |key, value|
-      puts "#{key} =  #{value}"
-      entries.concat(value.entries)
+    feed_urls.each do |url|
+      puts "-- Parsing feed: #{url}"
+      feed = Feedzirra::Feed.fetch_and_parse(url)
+      entries.concat(feed.entries)
     end
-
-    p entries
-
-    entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
     puts '- Rendering HTML'
