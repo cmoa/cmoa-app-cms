@@ -64,8 +64,6 @@ namespace :feeds do
       entries.concat(feed.entries)
     end
 
-    entries = feed.entries
-
     entries.sort! { |x,y| y.published <=> x.published }
     # Render feed template
     puts '- Rendering HTML'
