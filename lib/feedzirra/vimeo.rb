@@ -60,7 +60,7 @@ module Feedzirra
       elements :item, :as => :entries, :class => VimeoEntry
 
       def self.able_to_parse?(xml) #:nodoc:
-        xml =~ /xmlns:atom=\"http:\/\/www.w3.org\/2005\/Atom\" xmlns:dc=\"http:\/\/purl.org\/dc\/elements\/1.1\/\" xmlns:media=\"http:\/\/search.yahoo.com\/mrss\/\"/im
+        xml =~ /xmlns:atom=\"http:\/\/www.w3.org\/2005\/Atom\".+xmlns:media=\"http:\/\/search.yahoo.com\/mrss\/\"/im
       end
 
     end
