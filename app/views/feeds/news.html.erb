@@ -3,7 +3,7 @@
   <li>
     <h1><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
     <h2><%= entry.published.to_s(:published) %></h2>
-    <p class='unsan'><%= entry.summary %></p>
+    <p class='unsan'><%= raw(entry.summary) %></p>
     <p class="continue"><a href="<%= entry.url %>">Continue &raquo;</a></p>
   </li>
   <% end %>
