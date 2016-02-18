@@ -32,7 +32,7 @@ end
 
 resources :locations
 resources :categories
-
+resources :feeds
 resources :hours
 
 

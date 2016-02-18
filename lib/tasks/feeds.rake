@@ -2,6 +2,7 @@ include Rails.application.routes.url_helpers # brings ActionDispatch::Routing::U
 include ActionView::Helpers::TagHelper
 require "#{Rails.root}/lib/feedzirra/vimeo"
 require "#{Rails.root}/app/helpers/application_helper"
+require "pp"
 include ApplicationHelper
 
 namespace :feeds do
@@ -21,11 +22,16 @@ namespace :feeds do
 
     # Parse feeds
     puts '- Parsing RSS feeds'
-    feed_urls = ['http://blog.cmoa.org/feed', 'http://director.cmoa.org/feed']
-    feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
 
-    # Join entries from both news feeds and sort by date
-    entries = feeds['http://blog.cmoa.org/feed'].entries.concat(feeds['http://director.cmoa.org/feed'].entries)
+    feed_urls = Feed.newsFeedsURLs
+    entries = []
+
+    feed_urls.each do |url|
+      puts "-- Parsing feed: #{url}"
+      feed = Feedzirra::Feed.fetch_and_parse(url)
+      entries.concat(feed.entries)
+    end
+
     entries.sort! { |x,y| y.published <=> x.published }
 
     # Render feed template
@@ -47,14 +53,23 @@ namespace :feeds do
 
     # Parse feed
     puts '- Parsing RSS feed'
-    Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
-    feed = Feedzirra::Feed.fetch_and_parse('http://vimeo.com/cmoa/videos/rss')
 
+    feed_urls = Feed.videoFeedsURLs
+    entries = []
+
+    Feedzirra::Feed.add_feed_class Feedzirra::Parser::Vimeo
+    feed_urls.each do |url|
+      puts "-- Parsing feed: #{url}"
+      feed = Feedzirra::Feed.fetch_and_parse(url)
+      entries.concat(feed.entries)
+    end
+
+    entries.sort! { |x,y| y.published <=> x.published }
     # Render feed template
     puts '- Rendering HTML'
     localFilename = "#{Rails.root}/tmp/videos.html"
     render_template("feeds/videos.html.erb", localFilename, {
-      :entries => feed.entries
+      :entries => entries
     })
 
     # Upload to S3

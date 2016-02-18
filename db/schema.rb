@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160204161515) do
-
+ActiveRecord::Schema.define(version: 20160211164009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,11 +70,10 @@ ActiveRecord::Schema.define(version: 20160204161515) do
     t.datetime "deleted_at"
     t.integer  "location_id"
     t.string   "share_url"
-    t.integer  "beacons_id"
+    t.integer  "beacon_id"
   end
 
-  add_index "artworks", ["beacons_id"], name: "index_artworks_on_beacons_id", using: :btree
-
+  add_index "artworks", ["beacon_id"], name: "index_artworks_on_beacon_id", using: :btree
 
   create_table "beacons", force: true do |t|
     t.integer "major", null: false
@@ -114,8 +111,15 @@ ActiveRecord::Schema.define(version: 20160204161515) do
     t.string   "sponsor"
   end
 
-  create_table "hours", force: true do |t|
+  create_table "feeds", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "feed_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
+  create_table "hours", force: true do |t|
     t.datetime "start_schedule"
     t.datetime "end_schedule"
     t.time     "sunday_start"
@@ -162,11 +166,10 @@ ActiveRecord::Schema.define(version: 20160204161515) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
-    t.integer  "beacons_id"
+    t.integer  "beacon_id"
   end
 
-  add_index "locations", ["beacons_id"], name: "index_locations_on_beacons_id", using: :btree
-
+  add_index "locations", ["beacon_id"], name: "index_locations_on_beacon_id", using: :btree
 
   create_table "media", force: true do |t|
     t.integer  "exhibition_id"
