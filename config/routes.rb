@@ -54,5 +54,6 @@ resources :hours
 
   # Base
   devise_for :admins
+  resources :admins
   root 'dashboard#index'
 end
