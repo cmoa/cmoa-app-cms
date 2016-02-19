@@ -54,6 +54,10 @@ resources :hours
 
   # Base
   devise_for :admins
-  resources :admins, only: [:index, :new, :create, :destroy]
+  resources :admins, only: [:index, :new, :create, :destroy] do
+
+  end
+
+  end
   root 'dashboard#index'
 end
