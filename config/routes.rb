@@ -57,7 +57,5 @@ resources :hours
   resources :admins, only: [:index, :new, :create, :destroy] do
 
   end
-
-  end
   root 'dashboard#index'
 end
