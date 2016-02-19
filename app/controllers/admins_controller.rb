@@ -18,7 +18,7 @@ class AdminsController < ApplicationController
 
     if @admin.save
       #RegistrationMailer.welcome(@admin, pass).deliver
-      UserMailer.welcome(@admin, pass).deliver
+      UserMailer.new_admin(@admin, pass).deliver
       redirect_to action: "index", notice: "An Admin was created.  A password was sent to them."
     else
       render action: 'new'
