@@ -1,5 +1,7 @@
 class AdminsController < ApplicationController
 
+  devise :registerable, :confirmable
+
   def index
   end
 
@@ -16,7 +18,8 @@ class AdminsController < ApplicationController
     @admin.password = pass
 
     if @admin.save
-      RegistrationMailer.welcome(@admin, pass).deliver
+      #RegistrationMailer.welcome(@admin, pass).deliver
+      UserMailer.welcome(@admin, pass).deliver
       redirect_to action: "index", notice: "An Admin was created.  A password was sent to them."
     else
       render action: 'new'
