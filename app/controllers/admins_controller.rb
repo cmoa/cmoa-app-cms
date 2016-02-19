@@ -1,6 +1,5 @@
 class AdminsController < ApplicationController
 
-  devise :registerable, :confirmable
 
   def index
   end
