@@ -28,4 +28,11 @@ CMOA::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:8080' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'bsa.carnegiemuseums.org',
+  port:                 25,
+  authentication:       'plain',
+  enable_starttls_auto: true  }
 end
