@@ -211,6 +211,13 @@ nav.topbar {
         width: $top-height;
         height: $top-height;
         text-align:center;
+        padding-left: 0px;
+        line-height: 40px;
+
+        i {
+          font-size: em(40);
+          line-height: 60px;
+        }
       }
     }
   }
