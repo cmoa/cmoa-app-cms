@@ -2,6 +2,7 @@ class AdminsController < ApplicationController
 
 
   def index
+    @admins = Admin.all
   end
 
   def new
@@ -33,10 +34,25 @@ class AdminsController < ApplicationController
   def destroy
   end
 
-  def changepass
+  def profile
+    @admin = current_admin
   end
 
-  def savepass
+  def save_profile
+    @admin = Admin.find(current_admin.id)
+
+    if @admin.update(admin_params)
+      sign_in @admin, :bypass => true
+      redirect_to root_path
+    else
+      redner "profile"
+    end
+  end
+
+private
+
+  def admin_params
+    params.require(:admin).permit(:password, :password_again, :email)
   end
 
 end

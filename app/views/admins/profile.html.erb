@@ -3,7 +3,31 @@
     <div class="span12">
       <h1>My Profile</h1>
 
-      <%= render 'form' %>
+      <%= form_for(@admin, :url => save_profile_admin_path) do |f| %>
+        <% if @admin.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this beacon from being saved:</h2>
+
+            <ul class="errors">
+            <% @admin.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <p class="lbl"><%= f.label :email %></p>
+        <p class="input"><%= f.email_field :email, :class => 'input-xlarge' %></p>
+
+        <p class="lbl"><%= f.label :password %></p>
+        <p class="input"><%= f.password_field :password, :class => 'input-xlarge' %></p>
+
+        <p class="lbl"><%= f.label :password_again %></p>
+        <p class="input"><%= f.password_field :password_again, :class => 'input-xlarge' %></p>
+
+
+        <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+      <% end %>
 
       <hr>
 
