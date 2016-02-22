@@ -270,6 +270,10 @@ nav {
   .logged-in
   {
     background-color: $color-row-highlight;
+
+    td, tr, th {
+      background-color: $color-row-highlight;
+    }
   }
 
   table.table-exhibitions {
