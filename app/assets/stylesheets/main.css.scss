@@ -3,6 +3,8 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/box-sizing";
 @import "compass/css3/transition";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 // Vars
 $browser-context: 16;
@@ -107,11 +109,10 @@ nav {
         border-bottom: 1px solid $color-seperator-1;
         text-transform: uppercase;
         color: $color-nav-text;
-        font-size: em(9);
+        font-size: em(12);
         height: 100px;
         text-align: center;
         background-position: top center;
-        padding-top: 70px;
         font-family: $font-medium;
       }
 
@@ -158,31 +159,31 @@ nav {
     }
 
     li.home a {
-      @include at2x('nav-home', 80px, 80px);
+
     }
 
     li.artists a {
-      @include at2x('nav-artists', 80px, 80px);
+
     }
 
     li.artwork a {
-      @include at2x('nav-artwork', 80px, 80px);
+
     }
 
     li.tours a {
-      @include at2x('nav-tours', 80px, 80px);
+
     }
 
     li.categories a {
-      @include at2x('nav-categories', 80px, 80px);
+
     }
 
     li.locations a {
-      @include at2x('nav-locations', 80px, 80px);
+
     }
 
     li.logout a {
-      @include at2x('nav-logout', 80px, 80px);
+      
     }
   }
 }
