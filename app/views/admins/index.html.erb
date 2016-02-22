@@ -17,7 +17,7 @@
             <% if admins.id == current_admin.id %>
             <tr class='logged-in' data-id="<%= admins.id %>">
               <td><%= admins.email %></td>
-              <td class="actions"><%= link_to 'My Profile', profile_admin_path, :class => 'btn btn-success' %></td>
+              <td class="actions"><%= link_to 'My Profile', profile_admin_path, :class => 'btn btn-mini btn-success' %></td>
             </tr>
             <% else %>
             <tr data-id="<%= admins.id %>">
