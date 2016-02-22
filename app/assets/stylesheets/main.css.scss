@@ -157,13 +157,13 @@ nav {
     li.no-text {
       a {
         text-indent: -10000px;
-        height: $top-height;
+
       }
     }
 
     li.home a {
       padding-top: 10px;
-      padding-left:
+      height: $top-height;
       @include at2x('nav-home', 80px, 80px);
     }
 
@@ -189,6 +189,18 @@ nav {
 
     li.logout a {
 
+    }
+  }
+  .topbar {
+    ul {
+      li {
+        a {
+          border-bottom: 0px;
+          border-left: 1px solid $color-seperator-1;
+          width: $top-height;
+          height: $top-height;
+        }
+      }
     }
   }
 }

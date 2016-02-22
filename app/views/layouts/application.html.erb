@@ -14,7 +14,10 @@
     <% if admin_signed_in? %>
     <nav class='topbar'>
       <ul>
-        <li class="no-text logout"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
+        <li class="profile"><%= link_to('My Profile', profile_admin_path,  'data-gravity' => 'e') %></li>
+      </ul>
+      <ul>
+        <li class="logout"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
       </ul>
     </nav>
     <% end %>
