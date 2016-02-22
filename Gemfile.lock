@@ -182,7 +182,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.0)
   devise
   feedzirra!
-  font-awesome-sass
+  font-awesome-sass (~> 4.5.0)
   gibbon
   jquery-rails
   paperclip!
