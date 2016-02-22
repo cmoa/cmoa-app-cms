@@ -19,8 +19,8 @@ $color-header: #f26361;
 $color-seperator-1: #566573;
 $color-seperator-2: #f26361;
 $color-row-highlight: #EDEDCC;
-$nav-width: 80px;
-$nav-height: 100px;
+$nav-width: 100px;
+$nav-height: 30px;
 $font-light: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
 $font-medium: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue",
@@ -107,11 +107,11 @@ nav {
         background-repeat: no-repeat;
         @include box-sizing(border-box);
         border-bottom: 1px solid $color-seperator-1;
-        text-transform: uppercase;
+        //text-transform: uppercase;
         color: $color-nav-text;
         font-size: em(12);
         height: 100px;
-        text-align: center;
+        text-align: left;
         background-position: top center;
         font-family: $font-medium;
       }
@@ -183,7 +183,7 @@ nav {
     }
 
     li.logout a {
-      
+
     }
   }
 }
