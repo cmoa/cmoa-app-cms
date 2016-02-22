@@ -31,9 +31,9 @@
       <li class="categories"><a href="<%= url_for(categories_path) %>" data-gravity="w"><%=icon('tags', :class => 'fa-fw')%> Categories</a></li>
       <li class="exhibitions"><a href="<%= url_for(exhibitions_path) %>" data-gravity="w"><%=icon('calendar', :class => 'fa-fw')%> Exhibitions</a></li>
         <% if exhibition_is_set %>
-        <li class="sub artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w"><%=icon('user', :class => 'fa-fw')%> People</a></li>
-        <li class="sub artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w"><%=icon('diamond', :class => 'fa-fw')%> Objects</a></li>
-        <li class="sub tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w"><%=icon('map-signs', :class => 'fa-fw')%> Tours</a></li>
+          <li class="sub artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w"><%=icon('diamond', :class => 'fa-fw')%> Objects</a></li>
+          <li class="sub artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w"><%=icon('user', :class => 'fa-fw')%> People</a></li>
+          <li class="sub tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w"><%=icon('map-signs', :class => 'fa-fw')%> Tours</a></li>
         <% else %>
 
         <% end %>
