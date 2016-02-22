@@ -55,7 +55,8 @@ resources :hours
   # Base
   devise_for :admins
   resources :admins, only: [:index, :new, :create, :destroy] do
-
+    get :profile
+    post :save_profile
   end
   root 'dashboard#index'
 end

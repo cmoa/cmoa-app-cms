@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h2>Admins</h2>
+
+      <table class="table table-striped table-bordered table-exhibitions">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @admins.size > 0 %>
+          <% @admins.each_with_index do |admins, index| %>
+            <tr data-id="<%= admins.id %>">
+              <td><%= admins.email %></td>
+              <td class="actions"> <%= link_to 'Delete', admins, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="6"><strong>No adminss have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'New Admin', new_admins_path, :class => 'btn btn-success' %><%= link_to 'My Profile', profile_admins_path, :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>
