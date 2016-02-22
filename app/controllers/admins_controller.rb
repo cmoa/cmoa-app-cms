@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
 
       if @admin.save
         #UserMailer.new_admin(@admin, pass).deliver
-        redirect_to action: "index", notice: "An Admin was created."
+        redirect_to action: "index"
       else
         render action: 'new'
       end
@@ -32,6 +32,9 @@ class AdminsController < ApplicationController
   end
 
   def destroy
+    @admin = Admin.find(params[:id])
+    @admin.destroy
+    redirect_to action: "index"
   end
 
   def profile
