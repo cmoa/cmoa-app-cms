@@ -45,7 +45,7 @@ class AdminsController < ApplicationController
       sign_in @admin, :bypass => true
       redirect_to root_path
     else
-      redner "profile"
+      render "profile"
     end
   end
 
