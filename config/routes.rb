@@ -54,9 +54,12 @@ resources :hours
 
   # Base
   devise_for :admins
-  resources :admins, only: [:index, :new, :create, :destroy] do
-    get :profile
-    post :save_profile
+  resources :admins, only: [:index, :new, :create, :destroy]
+  #profile edit for admins
+  scope '/' do
+    match 'profile' => 'admin#profile',       :as 'admin_profile', via: [:get]
+    match 'profile' => 'admin#save_profile',  :as 'admin_save_profile', via: [:post]
   end
+  
   root 'dashboard#index'
 end

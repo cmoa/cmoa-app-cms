@@ -1,9 +1,9 @@
 module AdminsHelper
   def profile_admin_path
-    "/admins/profile"
+    "/profile"
   end
 
   def save_profile_admin_path
-    "/admins/save_profile"
+    "/profile"
   end
 end
