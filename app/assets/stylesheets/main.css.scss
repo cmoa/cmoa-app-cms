@@ -194,6 +194,8 @@ nav {
 }
 
 nav.topbar {
+  width: auto;
+
   ul {
     li {
       a {
@@ -201,6 +203,8 @@ nav.topbar {
         border-left: 1px solid $color-seperator-1;
         width: $top-height;
         height: $top-height;
+        float: left;
+        text-align:center;
       }
     }
   }
