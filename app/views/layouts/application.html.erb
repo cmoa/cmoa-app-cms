@@ -14,7 +14,8 @@
     <% if admin_signed_in? %>
     <nav>
       <ul>
-        <li class="logout no-text"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
+        <li class="profile"><%= link_to('My Profile', profile_admin_path, 'data-gravity' => 'e') %></li>
+        <li class="logout"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
       </ul>
     </nav>
     <% end %>
@@ -33,6 +34,7 @@
       <% else %>
 
       <% end %>
+      <li class="admins"><a href="<%= url_for(admins_path) %>" data-gravity="w">Admins</a></li>
       <li class="beacons"><a href="<%= url_for(beacons_path) %>" data-gravity="w">Beacons</a></li>
       <li class="categories"><a href="<%= url_for(categories_path) %>" data-gravity="w">Categories</a></li>
       <li class="feeds"><a href="<%= url_for(feeds_path) %>" data-gravity="w">Feeds</a></li>
