@@ -198,7 +198,9 @@ nav.topbar {
 
   ul {
     li {
-      display: inline;
+      display: inline-block;
+      width: $top-height;
+      height: $top-height;
 
       a {
         border-bottom: 0px;
