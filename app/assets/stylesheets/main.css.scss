@@ -191,19 +191,21 @@ nav {
 
     }
   }
-  .topbar {
-    ul {
-      li {
-        a {
-          border-bottom: 0px;
-          border-left: 1px solid $color-seperator-1;
-          width: $top-height;
-          height: $top-height;
-        }
+}
+
+nav.topbar {
+  ul {
+    li {
+      a {
+        border-bottom: 0px;
+        border-left: 1px solid $color-seperator-1;
+        width: $top-height;
+        height: $top-height;
       }
     }
   }
 }
+
 
 // Content
 #content {
