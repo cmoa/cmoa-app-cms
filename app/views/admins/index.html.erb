@@ -14,10 +14,17 @@
         <tbody>
           <% if @admins.size > 0 %>
           <% @admins.each_with_index do |admins, index| %>
+            <% if admins.id == current_admin.id %>
             <tr data-id="<%= admins.id %>">
               <td><%= admins.email %></td>
               <td class="actions"> <%= link_to 'Delete', admins, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
+            <% else %>
+            <tr class='logged-in' data-id="<%= admins.id %>">
+              <td><%= admins.email %></td>
+              <td class="actions"></td>
+            </tr>
+            <% end %>
           <% end %>
           <% else %>
             <tr>
