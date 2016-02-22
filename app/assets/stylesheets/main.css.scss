@@ -162,8 +162,9 @@ nav {
     }
 
     li.home a {
-      padding-top: 10px;
       height: $top-height;
+      width: $nav-width;
+      background-position: center;
       @include at2x('nav-home', 80px, 80px);
     }
 
