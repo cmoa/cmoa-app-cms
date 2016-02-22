@@ -11,7 +11,7 @@ class AdminsController < ApplicationController
 
   def create
     pass1 = params[:admin][:password]
-    pass2 = params[:admin][:password_again]
+    pass2 = params[:admin][:password_confirmation]
     email = params[:admin][:email]
 
     if pass1.to_s == pass2.to_s #If the passwords match
@@ -52,7 +52,7 @@ class AdminsController < ApplicationController
 private
 
   def admin_params
-    params.require(:admin).permit(:password, :password_again, :email)
+    params.require(:admin).permit(:password, :password_confirmation, :email)
   end
 
 end
