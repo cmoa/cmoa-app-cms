@@ -14,8 +14,8 @@
     <% if admin_signed_in? %>
     <nav class='topbar'>
       <ul >
-        <li class="profile"><a href="<%= url_for(profile_admin_path) %>" data-gravity="e"><%=icon('users', :class => 'fa-fw')%> Me</a></li>
-        <li class="logout"><a href="<%= url_for(destroy_admin_session_path) %>" data-method="delete" data-gravity="e"><%=icon('sign-out', :class => 'fa-fw')%> Logout</a></li>
+        <li class="profile"><a href="<%= url_for(profile_admin_path) %>" data-gravity="e"><%=icon('users', :class => 'fa-fw')%><br>Me</a></li>
+        <li class="logout"><a href="<%= url_for(destroy_admin_session_path) %>" data-method="delete" data-gravity="e"><%=icon('sign-out', :class => 'fa-fw')%><br>Logout</a></li>
       </ul>
     </nav>
     <% end %>
