@@ -200,12 +200,14 @@ nav.topbar {
     li {
       display: inline-block;
       list-style-type: none;
+      float: left;
       width: $top-height;
       height: $top-height;
+      border-bottom: 0px;
+      border-left: 1px solid $color-seperator-1;
 
       a {
-        border-bottom: 0px;
-        border-left: 1px solid $color-seperator-1;
+
         width: $top-height;
         height: $top-height;
         text-align:center;
