@@ -198,6 +198,8 @@ nav.topbar {
 
   ul {
     li {
+      display: inline;
+      
       a {
         border-bottom: 0px;
         border-left: 1px solid $color-seperator-1;

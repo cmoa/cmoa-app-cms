@@ -13,7 +13,7 @@
     <h1><a href="/">Carnegie Museum of Art</a></h1>
     <% if admin_signed_in? %>
     <nav class='topbar'>
-      <ul class="nav navbar-nav">
+      <ul >
         <li class="profile"><%= link_to('My Profile', profile_admin_path,  'data-gravity' => 'e') %></li>
         <li class="logout"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
       </ul>
