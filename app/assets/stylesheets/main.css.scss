@@ -74,7 +74,7 @@ header {
     width: 297px;
     height: 39px;
     text-decoration: none;
-    @include at2x('logo', 297px, 24px);
+    @include at2x('logo', 297px, 39px);
     background-position: center center;
     background-size: 100%;
     background-repeat: no-repeat;
