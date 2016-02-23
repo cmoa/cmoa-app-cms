@@ -224,6 +224,25 @@ nav.topbar {
   }
 }
 
+//Active selectors
+@for $i from 1 through 10
+{
+  nav.focused-#{$i}
+  {
+    ul{
+      li:nth-of-type(#{$i})
+      {
+        a, a:hover, a:active
+        {
+          background-color: $color-nav-active;
+        }
+      }
+    }
+  }
+
+}
+
+
 
 // Content
 #content {
