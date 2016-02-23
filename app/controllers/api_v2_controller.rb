@@ -64,7 +64,7 @@ class ApiV2Controller < ApplicationController
         :tours             => tours,
         :tourArtworks      => tour_artworks
       }
-
+      response = beacon_rename(response)
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
       $redis.rpush('sync:keys', cacheKey)
@@ -78,7 +78,7 @@ class ApiV2Controller < ApplicationController
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
-    response = beacon_rename(response)
+
     # Return
     return render :json => response
   end
@@ -178,25 +178,29 @@ class ApiV2Controller < ApplicationController
 
     #locations
     result = {}
-    response['locations'].map do |k,v|
-      if k == "beacon_id"
-        result["beacon_uuid"] = v
-      else
-        result[k] = v
+    if response.has_key?('locations')
+      response['locations'].map do |k,v|
+        if k == "beacon_id"
+          result["beacon_uuid"] = v
+        else
+          result[k] = v
+        end
       end
+      response['locations'] = result
     end
-    response['locations'] = result
 
     #artwork
     result = {}
-    response['artwork'].map do |k,v|
-      if k == "beacon_id"
-        result["beacon_uuid"] = v
-      else
-        result[k] = v
+    if response.has_key?('artwork')
+      response['artwork'].map do |k,v|
+        if k == "beacon_id"
+          result["beacon_uuid"] = v
+        else
+          result[k] = v
+        end
       end
+      response['artwork'] = result
     end
-    response['artwork'] = result
 
 
     return response
