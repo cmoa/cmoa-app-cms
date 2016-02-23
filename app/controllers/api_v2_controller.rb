@@ -38,7 +38,7 @@ class ApiV2Controller < ApplicationController
         artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ?', since).with_deleted
         artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ?', since).with_deleted
         artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ?', since).with_deleted
-        beacons = Beacon.attached.select("id AS uuid")
+        beacons = Beacon.attached
         categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since).with_deleted
         locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since).with_deleted
         links = Link.where('date_trunc(\'second\', links.updated_at) > ?', since).with_deleted
@@ -78,7 +78,7 @@ class ApiV2Controller < ApplicationController
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
-
+    response = beacon_rename(response)
     # Return
     return render :json => response
   end
@@ -162,11 +162,40 @@ class ApiV2Controller < ApplicationController
 
   #rename id to uuid
   def beacon_rename(response)
+
     #beacons themselves
-    response['beacons'].map! { |b|
-      b[:uuid] = b['id']
-      b.delete("id")
-    }
+    result = {}
+    response['beacons'].map do |k,v|
+      if k == "id"
+        result["uuid"] = v
+      else
+        result[k] = v
+      end
+    end
+    response['beacons'] = result
+
+    #locations
+    result = {}
+    response['locations'].map do |k,v|
+      if k == "beacon_id"
+        result["beacon_uuid"] = v
+      else
+        result[k] = v
+      end
+    end
+    response['locations'] = result
+
+    #artwork
+    result = {}
+    response['artwork'].map do |k,v|
+      if k == "beacon_id"
+        result["beacon_uuid"] = v
+      else
+        result[k] = v
+      end
+    end
+    response['artwork'] = result
+
 
     return response
 

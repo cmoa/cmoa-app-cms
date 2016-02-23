@@ -14,7 +14,7 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  JSON_ATTRS = ["uuid", "major", "minor", "name"]
+  JSON_ATTRS = ["id", "major", "minor", "name"]
 
 
   def self.unassigned(selected)
