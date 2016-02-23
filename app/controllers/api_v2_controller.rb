@@ -64,6 +64,7 @@ class ApiV2Controller < ApplicationController
         :tours             => tours,
         :tourArtworks      => tour_artworks
       }
+      return response
       response = beacon_rename(response)
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
@@ -167,7 +168,7 @@ class ApiV2Controller < ApplicationController
     #beacons themselves
     result = {}
     #if data.has_key?('beacons')
-      data['beacons'].map do |k,v|
+      data[:beacons].map do |k,v|
         if k == "id"
           result["uuid"] = v
         else
