@@ -61,6 +61,8 @@ class ApiV1Controller < ApplicationController
   end
 
   def hours
+
+    Date.beginning_of_week = :sunday
     #Vars
     schedule_date = params[:date]
 
@@ -71,21 +73,30 @@ class ApiV1Controller < ApplicationController
       schedule_date = DateTime.parse(schedule_date)
     end
 
+    start_week = schedule_date.beginning_of_week
+    end_week = start_week + 6
+
     date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
-     datestamp = schedule_date.strftime("'%F'")
-    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
+     datestamp = schedule_date.strftime("%F")
+    @sch = Hour.where("'" + datestamp + "' BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
 
-    #json = {'sql' => @sch}
-    json = @sch.to_json
+    #Form response
+    json = {}
+    json['requested_date'] = datestamp
+    json['date_range'] = {}
+    json['date_range']['start'] = start_week.strftime("%F")
+    json['date_range']['end'] = end_week.strftime("%F")
+    json['data'] = @sch.to_json
+
 
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
     return render :json => json
   end
-  
+
   def like
     # Vars
     artwork_uuid = params[:artwork]
