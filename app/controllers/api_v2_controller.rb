@@ -64,8 +64,10 @@ class ApiV2Controller < ApplicationController
         :tours             => tours,
         :tourArtworks      => tour_artworks
       }
-      return render :json => response
+
       response = beacon_rename(response)
+
+      return render :json => response
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
       $redis.rpush('sync:keys', cacheKey)
