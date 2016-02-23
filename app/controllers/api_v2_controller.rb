@@ -168,43 +168,55 @@ class ApiV2Controller < ApplicationController
 
     p data
     #beacons themselves
-    result = {}
-    #if data.has_key?('beacons')
-      data[:beacons].map do |k,v|
-        if k == "id"
-          result[:uuid] = v
-        else
-          result[k] = v
+    result = []
+
+      data[:beacons].each do |b|
+        mem = {}
+        b.map do |k, v| do
+          if k == "id"
+            mem[:uuid] = v
+          else
+            mem[k] = v
+          end
         end
+        result.push(mem)
       end
       data[:beacons] = result
-    #end
+
 
     #locations
     result = {}
-    #if data.has_key?('locations')
-      data[:locations].map do |k,v|
-        if k == "beacon_id"
-          result[:beacon_uuid] = v
-        else
-          result[k] = v
+
+      data[:locations].each do |b|
+        mem = {}
+        b.map do |k, v| do
+          if k == "beacon_id"
+            mem[:beacon_uuid] = v
+          else
+            mem[k] = v
+          end
         end
+        result.push(mem)
       end
       data[:locations] = result
-    #end
+
 
     #artwork
     result = {}
-    #if data.has_key?('artwork')
-      data[:artwork].map do |k,v|
-        if k == "beacon_id"
-          result[:beacon_uuid] = v
-        else
-          result[k] = v
+
+      data[:artwork].each do |b|
+        mem = {}
+        b.map do |k, v| do
+          if k == "beacon_id"
+            mem[:beacon_uuid] = v
+          else
+            mem[k] = v
+          end
         end
+        result.push(mem)
       end
       data[:artwork] = result
-    #end
+
 
 
     return data
