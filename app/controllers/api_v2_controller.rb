@@ -67,7 +67,6 @@ class ApiV2Controller < ApplicationController
 
       response = beacon_rename(response)
 
-      return render :json => response
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
       $redis.rpush('sync:keys', cacheKey)
@@ -166,7 +165,6 @@ class ApiV2Controller < ApplicationController
   #rename id to uuid
   def beacon_rename(data)
 
-    p data
     #beacons themselves
     result = []
 
@@ -216,11 +214,6 @@ class ApiV2Controller < ApplicationController
         result.push(mem)
       end
       data[:artwork] = result
-
-
-
     return data
-
-
   end
 end
