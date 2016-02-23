@@ -10,10 +10,12 @@
 $browser-context: 16;
 $color-bg: #ffffff;
 $color-font: #2c3e50;
+$color-light-text: #ffffff;
 $color-nav: #2c3e50;
 $color-sub-nav: #1b2631;
 $color-nav-active: #566573;
 $color-nav-text: #75899c;
+$color-nav-text-active: #ffffff;
 $color-action: #f26361;
 $color-header: #f26361;
 $color-seperator-1: #566573;
@@ -28,6 +30,8 @@ $font-medium: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
 $font-bold: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
+
+$menu: admins beacons categories exhibitions objects people tours feeds hours locations
 
 // Mixins
 @mixin at2x($image_name, $w: auto, $h: auto, $extention: '.png') {
@@ -131,8 +135,7 @@ nav {
 
       a:hover, a:active {
         background-color: $color-nav-active;
-
-        color: #ffffff;
+        color: $color-nav-text-active;
         text-decoration: none;
       }
     }
@@ -148,8 +151,7 @@ nav {
 
       a:hover, a:active {
         background-color: $color-nav-active;
-
-        color: #ffffff;
+        color: $color-nav-text-active;
         text-decoration: none;
       }
     }
@@ -225,17 +227,17 @@ nav.topbar {
 }
 
 //Active selectors
-@for $i from 1 through 10
+@each $i in $menu
 {
-  nav.focused-#{$i}
+  nav.focus-#{$i}
   {
     ul{
-      li:nth-of-type(#{$i})
+      li.#{$i}
       {
         a, a:hover, a:active
         {
           background-color: $color-nav-active;
-          color: #ffffff;
+          color: $color-nav-text-active;
           text-decoration: none;
         }
       }
@@ -352,7 +354,7 @@ nav.topbar {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -545,7 +547,7 @@ nav.topbar {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -603,7 +605,7 @@ nav.topbar {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -645,7 +647,7 @@ nav.topbar {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -694,7 +696,7 @@ nav.topbar {
 
     .flash-notice {
       background-color: #a0cc8c;
-      color: #ffffff;
+      color: $color-light-text;
     }
 
     .flash-alert {
@@ -758,7 +760,7 @@ nav.topbar {
 
       span {
         text-align: center;
-        color: #ffffff;
+        color: $color-light-text;
         display: block;
       }
 
@@ -825,7 +827,7 @@ nav.topbar {
           @include box-sizing(border-box);
           text-align: center;
           background-color: $color-header;
-          color: #ffffff;
+          color: $color-light-text;
           margin: 3px 10px 0 0;
           cursor: hand;
           cursor: grab;

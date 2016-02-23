@@ -2,7 +2,7 @@ class ExhibitionsController < ApplicationController
   before_action :set_exhibition, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy, :positions]
   before_action do
-    set_focus(4)
+    set_focus('exhibitions')
   end
 
   def index

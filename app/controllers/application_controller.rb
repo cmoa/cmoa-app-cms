@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     if @focus.blank?
       return ''
     else
-      return "focused-#{@focus}"
+      return "focus-#{@focus}"
     end
   end
 

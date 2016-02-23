@@ -3,7 +3,7 @@ class ToursController < ApplicationController
   before_action :set_tour, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
   before_action do
-    set_focus(6)
+    set_focus('tours')
   end
 
   def index

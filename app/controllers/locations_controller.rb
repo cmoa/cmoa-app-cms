@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
   before_action do
-    set_focus(9)
+    set_focus('locations')
   end
 
   def index
