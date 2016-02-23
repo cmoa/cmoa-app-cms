@@ -1,11 +1,9 @@
 <ul>
   <% @entries.each do |entry| %>
-  <li class='post'>
-    <a class='continue' href="<%= entry.url %>">
+  <li class='post' onclick='location.href="<%= entry.url %>"'>
       <h1 class='title'><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
       <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
       <p class='summary'><%= raw(entry.summary) %></p>
-    </a>
   </li>
   <% end %>
 </ul>
