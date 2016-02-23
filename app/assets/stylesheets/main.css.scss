@@ -31,7 +31,7 @@ $font-medium: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue",
 $font-bold: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
 
-$menu: admins beacons categories exhibitions objects people tours feeds hours locations
+$menu: admins beacons categories exhibitions objects people tours feeds hours locations;
 
 // Mixins
 @mixin at2x($image_name, $w: auto, $h: auto, $extention: '.png') {
