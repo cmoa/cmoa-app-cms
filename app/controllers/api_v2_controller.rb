@@ -165,7 +165,7 @@ class ApiV2Controller < ApplicationController
 
     #beacons themselves
     result = {}
-    if response.has_key?('beacons')
+    #if response.has_key?('beacons')
       response['beacons'].map do |k,v|
         if k == "id"
           result["uuid"] = v
@@ -174,7 +174,7 @@ class ApiV2Controller < ApplicationController
         end
       end
       response['beacons'] = result
-    end
+    #end
 
     #locations
     result = {}
