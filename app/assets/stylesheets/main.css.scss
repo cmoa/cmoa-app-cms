@@ -14,6 +14,7 @@ $color-light-text: #ffffff;
 $color-nav: #5E5F61;
 $color-sub-nav: #3E3E40;
 $color-nav-active: #727375;
+$color-sub-nav-active: #525254;
 $color-nav-text: #D2D4D9;
 $color-nav-text-active: #F7F9FF;
 $color-action: #f26361;
@@ -150,7 +151,7 @@ nav {
       }
 
       a:hover, a:active {
-        background-color: $color-nav-active;
+        background-color: $color-sub-nav-active;
         color: $color-nav-text-active;
         text-decoration: none;
       }
@@ -239,6 +240,13 @@ nav.topbar {
           background-color: $color-nav-active;
           color: $color-nav-text-active;
           text-decoration: none;
+        }
+      }
+      li.sub.#{$i}
+      {
+        a, a:hover, a:active
+        {
+          background-color: $color-sub-nav-active;
         }
       }
     }
