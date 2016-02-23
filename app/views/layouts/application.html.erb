@@ -10,35 +10,34 @@
 
   <!-- Header -->
   <header>
-    <h1><a href="/">Carnegie Museum of Art</a></h1>
+    <h1><a href="/"></a></h1>
     <% if admin_signed_in? %>
-    <nav>
-      <ul>
-        <li class="no-text logout"><%= link_to('Logout', destroy_admin_session_path, :method => 'delete', 'data-gravity' => 'e') %></li>
+    <nav class='topbar'>
+      <ul >
+        <li class="profile"><a href="<%= url_for(profile_admin_path) %>" data-gravity="e"><%=icon('user', :class => 'fa-fw')%><br>Me</a></li>
+        <li class="logout"><a href="<%= url_for(destroy_admin_session_path) %>" data-method="delete" data-gravity="e"><%=icon('sign-out', :class => 'fa-fw')%><br>Logout</a></li>
       </ul>
     </nav>
     <% end %>
   </header>
 
   <!-- Nav -->
-  <nav>
+  <nav class="<%=get_focus %>">
     <ul>
       <% if admin_signed_in? %>
       <li class="home no-text"><a href="<%= url_for(root_path) %>" data-gravity="w">Home</a></li>
-
-      <% if exhibition_is_set %>
-      <li class="sub artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w">Artists</a></li>
-      <li class="sub artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w">Artwork</a></li>
-      <li class="sub tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w">Tours</a></li>
-      <% else %>
-
-      <% end %>
-      <li class="admins"><a href="<%= url_for(admins_path) %>" data-gravity="w">Admins</a></li>
-      <li class="beacons"><a href="<%= url_for(beacons_path) %>" data-gravity="w">Beacons</a></li>
-      <li class="categories"><a href="<%= url_for(categories_path) %>" data-gravity="w">Categories</a></li>
-      <li class="feeds"><a href="<%= url_for(feeds_path) %>" data-gravity="w">Feeds</a></li>
-      <li class="hours"><a href="<%= url_for(hours_path) %>" data-gravity="w">Hours</a></li>
-      <li class="locations"><a href="<%= url_for(locations_path) %>" data-gravity="w">Locations</a></li>
+      <li class="admins"><a href="<%= url_for(admins_path) %>" data-gravity="w"><%=icon('users', :class => 'fa-fw')%> Admins</a></li>
+      <li class="beacons"><a href="<%= url_for(beacons_path) %>" data-gravity="w"><%=icon('bluetooth-b', :class => 'fa-fw')%> Beacons</a></li>
+      <li class="categories"><a href="<%= url_for(categories_path) %>" data-gravity="w"><%=icon('tags', :class => 'fa-fw')%> Categories</a></li>
+      <li class="exhibitions"><a href="<%= url_for(exhibitions_path) %>" data-gravity="w"><%=icon('calendar', :class => 'fa-fw')%> Exhibitions</a></li>
+        <% if exhibition_is_set %>
+          <li class="sub objects"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>" data-gravity="w"><%=icon('diamond', :class => 'fa-fw')%> Objects</a></li>
+          <li class="sub people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>" data-gravity="w"><%=icon('user', :class => 'fa-fw')%> People</a></li>
+          <li class="sub tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>" data-gravity="w"><%=icon('map-signs', :class => 'fa-fw')%> Tours</a></li>
+        <% end %>
+      <li class="feeds"><a href="<%= url_for(feeds_path) %>" data-gravity="w"><%=icon('rss', :class => 'fa-fw')%> Feeds</a></li>
+      <li class="hours"><a href="<%= url_for(hours_path) %>" data-gravity="w"><%=icon('clock-o', :class => 'fa-fw')%> Hours</a></li>
+      <li class="locations"><a href="<%= url_for(locations_path) %>" data-gravity="w"><%=icon('map-marker', :class => 'fa-fw')%> Locations</a></li>
       <% end %>
     </ul>
   </nav>

@@ -1,5 +1,7 @@
 class AdminsController < ApplicationController
-
+  before_action do
+    set_focus('admins')
+  end
 
   def index
     @admins = Admin.all

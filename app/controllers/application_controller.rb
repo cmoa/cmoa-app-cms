@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authenticate_admin!
   helper_method :exhibition_is_set
+  helper_method :get_focus
 
   def set_exhibition
     if params.has_key?(:exhibition_id)
@@ -31,6 +32,19 @@ class ApplicationController < ActionController::Base
       return false
     else
       return true
+    end
+  end
+
+
+  def set_focus(num)
+    @focus = num
+  end
+
+  def get_focus
+    if @focus.blank?
+      return ''
+    else
+      return "focus-#{@focus}"
     end
   end
 
