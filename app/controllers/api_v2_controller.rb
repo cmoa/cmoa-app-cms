@@ -78,8 +78,8 @@ class ApiV2Controller < ApplicationController
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
-    p response
-
+    #change beacon ids to uuids
+    response = beacon_rename(response)
     # Return
     return render :json => response
   end
@@ -159,5 +159,18 @@ class ApiV2Controller < ApplicationController
     digest = OpenSSL::Digest::Digest.new('sha256')
     signature2 = Base64.strict_encode64(OpenSSL::HMAC.digest(digest, sodium, hashable))
     return render :json => {:status => false, :message => "Invalid Login"} if signature1 != signature2
+  end
+
+  #rename id to uuid
+  def beacon_rename(response)
+    #beacons themselves
+    response.beacons.map! { |b|
+      b.uuid = b.id
+      b.delete("id")
+    }
+
+    return response
+
+
   end
 end
