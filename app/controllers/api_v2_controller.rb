@@ -161,49 +161,50 @@ class ApiV2Controller < ApplicationController
   end
 
   #rename id to uuid
-  def beacon_rename(response)
+  def beacon_rename(data)
 
+    p data
     #beacons themselves
     result = {}
-    #if response.has_key?('beacons')
-      response['beacons'].map do |k,v|
+    #if data.has_key?('beacons')
+      data['beacons'].map do |k,v|
         if k == "id"
           result["uuid"] = v
         else
           result[k] = v
         end
       end
-      response['beacons'] = result
+      data['beacons'] = result
     #end
 
     #locations
     result = {}
-    if response.has_key?('locations')
-      response['locations'].map do |k,v|
+    if data.has_key?('locations')
+      data['locations'].map do |k,v|
         if k == "beacon_id"
           result["beacon_uuid"] = v
         else
           result[k] = v
         end
       end
-      response['locations'] = result
+      data['locations'] = result
     end
 
     #artwork
     result = {}
-    if response.has_key?('artwork')
-      response['artwork'].map do |k,v|
+    if data.has_key?('artwork')
+      data['artwork'].map do |k,v|
         if k == "beacon_id"
           result["beacon_uuid"] = v
         else
           result[k] = v
         end
       end
-      response['artwork'] = result
+      data['artwork'] = result
     end
 
 
-    return response
+    return data
 
 
   end
