@@ -87,6 +87,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     fssm (0.2.10)
     gibbon (1.0.0)
       httparty
@@ -180,6 +182,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.0)
   devise
   feedzirra!
+  font-awesome-sass (~> 4.5.0)
   gibbon
   jquery-rails
   paperclip!
