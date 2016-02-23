@@ -101,7 +101,7 @@ class ApiV2Controller < ApplicationController
 
     #Form response
     json = {}
-    json['requested date'] = datestamp
+    json['requested_date'] = datestamp
     json['data'] = @sch.to_json
 
 

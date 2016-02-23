@@ -70,6 +70,9 @@ class ApiV1Controller < ApplicationController
       schedule_date = DateTime.parse(schedule_date)
     end
 
+    start_week = schedule_date.beginning_of_week
+    end_week = start_week + 6
+
     date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
@@ -78,7 +81,10 @@ class ApiV1Controller < ApplicationController
 
     #Form response
     json = {}
-    json['requested date'] = datestamp
+    json['requested_date'] = datestamp
+    json['date_range'] = []
+    json['date_range']['start'] = start_week.strftime("%F")
+    json['date_range']['end'] = end_week.strftime("%F")
     json['data'] = @sch.to_json
 
 
