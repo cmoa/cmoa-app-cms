@@ -71,8 +71,8 @@ header {
 
   h1 a {
     display: block;
-    width: 297px;
-    height: 24px;
+    width: auto;
+    max-height: 100%;
     text-decoration: none;
     @include at2x('logo', 297px, 24px);
     background-position: center center;
