@@ -185,7 +185,7 @@ class ApiV2Controller < ApplicationController
 
 
     #locations
-    result = {}
+    result = []
 
       data[:locations].each do |b|
         mem = {}
@@ -202,11 +202,11 @@ class ApiV2Controller < ApplicationController
 
 
     #artwork
-    result = {}
+    result = []
 
       data[:artwork].each do |b|
         mem = {}
-        b.as_json.map do |k, v| 
+        b.as_json.map do |k, v|
           if k == "beacon_id"
             mem[:beacon_uuid] = v
           else
