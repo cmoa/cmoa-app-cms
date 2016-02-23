@@ -82,7 +82,7 @@ class ApiV1Controller < ApplicationController
     #Form response
     json = {}
     json['requested_date'] = datestamp
-    json['date_range'] = []
+    json['date_range'] = {}
     json['date_range']['start'] = start_week.strftime("%F")
     json['date_range']['end'] = end_week.strftime("%F")
     json['data'] = @sch.to_json
