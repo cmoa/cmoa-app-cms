@@ -164,7 +164,7 @@ class ApiV2Controller < ApplicationController
   #rename id to uuid
   def beacon_rename(response)
     #beacons themselves
-    response.beacons.map! { |b|
+    response['beacons'].map! { |b|
       b.uuid = b.id
       b.delete("id")
     }
