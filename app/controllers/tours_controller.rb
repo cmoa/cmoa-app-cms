@@ -2,6 +2,9 @@ class ToursController < ApplicationController
   before_action :set_exhibition
   before_action :set_tour, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
+  before_action do
+    set_focus(6)
+  end
 
   def index
     @tours = @exhibition.tours

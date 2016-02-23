@@ -235,6 +235,8 @@ nav.topbar {
         a, a:hover, a:active
         {
           background-color: $color-nav-active;
+          color: #ffffff;
+          text-decoration: none;
         }
       }
     }

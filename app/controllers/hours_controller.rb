@@ -1,6 +1,9 @@
 class HoursController < ApplicationController
   before_action :set_exhibition
   before_action :set_hour, only: [:show, :edit, :update, :destroy]
+  before_action do
+    set_focus(8)
+  end
 
   def index
     @hours = Hour.all
