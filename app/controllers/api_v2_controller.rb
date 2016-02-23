@@ -78,6 +78,8 @@ class ApiV2Controller < ApplicationController
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
+    p response
+
     # Return
     return render :json => response
   end
