@@ -58,6 +58,8 @@ class ApiV1Controller < ApplicationController
   end
 
   def hours
+
+    Date.beginning_of_week = :sunday
     #Vars
     schedule_date = params[:date]
 
