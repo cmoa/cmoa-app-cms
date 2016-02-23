@@ -33,4 +33,6 @@ CMOA::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  config.beginning_of_week = :sunday
 end
