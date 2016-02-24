@@ -773,6 +773,12 @@ nav.topbar {
         display: block;
       }
 
+      span.icon
+      {
+        font-size: em(30);
+        padding-top:30px;
+      }
+
       span.count {
         font-size: em(55);
         font-family: $font-light;
