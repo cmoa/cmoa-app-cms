@@ -81,6 +81,7 @@ namespace :feeds do
   end
 end
 
+
 def render_template(template, outputFilename, variables)
   av = ActionView::Base.new(Rails.root.join('app', 'views'))
   av.assign(variables)
