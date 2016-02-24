@@ -3,6 +3,7 @@
   <li class='post' onclick='location.href="<%= entry.url %>"'>
       <h1 class='title'><%= entry.title.sanitize %></h1>
       <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
+      <h2 class='source'><%= p entry %></h2>
       <div class='summary'><%= raw(entry.summary.gsub(/<[^>]+>/i,"")) %></div>
   </li>
   <% end %>
