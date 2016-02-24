@@ -6,15 +6,18 @@
       <h2><%= @exhibition.title %></h2>
 
       <div class="row-fluid dash">
-        <div class="span4 artists"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
+        <div class="span4 people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
+          <span class="icon"><%= icon('user') %></span>
           <span class="count"><%= @total_artists %></span>
-          <span class="title"><%= 'artist'.pluralize(@total_artists) %></span>
+          <span class="title"><%= 'people'.pluralize(@total_artists) %></span>
         </a></div>
-        <div class="span4 artwork"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>">
+        <div class="span4 objects"><a href="<%= url_for(exhibition_artworks_path(@exhibition)) %>">
+          <span class="icon"><%= icon('diamond') %></span>
           <span class="count"><%= @total_artwork %></span>
-          <span class="title">artwork</span>
+          <span class="title"><%= 'object'.pluralize(@total_artwork) %></span>
         </a></div>
         <div class="span4 tours"><a href="<%= url_for(exhibition_tours_path(@exhibition)) %>">
+          <span class="icon"><%= icon('map-signs') %></span>
           <span class="count"><%= @total_tours %></span>
           <span class="title"><%= 'tour'.pluralize(@total_tours) %></span>
         </a></div>
@@ -22,10 +25,12 @@
 
       <div class="row-fluid dash">
         <div class="span4 categories"><a href="<%= url_for(categories_path) %>">
+          <span class="icon"><%= icon('tags') %></span>
           <span class="count"><%= @total_categories %></span>
           <span class="title"><%= 'category'.pluralize(@total_categories) %></span>
         </a></div>
         <div class="span4 locations"><a href="<%= url_for(locations_path) %>">
+          <span class="icon"><%= icon('map-marker') %></span>
           <span class="count"><%= @total_locations %></span>
           <span class="title"><%= 'location'.pluralize(@total_locations) %></span>
         </a></div>

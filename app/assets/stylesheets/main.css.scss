@@ -773,10 +773,16 @@ nav.topbar {
         display: block;
       }
 
+      span.icon
+      {
+        font-size: em(35);
+        padding-top:25px;
+      }
+
       span.count {
         font-size: em(55);
         font-family: $font-light;
-        padding-top: 80px;
+        padding-top: 20px;
         letter-spacing: -0.05em;
       }
 
@@ -789,29 +795,29 @@ nav.topbar {
       }
     }
 
-    .artists a {
+    .people a {
       background-color: #a0cc8c;
-      @include at2x('nav-artists', 80px, 80px);
+
     }
 
     .categories a {
       background-color: #f26a57;
-      @include at2x('nav-categories', 80px, 80px);
+
     }
 
-    .artwork a {
+    .objects a {
       background-color: #009dd8;
-      @include at2x('nav-artwork', 80px, 80px);
+
     }
 
     .tours a {
       background-color: #fcc25b;
-      @include at2x('nav-tours', 80px, 80px);
+
     }
 
     .locations a {
       background-color: #f47d22;
-      @include at2x('nav-locations', 80px, 80px);
+
     }
   }
 
