@@ -88,7 +88,7 @@ class ApiV1Controller < ApplicationController
     json['date_range'] = {}
     json['date_range']['start'] = start_week.strftime("%F")
     json['date_range']['end'] = end_week.strftime("%F")
-    json['data'] = @sch.to_json
+    json['hours'] = @sch.to_json
 
 
     # Configure gzipped response
