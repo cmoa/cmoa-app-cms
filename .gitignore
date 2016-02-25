@@ -37,4 +37,6 @@ pickle-email-*.html
 config/database.yml
 config/application.yml
 public/assets
+
 *.db
+*.backup
