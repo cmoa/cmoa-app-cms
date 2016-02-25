@@ -3,7 +3,7 @@
   <li class='post' onclick='location.href="<%= entry.url %>"'>
       <h1 class='title'><%= entry.title.sanitize %></h1>
       <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
-      <div class='summary'><%= entry.summary.gsub(/<[^>]+>/i," ").sub(/^\s+/,'').sub(/^(?:\S+\s+){25}([\s\S]+)/," [...]") %></div>
+      <div class='summary'><%= entry.summary.gsub(/<[^>]+>/i," ").sub(/^\s+/,'').sub(/(?:\b\w+\b|\W+){25}.*\n*\.([\s\S]+)/," [...]") %></div>
   </li>
   <% end %>
 </ul>
