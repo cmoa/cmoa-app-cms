@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
   end
 
   def index
+    unset_exhibition
     @total_beacons = Beacon.all.size
     @total_categories = Category.all.size
     @total_exhibitions = Exhibition.all.size
