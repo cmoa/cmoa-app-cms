@@ -170,6 +170,7 @@ nav {
       width: $nav-width;
       background-position: center;
       @include at2x('nav-home', 80px, 80px);
+      border-right: 1px solid $color-seperator-1;
     }
 
     li.artists a {
