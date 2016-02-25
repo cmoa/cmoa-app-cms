@@ -65,6 +65,8 @@ class ApiV2Controller < ApplicationController
         :tourArtworks      => tour_artworks
       }
 
+      response = beacon_rename(response)
+
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
       $redis.rpush('sync:keys', cacheKey)
@@ -78,11 +80,14 @@ class ApiV2Controller < ApplicationController
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
 
+
     # Return
     return render :json => response
   end
 
   def hours
+
+    Date.beginning_of_week = :sunday
     #Vars
     schedule_date = params[:date]
 
@@ -93,14 +98,22 @@ class ApiV2Controller < ApplicationController
       schedule_date = DateTime.parse(schedule_date)
     end
 
+    start_week = schedule_date.beginning_of_week
+    end_week = start_week + 6
+
     date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
 
     #get the valid schedule
-     datestamp = schedule_date.strftime("'%F'")
-    @sch = Hour.where(datestamp + " BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
+     datestamp = schedule_date.strftime("%F")
+    @sch = Hour.where("'" + datestamp + "' BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
 
-    #json = {'sql' => @sch}
-    json = @sch.to_json
+    #Form response
+    json = {}
+    json['requested_date'] = datestamp
+    json['date_range'] = {}
+    json['date_range']['start'] = start_week.strftime("%F")
+    json['date_range']['end'] = end_week.strftime("%F")
+    json['hours'] = @sch.to_json
 
     # Configure gzipped response
     request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
@@ -183,5 +196,60 @@ class ApiV2Controller < ApplicationController
     digest = OpenSSL::Digest::Digest.new('sha256')
     signature2 = Base64.strict_encode64(OpenSSL::HMAC.digest(digest, sodium, hashable))
     return render :json => {:status => false, :message => "Invalid Login"} if signature1 != signature2
+  end
+
+  #rename id to uuid
+  def beacon_rename(data)
+
+    #beacons themselves
+    result = []
+
+      data[:beacons].each do |b|
+        mem = {}
+        b.as_json.map do |k, v|
+          if k == "id"
+            mem[:uuid] = v
+          else
+            mem[k] = v
+          end
+        end
+        result.push(mem)
+      end
+      data[:beacons] = result
+
+
+    #locations
+    result = []
+
+      data[:locations].each do |b|
+        mem = {}
+        b.as_json.map do |k, v|
+          if k == "beacon_id"
+            mem[:beacon_uuid] = v
+          else
+            mem[k] = v
+          end
+        end
+        result.push(mem)
+      end
+      data[:locations] = result
+
+
+    #artwork
+    result = []
+
+      data[:artwork].each do |b|
+        mem = {}
+        b.as_json.map do |k, v|
+          if k == "beacon_id"
+            mem[:beacon_uuid] = v
+          else
+            mem[k] = v
+          end
+        end
+        result.push(mem)
+      end
+      data[:artwork] = result
+    return data
   end
 end

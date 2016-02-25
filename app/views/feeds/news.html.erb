@@ -1,10 +1,9 @@
 <ul>
   <% @entries.each do |entry| %>
-  <li>
-    <h1 class='title'><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
-    <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
-    <p class='summary'><%= raw(entry.summary) %></p>
-    <p class="continue"><a href="<%= entry.url %>">Continue &raquo;</a></p>
+  <li class='post' onclick='location.href="<%= entry.url %>"'>
+      <h1 class='title'><%= entry.title.sanitize %></h1>
+      <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
+      <div class='summary'><%= raw(entry.summary.gsub(/<[^>]+>/i,"")) %></div>
   </li>
   <% end %>
 </ul>

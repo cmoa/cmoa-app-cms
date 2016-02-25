@@ -1,6 +1,9 @@
 class FeedsController < ApplicationController
   before_action :set_exhibition
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action do
+    set_focus('feeds')
+  end
 
   def index
     @feeds = Feed.all
