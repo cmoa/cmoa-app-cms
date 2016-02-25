@@ -1,9 +1,8 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <h1>Exhibition</h1>
 
-      <h2><%= @exhibition.title %></h2>
+      <h1><%= @exhibition.title %></h1>
 
       <div class="row-fluid dash">
         <div class="span4 people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
