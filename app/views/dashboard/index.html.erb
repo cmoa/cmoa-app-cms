@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>CMOA + CMNH fo iOS</h1>
+
+      <div class="row-fluid dash">
+        <div class="span4 beacons"><a href="<%= url_for(beacons_path) %>">
+          <span class="icon"><%= icon('bluetooth-b') %></span>
+          <span class="count"><%= @total_beacons %></span>
+          <span class="title"><%= 'beacons'.pluralize(@total_beacons) %></span>
+        </a></div>
+
+        <div class="span4 categories"><a href="<%= url_for(categories_path) %>">
+          <span class="icon"><%= icon('tags') %></span>
+          <span class="count"><%= @total_categories %></span>
+          <span class="title"><%= 'categories'.pluralize(@total_categories) %></span>
+        </a></div>
+
+        <div class="span4 exhibitions"><a href="<%= url_for(exhibitions_path) %>">
+          <span class="icon"><%= icon('calendar') %></span>
+          <span class="count"><%= @total_exhibitions %></span>
+          <span class="title"><%= 'exhibitions'.pluralize(@total_exhibitions) %></span>
+        </a></div>
+
+      </div>
+
+      <div class="row-fluid dash">
+
+        <div class="span4 feeds"><a href="<%= url_for(feeds_path) %>">
+          <span class="icon"><%= icon('rss') %></span>
+          <span class="count"><%= @total_feeds %></span>
+          <span class="title"><%= 'feeds'.pluralize(@total_feeds) %></span>
+        </a></div>
+<!--
+        <div class="span4 hours"><a href="<%= url_for(hours_path) %>">
+          <span class="icon"><%= icon('clock-o') %></span>
+          <span class="count"><%= @total_hours %></span>
+          <span class="title"><%= 'hours'.pluralize(@total_hours) %></span>
+        </a></div>
+-->
+        <div class="span4 locations"><a href="<%= url_for(locations_path) %>">
+          <span class="icon"><%= icon('map-marker') %></span>
+          <span class="count"><%= @total_locations %></span>
+          <span class="title"><%= 'locations'.pluralize(@total_locations) %></span>
+        </a></div>
+
+      </div>
+    </div>
+  </div>
+</div>
