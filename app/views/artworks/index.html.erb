@@ -33,9 +33,9 @@
           <% else %>
             <tr>
               <% if @is_filtering %>
-              <td class="empty" colspan="5"><strong>No artwork matches this filter.</strong></td>
+              <td class="empty" colspan="5"><strong>No object matches this filter.</strong></td>
               <% else %>
-              <td class="empty" colspan="5"><strong>No artwork has been added yet.</strong></td>
+              <td class="empty" colspan="5"><strong>No object has been added yet.</strong></td>
               <% end %>
             </tr>
           <% end %>
@@ -46,12 +46,12 @@
 
       <h2>Filter artwork</h2>
       <div class="form-horizontal">
-        <%= select_tag(:filter_artist, options_from_collection_for_select(@exhibition.artists.order('last_name asc'), :id, :name, @filter_artist), :prompt => 'By artist:') %> &nbsp; <%= select_tag(:filter_category, options_from_collection_for_select(Category.all.order('title asc'), :id, :title, @filter_category), :prompt => 'By category:') %> &nbsp; <%= select_tag(:filter_location, options_from_collection_for_select(Location.all.order('name asc'), :id, :name, @filter_location), :prompt => 'By location:') %><% if @is_filtering %> &nbsp; <button id="resetFilter" class="btn btn-mini btn-danger">Reset</button><% end %>
+        <%= select_tag(:filter_artist, options_from_collection_for_select(@exhibition.artists.order('last_name asc'), :id, :name, @filter_artist), :prompt => 'By person:') %> &nbsp; <%= select_tag(:filter_category, options_from_collection_for_select(Category.all.order('title asc'), :id, :title, @filter_category), :prompt => 'By category:') %> &nbsp; <%= select_tag(:filter_location, options_from_collection_for_select(Location.all.order('name asc'), :id, :name, @filter_location), :prompt => 'By location:') %><% if @is_filtering %> &nbsp; <button id="resetFilter" class="btn btn-mini btn-danger">Reset</button><% end %>
       </div>
 
       <hr>
 
-      <p><%= link_to 'New Artwork', new_exhibition_artwork_path(@exhibition), :class => 'btn btn-success' %></p>
+      <p><%= link_to 'New Object', new_exhibition_artwork_path(@exhibition), :class => 'btn btn-success' %></p>
     </div>
   </div>
 </div>
