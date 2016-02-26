@@ -28,7 +28,8 @@
 
   <% else %>
   <div class='exhibition_image'>
-    <%= image_tag(@exhibition.bg_ipad) %>
+    <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
+    <%= image_tag("images/rails.png", :class=>"image-overlay") %>
   </div>
   <% end %>
 

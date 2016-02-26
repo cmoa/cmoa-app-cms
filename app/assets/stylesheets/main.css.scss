@@ -93,6 +93,28 @@ header {
     }
   }
 }
+//Exhibition Images
+.exhibition_image
+{
+  position: relative;
+
+  .image-overlay
+  {
+    z-index:10;
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0.2;
+  }
+  .image-underlay
+  {
+    position: absolute;
+    top:0;
+    left 0;
+  }
+
+
+}
 
 // Nav
 nav {
