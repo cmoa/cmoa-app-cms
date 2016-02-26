@@ -64,6 +64,7 @@ header {
   background-color: $color-header;
   height: $top-height;
   position: relative;
+  border-left: 1px solid $color-seperator-1;
 
   h1 {
     padding: 28px 0 0 15px;
@@ -104,12 +105,15 @@ header {
     position: absolute;
     top:0;
     left:0;
+    max-height:300px;
   }
   .image-underlay
   {
+    z-index:1;
     position: absolute;
     top:0;
     left: 0;
+    max-height:300px;
   }
 
 
@@ -191,7 +195,7 @@ nav {
       width: $nav-width;
       background-position: center;
       @include at2x('nav-home', 80px, 80px);
-      border-right: 1px solid $color-seperator-1;
+
     }
 
     li.artists a {
