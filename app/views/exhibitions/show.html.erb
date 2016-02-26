@@ -64,8 +64,8 @@
           });
         </script>
         <div class='exhibition_image'>
-          <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay"), :style=>"display:none;" %>
-          <%= image_tag(image_url("highlight.png"), :class=>"image-overlay") %>
+          <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
+          <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
         </div>
       </div>
       <% end %>
