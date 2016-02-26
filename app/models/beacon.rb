@@ -33,6 +33,11 @@ class Beacon < ActiveRecord::Base
     where(where_clause)
   end
 
+  def self.exhibition_beacons(exhibition)
+    e_beacons = Artwork.where("(beacon_id IS NOT NULL) AND (exhibition_id = ?)", exhibition.id).pluck("beacon_id")
+    return e_beacons.uniq.count
+  end
+
   def detach
     beacon = self.id
     Location.where(beacon_id: beacon).update_all(beacon_id: nil)

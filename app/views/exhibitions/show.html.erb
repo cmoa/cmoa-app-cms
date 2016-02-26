@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="span12">
 
-      <h1><%= @exhibition.title %></h1>
+      <h1><%= @exhibition.title %> <%= link_to 'Edit', edit_exhibition_path(@exhibition), :class => 'btn btn-default' %></h1>
 
       <div class="row-fluid dash">
         <div class="span4 people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
@@ -32,10 +32,10 @@
           <span class="count"><%= @total_locations %></span>
           <span class="title"><%= 'location'.pluralize(@total_locations) %></span>
         </a></div>
-        <div class="span4 edit"><a href="<%= url_for(edit_exhibition_path(@exhibition)) %>">
-          <span class="icon"><%= icon('pencil') %></span>
-          <span class="count">Edit</span>
-          <span class="title">Exhibition Details</span>
+        <div class="span4 beacons"><a href="<%= url_for(beacons_path) %>">
+          <span class="icon"><%= icon('bluetooth-b') %></span>
+          <span class="count"><%= @total_beacons %></span>
+          <span class="title">Beacons</span>
         </a></div>
       </div>
 
