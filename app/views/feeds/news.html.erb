@@ -1,6 +1,6 @@
 <%
 def summarize(text)
-  clean = text.gsub(/<[^>]+>/i," ").gsub(/&[a-zA-Z]+;/," ").sub(/^\s+/,'')
+  clean = text.gsub(/<[^>]+>/i," ").gsub(/(&[a-zA-Z0-9#]+;)/," ").sub(/^\s+/,'')
   summary = clean[/^(\s*(\S+\s+){25}[^.!?;]*[.!?;])/, 0]
   if summary.blank?
     return  clean
