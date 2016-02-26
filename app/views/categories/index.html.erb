@@ -18,7 +18,7 @@
             <tr>
               <td class="title"><%= category.title %></td>
               <% if exhibition_is_set %>
-              <td class="artwork"><%= category.exhibition_artworks(@exhibition).size %> <%= link_to('Show', exhibition_artworks_path(@exhibition, :filter_category => category.id), :class => 'btn btn-mini btn-info') %></td>
+              <td class="artwork"><%= category.exhibition_artworks(@exhibition).size %> </td>
               <% else %>
               <td class="artwork"><%= category.artworks.size %> </td>
               <% end %>

@@ -1,9 +1,8 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <h1>Exhibition</h1>
 
-      <h2><%= @exhibition.title %></h2>
+      <h1><%= @exhibition.title %></h1>
 
       <div class="row-fluid dash">
         <div class="span4 people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
@@ -22,7 +21,6 @@
           <span class="title"><%= 'tour'.pluralize(@total_tours) %></span>
         </a></div>
       </div>
-
       <div class="row-fluid dash">
         <div class="span4 categories"><a href="<%= url_for(categories_path) %>">
           <span class="icon"><%= icon('tags') %></span>
@@ -34,7 +32,24 @@
           <span class="count"><%= @total_locations %></span>
           <span class="title"><%= 'location'.pluralize(@total_locations) %></span>
         </a></div>
+        <div class="span4 edit"><a href="<%= url_for(edit_exhibition_path(@exhibition)) %>">
+          <span class="icon"><%= icon('pencil') %></span>
+          <span class="count">Edit</span>
+          <span class="title">Exhibition Details</span>
+        </a></div>
       </div>
+
+      <% if @exhibition.bg_ipad.blank? %>
+
+      <% else %>
+      <div class="row-fluid dash">
+        <div class='exhibition_image'>
+          <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
+          <%= image_tag(image_url("highlight.png"), :class=>"image-overlay") %>
+        </div>
+      </div>
+      <% end %>
+
     </div>
   </div>
 </div>

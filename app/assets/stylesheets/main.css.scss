@@ -32,7 +32,7 @@ $font-medium: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue",
 $font-bold: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
 
-$menu: admins beacons categories exhibitions objects people tours feeds hours locations;
+$menu: home admins beacons categories exhibitions objects people tours feeds hours locations;
 
 // Mixins
 @mixin at2x($image_name, $w: auto, $h: auto, $extention: '.png') {
@@ -92,6 +92,28 @@ header {
       border: 0 !important;
     }
   }
+}
+//Exhibition Images
+.exhibition_image
+{
+  position: relative;
+
+  .image-overlay
+  {
+    z-index:10;
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0.2;
+  }
+  .image-underlay
+  {
+    position: absolute;
+    top:0;
+    left: 0;
+  }
+
+
 }
 
 // Nav
@@ -170,6 +192,7 @@ nav {
       width: $nav-width;
       background-position: center;
       @include at2x('nav-home', 80px, 80px);
+      border-right: 1px solid $color-seperator-1;
     }
 
     li.artists a {
@@ -819,6 +842,26 @@ nav.topbar {
       background-color: #f47d22;
 
     }
+
+    .beacons a {
+      background-color: #009dd8;
+    }
+
+    .exhibitions a {
+      background-color: #a0cc8c;
+
+    }
+
+    .feeds a {
+      background-color: #fcc25b;
+
+    }
+
+    .edit a {
+      background-color: #A95BFC;
+    }
+
+
   }
 
   // Tour artworks

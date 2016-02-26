@@ -33,7 +33,7 @@
               <% else %>
               <td class="status offline"><strong>OFFLINE</strong></td>
               <% end %>
-              <td class="actions"><%= link_to 'Show', exhibition, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_path(exhibition), :class => 'btn btn-mini' %><% unless exhibition.is_live %> <%= link_to 'Delete', exhibition, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %><% end %></td>
+              <td class="actions"><%= link_to 'Show', exhibition, :class => 'btn btn-mini btn-info' %><% unless exhibition.is_live %> <%= link_to 'Delete', exhibition, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %><% end %></td>
             </tr>
           <% end %>
           <% else %>
