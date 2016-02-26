@@ -44,7 +44,7 @@
 
       <hr>
 
-      <h2>Filter artwork</h2>
+      <h2>Filter object</h2>
       <div class="form-horizontal">
         <%= select_tag(:filter_artist, options_from_collection_for_select(@exhibition.artists.order('last_name asc'), :id, :name, @filter_artist), :prompt => 'By person:') %> &nbsp; <%= select_tag(:filter_category, options_from_collection_for_select(Category.all.order('title asc'), :id, :title, @filter_category), :prompt => 'By category:') %> &nbsp; <%= select_tag(:filter_location, options_from_collection_for_select(Location.all.order('name asc'), :id, :name, @filter_location), :prompt => 'By location:') %><% if @is_filtering %> &nbsp; <button id="resetFilter" class="btn btn-mini btn-danger">Reset</button><% end %>
       </div>
