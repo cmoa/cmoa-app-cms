@@ -1,9 +1,21 @@
+<%
+def summarize(text)
+  clean = text.gsub(/<[^>]+>/i," ").gsub(/&[a-zA-Z]+;/," ").sub(/^\s+/,'')
+  summary = clean.match(/^^((\b\w+\b|\W+){25}[^.]*\.)/)
+  if summary.length > 0
+    return summary + " [...]"
+  else
+    return clean
+  end
+end
+ %>
+
 <ul>
   <% @entries.each do |entry| %>
   <li class='post' onclick='location.href="<%= entry.url %>"'>
       <h1 class='title'><%= entry.title.sanitize %></h1>
       <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
-      <div class='summary'><%= entry.summary.gsub(/<[^>]+>/i," ").gsub(/&[a-zA-Z]+;/," ").sub(/^\s+/,'') %></div>
+      <div class='summary'><%= summarize(entry.summary) %></div>
   </li>
   <% end %>
 </ul>
