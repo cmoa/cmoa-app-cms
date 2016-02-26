@@ -44,7 +44,8 @@
       <% else %>
       <div class="row-fluid dash">
         <button id='show_overlay' data-visible='false' class="btn btn-default">Show menu overlay</button>
-
+      </div>
+      <div class="row-fluid dash">
         <div class='exhibition_image'>
           <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
           <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
