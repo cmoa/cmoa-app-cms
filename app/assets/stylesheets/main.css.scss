@@ -95,6 +95,10 @@ header {
   }
 }
 //Exhibition Images
+.image-info
+{
+  height:80px;
+}
 .exhibition_image
 {
   position: relative;
@@ -106,7 +110,8 @@ header {
     position: absolute;
     top:0;
     left:0;
-    max-height:300px;
+    max-height: 600px;
+
   }
   .image-underlay
   {
@@ -114,8 +119,9 @@ header {
     position: absolute;
     top:0;
     left: 0;
-    max-height:300px;
+    max-height: 600px;
     padding-bottom: 50px;
+    
   }
 
 }
@@ -286,7 +292,7 @@ nav.topbar {
 
 // Content
 #content {
-  width: 800px;
+  //width: 800px;
 
   h1 {
     font-family: $font-light;
