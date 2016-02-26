@@ -3,7 +3,7 @@ def summarize(text)
   clean = text.gsub(/<[^>]+>/i," ").gsub(/&[a-zA-Z]+;/," ").sub(/^\s+/,'')
   summary = clean[/^((\b\w+\b|\W+){25}[^.]*\.)/, 0]
   if summary.blank?
-    return clean
+    return "<pre>" + clean "</pre>"
   else
     return summary + " [...]"
   end
