@@ -16,6 +16,7 @@ class ExhibitionsController < ApplicationController
     @total_artwork = @exhibition.artworks.size
     @total_locations = Location.all.size
     @total_tours = @exhibition.tours.size
+    @total_beacons = Beacon.exhibition_beacons(@exhibition)
   end
 
   def new
