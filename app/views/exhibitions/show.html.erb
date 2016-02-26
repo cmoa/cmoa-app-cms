@@ -44,25 +44,7 @@
       <% else %>
       <div class="row-fluid dash">
         <button id='show_overlay' data-visible='false' class="btn btn-default">Show menu overlay</button>
-        <script>
-          $(document).ready(function() {
-            $('#show_overlay').click(function(){
-              var show = $('#show_overlay').attr('data-visible');
-              if(show == 'false')
-              {
-                $('#show_overlay').attr('data-visible', 'true');
-                $('#show_overlay').text("Hide menu overlay");
-                $('.image-overlay').show();
-              }
-              else
-              {
-                $('#show_overlay').attr('data-visible', 'false');
-                $('#show_overlay').text("Show menu overlay");
-                $('.image-overlay').hide();
-              }
-            });
-          });
-        </script>
+
         <div class='exhibition_image'>
           <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
           <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
@@ -73,3 +55,23 @@
     </div>
   </div>
 </div>
+
+<% content_for :js %>
+
+    $('#show_overlay').click(function(){
+      var show = $('#show_overlay').attr('data-visible');
+      if(show == 'false')
+      {
+        $('#show_overlay').attr('data-visible', 'true');
+        $('#show_overlay').text("Hide menu overlay");
+        $('.image-overlay').show();
+      }
+      else
+      {
+        $('#show_overlay').attr('data-visible', 'false');
+        $('#show_overlay').text("Show menu overlay");
+        $('.image-overlay').hide();
+      }
+    });
+
+<% end %>
