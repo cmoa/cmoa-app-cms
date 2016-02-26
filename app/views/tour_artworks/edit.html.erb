@@ -5,10 +5,10 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <h1>Modifying artworks for <strong><%= @tour.title %></strong></h1>
+      <h1>Modifying objects for <strong><%= @tour.title %></strong></h1>
 
       <%= form_for(@tour, :url => { :controller => 'tour_artworks', :action => 'update' }) do |f| %>
-      <p id="noArtworkNote" style="display: <%= @tour.artworks.empty? ? 'block' : 'none' %>">This tour has no artwork. Add artwork by clicking below.</p>
+      <p id="noArtworkNote" style="display: <%= @tour.artworks.empty? ? 'block' : 'none' %>">This tour has no objects. Add objects by clicking below.</p>
 
       <div class="artwork-list">
 
@@ -36,12 +36,12 @@
           <% end %>
         </ol>
 
-        <p class="submit"><button id="addArtwork" class="btn btn-mini btn-inverse">Add artwork</button></p>
+        <p class="submit"><button id="addArtwork" class="btn btn-mini btn-inverse">Add object</button></p>
 
       </div>
 
       <hr>
-      <p class="hint"><em>Hint:</em> You can change the order of the artwork by dragging its order number.</p>
+      <p class="hint"><em>Hint:</em> You can change the order of the object by dragging its order number.</p>
       <hr>
 
       <p class="submit"><%= f.submit('Update this tour', :class => 'btn btn-primary') %></p>
@@ -59,7 +59,7 @@
     <div class="position">1</div>
     <div class="btn-group">
       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        <span class="text">Select artwork</span>
+        <span class="text">Select object</span>
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
