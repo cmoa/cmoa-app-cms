@@ -2,7 +2,9 @@
   <div class="row-fluid">
     <div class="span12">
 
-      <h1><%= @exhibition.title %> <%= link_to 'Edit', edit_exhibition_path(@exhibition), :class => 'btn btn-default' %></h1>
+      <h1><%= @exhibition.title %> </h1>
+
+      <h2><%= link_to 'Edit', edit_exhibition_path(@exhibition), :class => 'btn btn-default' %></h2>
 
       <div class="row-fluid dash">
         <div class="span4 people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
