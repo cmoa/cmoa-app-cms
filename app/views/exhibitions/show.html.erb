@@ -44,16 +44,20 @@
       <h2>Exhibition Images</h2>
 
       <div class="row-fluid dash">
-        <div class='exhibition_image'>
+        <div class='col-sm-4 col-xs-4'>
           <h3>iPhone</h3>
-          <%= image_tag(@exhibition.bg_iphone, :class=>"image-underlay") %>
+          <div class='exhibition_image'>
+            <%= image_tag(@exhibition.bg_iphone, :class=>"image-underlay") %>
+          </div>
         </div>
 
-        <div class='exhibition_image'>
+        <div class='col-sm-8 col-xs-8'>
           <h3>iPad</h3>
           <p><button id='show_overlay' data-visible='false' class="btn btn-default">Show Left Menu Image</button></p>
-          <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
-          <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
+          <div class='exhibition_image'>
+            <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
+            <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
+          </div>
         </div>
 
       </div>
