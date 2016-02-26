@@ -8,7 +8,7 @@ def summarize(text)
   else
     ret = summary + " [ellipsis]!"
   end
-  return ret.sub(/\[ellipsis\]!/,"[…]")
+  return ret.sub(/\[ellipsis\]!/,"[…]").gsub(/\[ellipsis\]!/,"")
 end
  %>
 
