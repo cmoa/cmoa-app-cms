@@ -24,6 +24,14 @@
 
   <p><%= f.file_field :bg_ipad, :title => raw('Select an iPad background to upload <strong>(1406x1408)</strong>'), :class => 'btn-mini btn-success' %></p>
 
+  <% if @exhibition.bg_ipad.blank? %>
+
+  <% else %>
+  <div class='exhibition_image'>
+    <%= image_tag(@exhibition.bg_ipad) %>
+  </div>
+  <% end %>
+
   <p class="input-chk"><%= f.check_box :is_live %> <%= f.label :is_live, 'Live exhibition? (Uncheck for draft mode)', :class => 'inline' %></p>
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
