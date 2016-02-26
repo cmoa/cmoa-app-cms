@@ -52,8 +52,7 @@
         </div>
 
         <div class='span8'>
-          <h3>iPad</h3>
-          <p><button id='show_overlay' data-visible='false' class="btn btn-default">Show Left Menu Image</button></p>
+          <h3>iPad <button id='show_overlay' data-visible='false' class="btn btn-default">Show Left Menu Image</button></h3>
           <div class='exhibition_image'>
             <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
             <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
@@ -74,13 +73,13 @@
       if(show == 'false')
       {
         $('#show_overlay').attr('data-visible', 'true');
-        $('#show_overlay').text("Hide menu overlay");
+        $('#show_overlay').text("Hide Left Menu Image");
         $('.image-overlay').show();
       }
       else
       {
         $('#show_overlay').attr('data-visible', 'false');
-        $('#show_overlay').text("Show menu overlay");
+        $('#show_overlay').text("Show Left Menu Image");
         $('.image-overlay').hide();
       }
     });
