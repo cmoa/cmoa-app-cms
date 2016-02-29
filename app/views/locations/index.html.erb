@@ -22,7 +22,7 @@
               <% else %>
               <td class="artwork"><%= location.artworks.size %> </td>
               <% end %>
-              <td class="actions"><%= link_to 'Show', [location], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-mini' %> <%= link_to 'Delete', [location], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+              <td class="actions"><%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-mini' %> <%= link_to 'Delete', [location], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>
           <% else %>
