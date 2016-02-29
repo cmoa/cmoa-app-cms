@@ -47,7 +47,7 @@ class ExhibitionsController < ApplicationController
 
   def update
     if @exhibition.update(exhibition_params)
-      redirect_to root_path, notice: 'Exhibition was successfully updated.'
+      redirect_to @exhibition, notice: 'Exhibition was successfully updated.'
     else
       render action: 'edit'
     end
