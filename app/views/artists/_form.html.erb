@@ -1,7 +1,7 @@
 <%= form_for([@exhibition, @artist]) do |f| %>
   <% if @artist.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this person from being saved:</h2>
 
       <ul class="errors">
       <% @artist.errors.full_messages.each do |msg| %>

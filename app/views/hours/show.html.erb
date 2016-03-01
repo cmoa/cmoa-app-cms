@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Schedule</h1>
+
+      <h2>Start of Schedule</h2>
+      <p class="sub"><%= @hour.start_schedule.strftime("%F") %></p>
+
+      <h2>End of Schedule</h2>
+      <p class="sub"><%= @hour.end_schedule.strftime("%F") %></p>
+
+      <% for dow in 1..7 do %>
+        <h3><%= Hour.dow(dow) %></h3>
+        <p class="sub"><%= @hour.print_dow(dow) %></p>
+      <% end %>
+      
+      <p><%= link_to raw('&laquo; Back'), hours_path, :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_hour_path(@hour), :class => 'btn btn-mini' %>  </p>
+
+    </div>
+  </div>
+</div>

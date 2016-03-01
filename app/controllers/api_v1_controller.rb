@@ -1,7 +1,7 @@
 class ApiV1Controller < ApplicationController
   skip_before_filter :authenticate_admin!
-  before_filter :check_params, :except => [:sync]
-  protect_from_forgery :except => [:sync, :like, :subscribe]
+  before_filter :check_params, :except => [:sync, :hours]
+  protect_from_forgery :except => [:sync, :like, :subscribe, :hours]
 
   def sync
     since = (!params[:since].nil? && params[:since] != '') ? params[:since].to_datetime : Date.new(2011, 1, 1)
@@ -17,6 +17,7 @@ class ApiV1Controller < ApplicationController
       artists = Artist.where('date_trunc(\'second\', artists.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
       artist_artworks = ArtistArtwork.where('date_trunc(\'second\', artist_artworks.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
       artwork = Artwork.where('date_trunc(\'second\', artworks.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
+      beacons = Beacon.attached
       categories = Category.where('date_trunc(\'second\', categories.updated_at) > ?', since).with_deleted
       locations = Location.where('date_trunc(\'second\', locations.updated_at) > ?', since).with_deleted
       links = Link.where('date_trunc(\'second\', links.updated_at) > ? AND exhibition_id = ?', since, DEFAULT_EXHIBITION_ID).with_deleted
@@ -31,6 +32,7 @@ class ApiV1Controller < ApplicationController
         :artists           => artists,
         :artwork           => artwork,
         :artistArtworks    => artist_artworks,
+        :beacons           => beacons,
         :categories        => categories,
         :locations         => locations,
         :links             => links,
@@ -40,6 +42,7 @@ class ApiV1Controller < ApplicationController
         :tourArtworks      => tour_artworks
       }
 
+      response = beacon_rename(response)
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
       $redis.rpush('sync:keys', cacheKey)
@@ -55,6 +58,43 @@ class ApiV1Controller < ApplicationController
 
     # Return
     return render :json => response
+  end
+
+  def hours
+
+    Date.beginning_of_week = :sunday
+    #Vars
+    schedule_date = params[:date]
+
+    #Convert to date
+    if schedule_date.blank?
+      schedule_date = DateTime.now
+    else
+      schedule_date = DateTime.parse(schedule_date)
+    end
+
+    start_week = schedule_date.beginning_of_week
+    end_week = start_week + 6
+
+    date_diff = "(end_schedule::timestamp - start_schedule::timestamp)"
+
+    #get the valid schedule
+     datestamp = schedule_date.strftime("%F")
+    @sch = Hour.where("'" + datestamp + "' BETWEEN start_schedule AND end_schedule").order(date_diff + " asc").first
+
+    #Form response
+    json = {}
+    json['requested_date'] = datestamp
+    json['date_range'] = {}
+    json['date_range']['start'] = start_week.strftime("%F")
+    json['date_range']['end'] = end_week.strftime("%F")
+    json['hours'] = @sch.to_json
+
+
+    # Configure gzipped response
+    request.env['HTTP_ACCEPT_ENCODING'] = 'gzip'
+
+    return render :json => json
   end
 
   def like
@@ -140,6 +180,61 @@ class ApiV1Controller < ApplicationController
     # logger.debug "Signature 2:  #{signature2}"
     # logger.debug "============================"
     return render :json => {:status => false, :message => "Invalid Login"} if signature1 != signature2
+  end
+
+  #rename id to uuid
+  def beacon_rename(data)
+
+    #beacons themselves
+    result = []
+
+      data[:beacons].each do |b|
+        mem = {}
+        b.as_json.map do |k, v|
+          if k == "id"
+            mem[:uuid] = v
+          else
+            mem[k] = v
+          end
+        end
+        result.push(mem)
+      end
+      data[:beacons] = result
+
+
+    #locations
+    result = []
+
+      data[:locations].each do |b|
+        mem = {}
+        b.as_json.map do |k, v|
+          if k == "beacon_id"
+            mem[:beacon_uuid] = v
+          else
+            mem[k] = v
+          end
+        end
+        result.push(mem)
+      end
+      data[:locations] = result
+
+
+    #artwork
+    result = []
+
+      data[:artwork].each do |b|
+        mem = {}
+        b.as_json.map do |k, v|
+          if k == "beacon_id"
+            mem[:beacon_uuid] = v
+          else
+            mem[k] = v
+          end
+        end
+        result.push(mem)
+      end
+      data[:artwork] = result
+    return data
   end
 
 end

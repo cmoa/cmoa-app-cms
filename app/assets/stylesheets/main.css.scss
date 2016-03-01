@@ -3,26 +3,36 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/box-sizing";
 @import "compass/css3/transition";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 // Vars
 $browser-context: 16;
 $color-bg: #ffffff;
 $color-font: #2c3e50;
-$color-nav: #2c3e50;
-$color-nav-active: #566573;
-$color-nav-text: #75899c;
+$color-light-text: #ffffff;
+$color-nav: #5E5F61;
+$color-sub-nav: #3E3E40;
+$color-nav-active: #727375;
+$color-sub-nav-active: #525254;
+$color-nav-text: #D2D4D9;
+$color-nav-text-active: #F7F9FF;
 $color-action: #f26361;
-$color-header: #f26361;
-$color-seperator-1: #566573;
+$color-header: #838487;
+$color-seperator-1: #9a9a9a;
 $color-seperator-2: #f26361;
-$nav-width: 80px;
-$nav-height: 100px;
+$color-row-highlight: #EDEDCC;
+$nav-width: 140px;
+$nav-height: 50px;
+$top-height: 100px;
 $font-light: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
 $font-medium: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
 $font-bold: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue",
   Helvetica, Arial, "Lucida Grande", sans-serif;
+
+$menu: home admins beacons categories exhibitions objects people tours feeds hours locations;
 
 // Mixins
 @mixin at2x($image_name, $w: auto, $h: auto, $extention: '.png') {
@@ -52,8 +62,9 @@ body {
 // Header
 header {
   background-color: $color-header;
-  height: $nav-width;
+  height: $top-height;
   position: relative;
+  border-left: 1px solid $color-seperator-1;
 
   h1 {
     padding: 28px 0 0 15px;
@@ -62,10 +73,11 @@ header {
   h1 a {
     display: block;
     width: 297px;
-    height: 24px;
+    height: 39px;
     text-decoration: none;
-    @include at2x('logo', 297px, 24px);
+    @include at2x('logo', 297px, 39px);
     background-position: center center;
+    background-size: 100%;
     background-repeat: no-repeat;
     text-indent: -10000px;
   }
@@ -81,6 +93,37 @@ header {
       border: 0 !important;
     }
   }
+}
+//Exhibition Images
+.image-info
+{
+  height:80px;
+}
+.exhibition_image
+{
+  position: relative;
+
+
+  .image-overlay
+  {
+    z-index:10;
+    position: absolute;
+    top:0;
+    left:0;
+    max-height: 600px;
+
+  }
+  .image-underlay
+  {
+    z-index:1;
+    position: absolute;
+    top:0;
+    left: 0;
+    max-height: 600px;
+    padding-bottom: 50px;
+    
+  }
+
 }
 
 // Nav
@@ -99,31 +142,50 @@ nav {
         display: block;
         width: $nav-width;
         height: $nav-height;
+        line-height: $nav-height;
         background-position: center center;
         background-repeat: no-repeat;
         @include box-sizing(border-box);
         border-bottom: 1px solid $color-seperator-1;
-        text-transform: uppercase;
+        //text-transform: uppercase;
         color: $color-nav-text;
-        font-size: em(9);
-        height: 100px;
-        text-align: center;
+        font-size: em(18);
+        text-align: left;
         background-position: top center;
-        padding-top: 70px;
         font-family: $font-medium;
+
+        padding-left: 10px;
       }
 
-      a:link, a:visited {
+      a:link, a:visited
+      {
         background-color: $color-nav;
 
         color: $color-nav-text;
         text-decoration: none;
       }
 
+
+
       a:hover, a:active {
         background-color: $color-nav-active;
+        color: $color-nav-text-active;
+        text-decoration: none;
+      }
+    }
 
-        color: #ffffff;
+    li.sub
+    {
+      a {
+        background-color: $color-sub-nav;
+        padding-left: 20px;
+        color: $color-nav-text;
+        text-decoration: none;
+      }
+
+      a:hover, a:active {
+        background-color: $color-sub-nav-active;
+        color: $color-nav-text-active;
         text-decoration: none;
       }
     }
@@ -131,43 +193,106 @@ nav {
     li.no-text {
       a {
         text-indent: -10000px;
-        height: $nav-width;
+
       }
     }
 
     li.home a {
+      height: $top-height;
+      width: $nav-width;
+      background-position: center;
       @include at2x('nav-home', 80px, 80px);
+
     }
 
     li.artists a {
-      @include at2x('nav-artists', 80px, 80px);
+
     }
 
     li.artwork a {
-      @include at2x('nav-artwork', 80px, 80px);
+
     }
 
     li.tours a {
-      @include at2x('nav-tours', 80px, 80px);
+
     }
 
     li.categories a {
-      @include at2x('nav-categories', 80px, 80px);
+
     }
 
     li.locations a {
-      @include at2x('nav-locations', 80px, 80px);
+
     }
 
     li.logout a {
-      @include at2x('nav-logout', 80px, 80px);
+
     }
   }
 }
 
+nav.topbar {
+  width: auto;
+
+  ul {
+    li {
+      display: inline-block;
+      list-style-type: none;
+      float: left;
+      width: $top-height;
+      height: $top-height;
+      border-bottom: 0px;
+      border-left: 1px solid $color-seperator-1;
+
+      a {
+
+        width: $top-height;
+        height: $top-height;
+        text-align:center;
+        padding-left: 0px;
+        line-height: 40px;
+
+        i {
+          font-size: em(40);
+          line-height: 60px;
+        }
+      }
+    }
+  }
+}
+
+//Active selectors
+@each $i in $menu
+{
+  nav.focus-#{$i}
+  {
+    ul{
+      li.#{$i}
+      {
+        a, a:hover, a:active
+        {
+          background-color: $color-nav-active;
+          color: $color-nav-text-active;
+          text-decoration: none;
+        }
+      }
+      li.sub.#{$i}
+      {
+        a, a:hover, a:active
+        {
+          background-color: $color-sub-nav-active;
+        }
+      }
+    }
+  }
+
+}
+
+
+
 // Content
 #content {
-  width: 800px;
+  //width: 800px;
 
   h1 {
     font-family: $font-light;
@@ -245,6 +370,15 @@ nav {
     }
   }
 
+  .logged-in
+  {
+    background-color: $color-row-highlight;
+
+    td, tr, th {
+      background-color: $color-row-highlight;
+    }
+  }
+
   table.table-exhibitions {
     th.position,
     td.position {
@@ -262,7 +396,7 @@ nav {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -455,7 +589,7 @@ nav {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -513,7 +647,7 @@ nav {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -555,7 +689,7 @@ nav {
       @include box-sizing(border-box);
       text-align: center;
       background-color: $color-header;
-      color: #ffffff;
+      color: $color-light-text;
       margin: 0 0 0 0;
       cursor: hand;
       cursor: grab;
@@ -604,7 +738,7 @@ nav {
 
     .flash-notice {
       background-color: #a0cc8c;
-      color: #ffffff;
+      color: $color-light-text;
     }
 
     .flash-alert {
@@ -668,14 +802,20 @@ nav {
 
       span {
         text-align: center;
-        color: #ffffff;
+        color: $color-light-text;
         display: block;
+      }
+
+      span.icon
+      {
+        font-size: em(35);
+        padding-top:25px;
       }
 
       span.count {
         font-size: em(55);
         font-family: $font-light;
-        padding-top: 80px;
+        padding-top: 20px;
         letter-spacing: -0.05em;
       }
 
@@ -688,30 +828,50 @@ nav {
       }
     }
 
-    .artists a {
+    .people a {
       background-color: #a0cc8c;
-      @include at2x('nav-artists', 80px, 80px);
+
     }
 
     .categories a {
       background-color: #f26a57;
-      @include at2x('nav-categories', 80px, 80px);
+
     }
 
-    .artwork a {
-      background-color: #009dd8;
-      @include at2x('nav-artwork', 80px, 80px);
+    .objects a {
+      background-color: #A95BFC;
+
     }
 
     .tours a {
       background-color: #fcc25b;
-      @include at2x('nav-tours', 80px, 80px);
+
     }
 
     .locations a {
       background-color: #f47d22;
-      @include at2x('nav-locations', 80px, 80px);
+
     }
+
+    .beacons a {
+      background-color: #009dd8;
+    }
+
+    .exhibitions a {
+      background-color: #a0cc8c;
+
+    }
+
+    .feeds a {
+      background-color: #fcc25b;
+
+    }
+
+    .edit a {
+      background-color: #A95BFC;
+    }
+
+
   }
 
   // Tour artworks
@@ -735,7 +895,7 @@ nav {
           @include box-sizing(border-box);
           text-align: center;
           background-color: $color-header;
-          color: #ffffff;
+          color: $color-light-text;
           margin: 3px 10px 0 0;
           cursor: hand;
           cursor: grab;

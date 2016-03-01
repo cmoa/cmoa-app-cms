@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219211940) do
+ActiveRecord::Schema.define(version: 20160211164009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,18 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.datetime "deleted_at"
     t.integer  "location_id"
     t.string   "share_url"
+    t.integer  "beacon_id"
   end
+
+  add_index "artworks", ["beacon_id"], name: "index_artworks_on_beacon_id", using: :btree
+
+  create_table "beacons", force: true do |t|
+    t.integer "major", null: false
+    t.integer "minor", null: false
+    t.string  "name"
+  end
+
+  add_index "beacons", ["major", "minor"], name: "index_beacons_on_major_and_minor", unique: true, using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "title"
@@ -100,6 +111,35 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.string   "sponsor"
   end
 
+  create_table "feeds", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "feed_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hours", force: true do |t|
+    t.datetime "start_schedule"
+    t.datetime "end_schedule"
+    t.time     "sunday_start"
+    t.time     "sunday_end"
+    t.time     "monday_start"
+    t.time     "monday_end"
+    t.time     "tuesday_start"
+    t.time     "tuesday_end"
+    t.time     "wednesday_start"
+    t.time     "wednesday_end"
+    t.time     "thursday_start"
+    t.time     "thursday_end"
+    t.time     "friday_start"
+    t.time     "friday_end"
+    t.time     "saturday_start"
+    t.time     "saturday_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "likes", force: true do |t|
     t.integer  "exhibition_id"
     t.integer  "artwork_id"
@@ -126,7 +166,10 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.integer  "beacon_id"
   end
+
+  add_index "locations", ["beacon_id"], name: "index_locations_on_beacon_id", using: :btree
 
   create_table "media", force: true do |t|
     t.integer  "exhibition_id"

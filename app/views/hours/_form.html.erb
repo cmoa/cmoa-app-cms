@@ -1,0 +1,43 @@
+<%= form_for(@hour) do |f| %>
+
+  <% if @hour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hour.errors.count, "error") %> prohibited this exhibition from being saved:</h2>
+
+      <ul class="errors">
+      <% @hour.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="lbl"><%= f.label :start_schedule, "Schedule starts on:" %></p>
+  <p class="input"><%= f.date_field :start_schedule, :class => 'input-large' %></p>
+
+  <p class="lbl"><%= f.label :end_schedule, "Schedule ends on:" %></p>
+  <p class="input"><%= f.date_field :end_schedule, :class => 'input-large' %></p>
+
+  <p class="lbl"><%= f.label :sunday_start, "Sunday hours" %></p>
+  <p class="input"><%= f.time_field :sunday_start, :class => 'input-small' %> to <%= f.time_field :sunday_end, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :monday_start, "Monday hours" %></p>
+  <p class="input"><%= f.time_field :monday_start, :class => 'input-small' %> to <%= f.time_field :monday_end, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :tuesday_start, "Tuesday hours" %></p>
+  <p class="input"><%= f.time_field :tuesday_start, :class => 'input-small' %> to <%= f.time_field :tuesday_end, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :wednesday_start, "Wednesday hours" %></p>
+  <p class="input"><%= f.time_field :wednesday_start, :class => 'input-small' %> to <%= f.time_field :wednesday_end, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :thursday_start, "Thursday hours" %></p>
+  <p class="input"><%= f.time_field :thursday_start, :class => 'input-small' %> to <%= f.time_field :thursday_end, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :friday_start, "Friday hours" %></p>
+  <p class="input"><%= f.time_field :friday_start, :class => 'input-small' %> to <%= f.time_field :friday_end, :class => 'input-small' %></p>
+
+  <p class="lbl"><%= f.label :saturday_start, "Saturday hours" %></p>
+  <p class="input"><%= f.time_field :saturday_start, :class => 'input-small' %> to <%= f.time_field :saturday_end, :class => 'input-small' %></p>
+
+  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+<% end %>

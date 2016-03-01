@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Beacon: <%=@beacon.name%></h1>
+
+      <h2>Major</h2>
+      <h3><%= @beacon.major %></h3>
+
+      <h2>Minor</h2>
+      <h3><%= @beacon.minor %></h3>
+
+      <h2>Attached to:</h2>
+      <% if @beacon.location.present? %>
+        <p class="sub"><%= link_to @beacon.location.name, location_path(@beacon.location) %> <%= link_to 'Detach', detach_beacon_path(@beacon), method: :get, :class => 'btn btn-mini btn-danger' %></p>
+      <% elsif @beacon.artwork.present? %>
+        <p class="sub"><%= link_to(@beacon.artwork.title, [@beacon.artwork.exhibition, @beacon.artwork]) %> <%= link_to 'Detach', detach_beacon_path(@beacon), method: :get, :class => 'btn btn-mini btn-danger' %></p>
+      <% else %>
+
+      <% end %>
+
+
+    </div>
+  </div>
+</div>

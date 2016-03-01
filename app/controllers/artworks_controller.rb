@@ -2,6 +2,9 @@ class ArtworksController < ApplicationController
   before_action :set_exhibition
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
+  before_action do
+    set_focus('objects')
+  end
 
   def index
     # Filters
@@ -33,19 +36,21 @@ class ArtworksController < ApplicationController
     end
     # Category check
     if Category.count == 0
-      return redirect_to exhibition_categories_path(@exhibition), alert: 'Please add at least one category before adding artwork.'
+      return redirect_to categories_path, alert: 'Please add at least one category before adding artwork.'
     end
     # Location check
     if Location.count == 0
-      return redirect_to exhibition_locations_path(@exhibition), alert: 'Please add at least one location before adding artwork.'
+      return redirect_to locations_path, alert: 'Please add at least one location before adding artwork.'
     end
     @artwork = Artwork.new
   end
 
   def edit
+
   end
 
   def create
+
     # Verity artistArtwork relation
     if artwork_params[:artist_id].nil?
       flash.now[:notice] = 'Please specify an artist for this artwork'
@@ -105,6 +110,6 @@ class ArtworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:title, :artist_id, :category_id, :location_id, :code, :body, :share_url)
+      params.require(:artwork).permit(:title, :artist_id, :category_id, :location_id, :code, :body, :beacon_id, :share_url)
     end
 end

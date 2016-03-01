@@ -1,7 +1,7 @@
 <%= form_for([@exhibition, @artwork]) do |f| %>
   <% if @artwork.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@artwork.errors.count, "error") %> prohibited this artwork from being saved:</h2>
+      <h2><%= pluralize(@artwork.errors.count, "error") %> prohibited this object from being saved:</h2>
 
       <ul class="errors">
       <% @artwork.errors.full_messages.each do |msg| %>
@@ -34,5 +34,9 @@
   <p class="lbl"><%= f.label :body, 'Description' %></p>
   <p class="input"><%= f.text_area :body, :class => 'input-xxlarge', :rows => 5 %></p>
 
+  <p class="lbl"><%= f.label :beacon_id %></p>
+  <p class="input"><%= f.collection_select :beacon_id, Beacon.unassigned(@artwork.beacon).order('name asc') , :id, :name, :selected => @artwork.beacon.nil? ? nil : @artwork.beacon.id , :include_blank => '-- No Beacon --' %></p>
+
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+
 <% end %>
