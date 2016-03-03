@@ -14,7 +14,7 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  validate :single_attachment
+  #validate :single_attachment
 
   JSON_ATTRS = ["id", "major", "minor", "name", "locations_id", "artworks_id"]
 
