@@ -16,7 +16,7 @@ class Beacon < ActiveRecord::Base
 
   validate :single_attachment
 
-  JSON_ATTRS = ["id", "major", "minor", "name", "location_id", "artwork_id"]
+  JSON_ATTRS = ["id", "major", "minor", "name", "locations_id", "artworks_id"]
 
 
   def self.unassigned(beacons)
@@ -39,12 +39,12 @@ class Beacon < ActiveRecord::Base
   end
 
   def self.exhibition_beacons(exhibition)
-    e_beacons = Beacon.where(:artwork_id => Artwork.where(:exhibition_id => exhibition).select(:id)).pluck(:id)
+    e_beacons = Beacon.where(:artworks_id => Artwork.where(:exhibitions_id => exhibition).select(:id)).pluck(:id)
     return e_beacons.uniq.count
   end
 
   def detach
-    self.update_columns(:location_id => nil, :artwork_id => nil)
+    self.update_columns(:locations_id => nil, :artworks_id => nil)
   end
 
 
