@@ -14,8 +14,8 @@
   <p class="lbl"><%= f.label :name %></p>
   <p class="input"><%= f.text_field :name, :class => 'input-xlarge' %></p>
 
-  <p class="lbl"><%= f.label :beacon_id %></p>
-  <p class="input"><%= f.select :beacon_id, Beacon.unassigned.order('name asc'), :id, :name, :multiple => true %></p>
+  <p class="lbl"><%= f.label "beacons" %></p>
+  <p class="input"><%= f.select "beacons", "beacon_id", Beacon.unassigned.order('name asc').collect {|b| [ b.name, b.id ] }, { :multiple => true } %></p>
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
 <% end %>
