@@ -16,11 +16,11 @@ class Beacon < ActiveRecord::Base
 
   #validate :single_attachment
 
-  JSON_ATTRS = ["id", "major", "minor", "name", "locations_id", "artworks_id"]
+  JSON_ATTRS = ["id", "major", "minor", "name", "location_id", "artwork_id"]
 
 
   def self.unassigned(beacons = nil)
-    where_clause = "(locations_id IS NULL AND artworks_id IS NULL)"
+    where_clause = "(location_id IS NULL AND artwork_id IS NULL)"
 
     if beacons.blank?
 
@@ -34,17 +34,17 @@ class Beacon < ActiveRecord::Base
   end
 
   def self.attached
-    where_clause = "(locations_id IS NOT NULL OR artworks_id IS NOT NULL)"
+    where_clause = "(location_id IS NOT NULL OR artwork_id IS NOT NULL)"
     where(where_clause)
   end
 
   def self.exhibition_beacons(exhibition)
-    e_beacons = Beacon.where(:artworks_id => Artwork.where(:exhibitions_id => exhibition).select(:id)).pluck(:id)
+    e_beacons = Beacon.where(:artwork_id => Artwork.where(:exhibition_id => exhibition).select(:id)).pluck(:id)
     return e_beacons.uniq.count
   end
 
   def detach
-    self.update_columns(:locations_id => nil, :artworks_id => nil)
+    self.update_columns(:location_id => nil, :artwork_id => nil)
   end
 
 
