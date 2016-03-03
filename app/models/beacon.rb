@@ -20,7 +20,7 @@ class Beacon < ActiveRecord::Base
 
 
   def self.unassigned(beacons)
-    where_clause = "(location_id IS NULL AND artwork_id IS NULL)"
+    where_clause = "(locations_id IS NULL AND artworks_id IS NULL)"
 
     beacon_ids = beacons.pluck(:id).join(',')
 
@@ -34,7 +34,7 @@ class Beacon < ActiveRecord::Base
   end
 
   def self.attached
-    where_clause = "(location_id IS NOT NULL OR artwork_id IS NOT NULL)"
+    where_clause = "(locations_id IS NOT NULL OR artworks_id IS NOT NULL)"
     where(where_clause)
   end
 
