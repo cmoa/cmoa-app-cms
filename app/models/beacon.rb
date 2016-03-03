@@ -19,12 +19,15 @@ class Beacon < ActiveRecord::Base
   JSON_ATTRS = ["id", "major", "minor", "name", "location_id", "artwork_id"]
 
 
-  def self.unassigned(selected)
+  def self.unassigned(beacons)
     where_clause = "(location_id IS NULL AND artwork_id IS NULL)"
+
+    beacon_ids = beacons.pluck(:id).join(',')
+
     if selected.blank?
 
     else
-      where_clause += " OR (id = '#{selected.id}')"
+      where_clause += " OR (id IN (#{beacon_ids}))"
     end
 
     where(where_clause)
