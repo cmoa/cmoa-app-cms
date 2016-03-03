@@ -1,8 +1,8 @@
 class ChangeBeaconsForMultiLocation < ActiveRecord::Migration
   def change
     #remove old indexes
-    remove_column :artwork, :beacon_id, :integer
-    remove_column :location, :beacon_id, :integer
+    remove_column :artworks, :beacon_id, :integer
+    remove_column :locations, :beacon_id, :integer
 
     #add new indexes
     add_index :beacons, :artwork
