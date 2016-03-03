@@ -15,7 +15,7 @@
   <p class="input"><%= f.text_field :name, :class => 'input-xlarge' %></p>
 
   <p class="lbl"><%= f.label :beacon_id %></p>
-  <p class="input"><%= f.collection_select :beacon_id, Beacon.unassigned(@location.beacons).order('name asc'), :id, :name, :selected => @location.beacon.nil? ? nil : @location.beacon.id, :include_blank => '-- No Beacon --' %></p>
+  <p class="input"><%= f.collection_select :beacon_id, Beacon.unassigned(@location.beacons).order('name asc'), :id, :name, :selected => @location.beacons.nil? ? nil : @location.beacons.id, :multiple => true %></p>
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
 <% end %>
