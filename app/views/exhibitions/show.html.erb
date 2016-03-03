@@ -1,9 +1,10 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <h1>Exhibition</h1>
 
-      <h2><%= @exhibition.title %></h2>
+      <h1><%= @exhibition.title %> </h1>
+
+      <h2><%= link_to 'Edit', edit_exhibition_path(@exhibition), :class => 'btn btn-default' %></h2>
 
       <div class="row-fluid dash">
         <div class="span4 people"><a href="<%= url_for(exhibition_artists_path(@exhibition)) %>">
@@ -22,7 +23,6 @@
           <span class="title"><%= 'tour'.pluralize(@total_tours) %></span>
         </a></div>
       </div>
-
       <div class="row-fluid dash">
         <div class="span4 categories"><a href="<%= url_for(categories_path) %>">
           <span class="icon"><%= icon('tags') %></span>
@@ -34,7 +34,59 @@
           <span class="count"><%= @total_locations %></span>
           <span class="title"><%= 'location'.pluralize(@total_locations) %></span>
         </a></div>
+        <div class="span4 beacons"><a href="<%= url_for(beacons_path) %>">
+          <span class="icon"><%= icon('bluetooth-b') %></span>
+          <span class="count"><%= @total_beacons %></span>
+          <span class="title">Beacons</span>
+        </a></div>
       </div>
+
+      <h2>Exhibition Images</h2>
+
+      <div class="row-fluid dash">
+        <div class='span4'>
+          <div class='image-info'>
+            <h3>iPhone</h3>
+          </div>
+          <div class='exhibition_image'>
+            <%= image_tag(@exhibition.bg_iphone, :class=>"image-underlay") %>
+          </div>
+        </div>
+
+        <div class='span8'>
+          <div class='image-info'>
+            <h3>iPad</h3>
+            <p><button id='show_overlay' data-visible='false' class="btn btn-default">Show Left Menu Image Location</button></p>
+          </div>
+          <div class='exhibition_image'>
+            <%= image_tag(@exhibition.bg_ipad, :class=>"image-underlay") %>
+            <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
   </div>
 </div>
+
+<% content_for :js do %>
+
+    $('#show_overlay').click(function(){
+      var show = $('#show_overlay').attr('data-visible');
+      if(show == 'false')
+      {
+        $('#show_overlay').attr('data-visible', 'true');
+        $('#show_overlay').text("Hide Left Menu Image Location");
+        $('.image-overlay').show();
+      }
+      else
+      {
+        $('#show_overlay').attr('data-visible', 'false');
+        $('#show_overlay').text("Show Left Menu Image Location");
+        $('.image-overlay').hide();
+      }
+    });
+
+<% end %>

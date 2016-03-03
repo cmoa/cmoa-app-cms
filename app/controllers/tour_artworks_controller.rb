@@ -2,6 +2,9 @@ class TourArtworksController < ApplicationController
   before_action :set_exhibition
   before_action :set_tour, only: [:edit, :update]
   cache_sweeper :cache_sweeper, :only => [:update]
+  before_action do
+    set_focus('tours')
+  end
 
   def edit
     @artworks = @exhibition.artworks.order('title asc').all

@@ -83,7 +83,7 @@
           <% @artwork.media.image.each_with_index do |medium, index| %>
             <tr data-id="<%= medium.id %>">
               <td class="position"><span><%= (index + 1) %></span></td>
-              <td class="image"><%= image_tag(medium.file(:thumb)) %></td>
+              <td class="image"><%= image_tag(medium.file(:thumb), alt: medium.alt) %></td>
               <td class="title"><%= medium.title %></td>
               <td class="url"><%= link_to('Link', medium.file(:medium), :class => 'btn btn-mini') %></td>
               <td class="actions"><%= link_to 'Edit', edit_exhibition_artwork_medium_path(@exhibition, @artwork, medium), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artwork_medium_path(@exhibition, @artwork, medium), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
@@ -150,7 +150,7 @@
 
       <hr>
 
-      <p><%= link_to raw('&laquo; Back'), exhibition_artworks_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini' %> <%= link_to 'Add artist', new_exhibition_artwork_artist_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %> <%= link_to 'Add media', new_exhibition_artwork_medium_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %></p>
+      <p><%= link_to raw('&laquo; Back'), exhibition_artworks_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini' %> <%= link_to 'Add person', new_exhibition_artwork_artist_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %> <%= link_to 'Add media', new_exhibition_artwork_medium_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %></p>
     </div>
   </div>
 </div>

@@ -3,6 +3,9 @@ class ArtistArtworksController < ApplicationController
   before_action :set_artwork
   before_action :set_arist_artwork, only: [:edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
+  before_action do
+    set_focus('object')
+  end
 
   def new
     @artist_artwork = ArtistArtwork.new

@@ -3,6 +3,9 @@ class MediaController < ApplicationController
   before_action :set_artwork
   before_action :set_medium, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy, :positions]
+  before_action do
+    set_focus('objects')
+  end
 
   def index
     @media = @artwork.media
@@ -87,6 +90,6 @@ class MediaController < ApplicationController
     end
 
     def medium_params
-      params.require(:medium).permit(:title, :file)
+      params.require(:medium).permit(:title, :file, :alt, :description)
     end
 end
