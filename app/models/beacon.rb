@@ -20,7 +20,7 @@ class Beacon < ActiveRecord::Base
 
 
   def self.unassigned(selected)
-    where_clause = "id not in (SELECT beacon_id FROM artworks where beacon_id is not null) AND id not in (SELECT beacon_id FROM locations where beacon_id is not null)"
+    where_clause = "(location_id IS NULL AND artwork_id IS NULL)"
     if selected.blank?
 
     else
@@ -31,19 +31,17 @@ class Beacon < ActiveRecord::Base
   end
 
   def self.attached
-    where_clause = "id in (SELECT beacon_id FROM artworks where beacon_id is not null) OR id  in (SELECT beacon_id FROM locations where beacon_id is not null)"
+    where_clause = "(location_id IS NOT NULL OR artwork_id IS NOT NULL)"
     where(where_clause)
   end
 
   def self.exhibition_beacons(exhibition)
-    e_beacons = Artwork.where("(beacon_id IS NOT NULL) AND (exhibition_id = ?)", exhibition.id).pluck("beacon_id")
+    e_beacons = Beacon.where(:artwork_id => Artwork.where(:exhibition_id => exhibition).select(:id)).pluck(:id)
     return e_beacons.uniq.count
   end
 
   def detach
-    beacon = self.id
-    Location.where(beacon_id: beacon).update_all(beacon_id: nil)
-    Artwork.where(beacon_id: beacon).update_all(beacon_id: nil)
+    self.update_columns(:location_id => nil, :artwork_id => nil)
   end
 
 
