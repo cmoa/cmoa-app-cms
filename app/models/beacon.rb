@@ -19,7 +19,7 @@ class Beacon < ActiveRecord::Base
   JSON_ATTRS = ["id", "major", "minor", "name", "locations_id", "artworks_id"]
 
 
-  def self.unassigned(beacons)
+  def self.unassigned(beacons = nil)
     where_clause = "(locations_id IS NULL AND artworks_id IS NULL)"
 
     beacon_ids = beacons.pluck(:id).join(',')
