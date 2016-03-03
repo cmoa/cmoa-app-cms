@@ -5,8 +5,8 @@ class ChangeBeaconsForMultiLocation < ActiveRecord::Migration
     remove_column :locations, :beacon_id, :integer
 
     #add new indexes
-    add_foreign_key :beacons, :artworks
-    add_foreign_key :beacons, :locations
+    add_index :beacons, :artworks
+    add_index :beacons, :locations
 
     #add timestamps
     add_column(:beacons, :created_at, :datetime)
