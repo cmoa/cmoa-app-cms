@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211164009) do
+ActiveRecord::Schema.define(version: 20160301160024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,8 @@ ActiveRecord::Schema.define(version: 20160211164009) do
     t.integer  "height"
     t.datetime "deleted_at"
     t.integer  "position"
+    t.string   "alt"
+    t.text     "description"
   end
 
   create_table "tour_artworks", force: true do |t|
