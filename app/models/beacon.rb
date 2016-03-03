@@ -1,6 +1,6 @@
 class Beacon < ActiveRecord::Base
-  has_one :artwork, :dependent => :nullify
-  has_one :location
+  belongs_to :artwork
+  belongs_to :location
 
 
   validates_uniqueness_of :major, :scope => :minor
@@ -14,7 +14,9 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  JSON_ATTRS = ["id", "major", "minor", "name"]
+  validate :single_attachment
+
+  JSON_ATTRS = ["id", "major", "minor", "name", "location_id", "artwork_id"]
 
 
   def self.unassigned(selected)
@@ -50,5 +52,13 @@ class Beacon < ActiveRecord::Base
 
   def as_json(options=nil)
     attributes.slice(*JSON_ATTRS)
+  end
+
+  def single_attachment
+    if artwork.present?
+      if location.present?
+        errors.add(:base, "Can't attach a beacon to both a location and an object")
+      end
+    end
   end
 end
