@@ -11,11 +11,6 @@
     </div>
   <% end %>
 
-  <% if (action_name == 'new') || (action_name == 'create') %>
-  <p class="lbl"><%= f.label :artist_id %></p>
-  <p class="input"><%= f.collection_select :artist_id, @exhibition.artists.order('last_name asc'), :id, :name, :selected => params[:artist_id], :prompt => 'Please select the artist:' %></p>
-  <% end %>
-
   <p class="lbl"><%= f.label :category_id %></p>
   <p class="input"><%= f.collection_select :category_id, Category.all.order('title asc'), :id, :title, :selected => @artwork.category.nil? ? nil : @artwork.category.id, :prompt => 'Please select the category:' %></p>
 
