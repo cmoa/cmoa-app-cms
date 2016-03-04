@@ -20,6 +20,9 @@
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
 <% end %>
 
+<% content_for :css_files do %>
+  <%= stylesheet_link_tag "selec2.min" %>
+<% end %>
 
 <% content_for :js_files do %>
   <%= javascript_include_tag "select2.min" %>
