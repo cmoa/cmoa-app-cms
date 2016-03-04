@@ -67,10 +67,12 @@ class LocationsController < ApplicationController
     end
 
     def update_beacons(location, beacons)
-      beacons.each do |b|
-        if Beacon.exists?(b)
-          beacon = Beacon.find(b)
-          beacon.update_columns(:location_id => location.id)
+      if beacons.present?
+        beacons.each do |b|
+          if Beacon.exists?(b)
+            beacon = Beacon.find(b)
+            beacon.update_columns(:location_id => location.id)
+          end
         end
       end
     end
