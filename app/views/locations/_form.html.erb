@@ -15,7 +15,7 @@
   <p class="input"><%= f.text_field :name, :class => 'input-xlarge' %></p>
 
   <p class="lbl"><%= f.label "beacons" %></p>
-  <p class="input"><%= f.select  "beacons", Beacon.unassigned(@location.beacons).order('name asc').collect {|b| [ b.name, b.id ] },{:selected => @location.beacons.nil? ? nil : @location.beacons.pluck(:id)}, {:multiple => true, :size => 5 } %></p>
+  <p class="input"><%= f.select  "beacons", Beacon.unassigned(@location.beacons).order('name asc').collect {|b| [ b.name, b.id ] },{:selected => @location.beacons.nil? ? nil : @location.beacons.pluck(:id), :class => 'input-xlarge'}, {:multiple => true, :size => 5 } %></p>
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
 <% end %>
