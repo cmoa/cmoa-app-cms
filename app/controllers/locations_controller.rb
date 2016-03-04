@@ -33,9 +33,9 @@ class LocationsController < ApplicationController
   def update
     beacons = params[:beacons]
     if @location.update(location_params)
-
+      puts YAML::dump(beacons)
       update_beacons(@location, beacons)
-      
+
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
