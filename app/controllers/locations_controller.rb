@@ -32,9 +32,10 @@ class LocationsController < ApplicationController
 
   def update
     beacons = params[:beacons]
-    cause_an_error
     if @location.update(location_params)
 
+      update_beacons(@location, beacons)
+      
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
@@ -64,4 +65,14 @@ class LocationsController < ApplicationController
     def location_params
       params.require(:location).permit(:name, :beacon_id)
     end
+
+    def update_beacons(location, beacons)
+      beacons.each do |b|
+        if Beacon.exists?(b)
+          beacon = Beacon.find(b)
+          beacon.update_columns(:location_id => location.id)
+        end
+      end
+    end
+#########################################
 end
