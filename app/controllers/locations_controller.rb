@@ -21,9 +21,11 @@ class LocationsController < ApplicationController
   end
 
   def create
+    @beacons = params[:location][:beacons]
     @location = Location.new(location_params)
 
     if @location.save
+      update_beacons(@location, @beacons)
       redirect_to @location, notice: 'Location was successfully created.'
     else
       render action: 'new'
@@ -32,9 +34,9 @@ class LocationsController < ApplicationController
 
   def update
     @beacons = params[:location][:beacons]
-    update_beacons(@location, @beacons)
 
     if @location.update(location_params)
+      update_beacons(@location, @beacons)
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
