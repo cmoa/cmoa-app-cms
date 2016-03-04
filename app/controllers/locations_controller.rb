@@ -32,9 +32,11 @@ class LocationsController < ApplicationController
 
   def update
     beacons = params[:beacons]
+    update_beacons(@location, beacons)
+
     if @location.update(location_params)
-      puts YAML::dump(beacons)
-      update_beacons(@location, beacons)
+
+
 
       redirect_to @location, notice: 'Location was successfully updated.'
     else
@@ -63,7 +65,7 @@ class LocationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def location_params
-      params.require(:location).permit(:name, :beacon_id)
+      params.require(:location).permit(:name)
     end
 
     def update_beacons(location, beacons)
