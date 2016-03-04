@@ -31,17 +31,13 @@ class LocationsController < ApplicationController
   end
 
   def update
-    @beacons = params[:beacons]
-    render :text => params.inspect
+    @beacons = params[:location][:beacons]
     update_beacons(@location, @beacons)
 
     if @location.update(location_params)
-
-
-
-      #redirect_to @location, notice: 'Location was successfully updated.'
+      redirect_to @location, notice: 'Location was successfully updated.'
     else
-      #render action: 'edit'
+      render action: 'edit'
     end
   end
 
