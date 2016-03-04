@@ -21,9 +21,11 @@ class LocationsController < ApplicationController
   end
 
   def create
+    @beacons = params[:location][:beacons]
     @location = Location.new(location_params)
 
     if @location.save
+      update_beacons(@location, @beacons)
       redirect_to @location, notice: 'Location was successfully created.'
     else
       render action: 'new'
@@ -31,7 +33,10 @@ class LocationsController < ApplicationController
   end
 
   def update
+    @beacons = params[:location][:beacons]
+
     if @location.update(location_params)
+      update_beacons(@location, @beacons)
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
@@ -59,6 +64,22 @@ class LocationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def location_params
-      params.require(:location).permit(:name, :beacon_id)
+      params.require(:location).permit(:name)
     end
+
+    def update_beacons(location, beacons)
+      if beacons.present?
+        #Remove all beacons from the location
+        Beacon.where(:location_id => location.id).update_all(:location_id => nil)
+
+        #And then add all selected
+        beacons.each do |b|
+          if Beacon.exists?(b)
+            beacon = Beacon.find(b)
+            beacon.update_columns(:location_id => location.id)
+          end
+        end
+      end
+    end
+#########################################
 end

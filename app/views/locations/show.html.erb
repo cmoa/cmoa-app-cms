@@ -5,9 +5,13 @@
 
       <h2><%= @location.name %></h2>
 
-      <% if @location.beacon.present? %>
-        <h3>Beacon</h3>
-        <p class="sub"><%= link_to(@location.beacon.name, [@location.beacon]) %></p>
+      <% if @location.beacons.present? %>
+        <h3>Beacons</h3>
+        <ul>
+          <% @location.beacons.each do |b| %>
+            <li><p class="sub"><%= link_to(b.name, [b]) %></p></li>
+          <% end %>
+        </ul>
       <% end %>
 
       <hr>

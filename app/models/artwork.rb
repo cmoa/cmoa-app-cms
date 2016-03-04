@@ -8,17 +8,16 @@ class Artwork < ActiveRecord::Base
   belongs_to :location
   belongs_to :location_including_deleted, :class_name => 'Location', :foreign_key => 'location_id', :with_deleted => true
 
-  belongs_to :beacon
-
   has_many :tour_artwork
   has_many :tours, :through => :tour_artworks
   has_many :media, -> { order('position asc') }
   has_many :likes
   has_many :artist_artworks
   has_many :artists, -> { order('"artists"."last_name" asc') }, :through => :artist_artworks
+  has_many :beacons, :dependent => :nullify
 
   # API
-  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'code', 'body', 'beacon_id', 'share_url'].freeze
+  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'code', 'body', 'share_url'].freeze
 
   # Soft delete
   acts_as_paranoid
