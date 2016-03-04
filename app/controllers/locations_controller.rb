@@ -67,6 +67,10 @@ class LocationsController < ApplicationController
 
     def update_beacons(location, beacons)
       if beacons.present?
+        #Remove all beacons from the location
+        Beacon.where(:location_id => location.id).update_all(:location_id => nil)
+
+        #And then add all selected
         beacons.each do |b|
           if Beacon.exists?(b)
             beacon = Beacon.find(b)
