@@ -121,7 +121,7 @@ header {
     left: 0;
     max-height: 600px;
     padding-bottom: 50px;
-    
+
   }
 
 }
@@ -929,4 +929,16 @@ nav.topbar {
     font-size: em(12);
   }
 
+}
+
+//Overrides
+
+.select2
+{
+  ul {
+    margin: none;
+    line-height: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
 }
