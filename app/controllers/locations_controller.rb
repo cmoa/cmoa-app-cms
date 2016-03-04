@@ -31,8 +31,9 @@ class LocationsController < ApplicationController
   end
 
   def update
-    beacons = params[:beacons]
-    update_beacons(@location, beacons)
+    @beacons = params[:beacons]
+    render :text => @beacons.inspect
+    update_beacons(@location, @beacons)
 
     if @location.update(location_params)
 
