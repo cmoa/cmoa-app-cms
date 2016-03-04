@@ -52,12 +52,7 @@ class ArtworksController < ApplicationController
   def create
     beacon = params[:artwork][:beacons]
 
-    # Verity artistArtwork relation
-    if artwork_params[:artist_id].nil?
-      flash.now[:notice] = 'Please specify an artist for this artwork'
-      render action: 'new'
-      return
-    end
+
 
     @artwork = Artwork.new(artwork_params)
 
@@ -67,12 +62,6 @@ class ArtworksController < ApplicationController
     if @artwork.save
       #Create beacon relation
       update_beacon(@artwork, beacon)
-      # Create artistArtwork relation
-      aa = ArtistArtwork.new
-      aa.exhibition_id = @artwork.exhibition_id
-      aa.artwork = @artwork
-      aa.artist_id = artwork_params[:artist_id]
-      aa.save
 
       redirect_to [@exhibition, @artwork], notice: 'Artwork was successfully created.'
     else
