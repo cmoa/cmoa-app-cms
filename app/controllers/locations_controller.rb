@@ -31,7 +31,10 @@ class LocationsController < ApplicationController
   end
 
   def update
+    beacons = params[:beacons]
+    cause_an_error
     if @location.update(location_params)
+
       redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
