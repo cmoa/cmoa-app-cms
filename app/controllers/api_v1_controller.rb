@@ -202,38 +202,6 @@ class ApiV1Controller < ApplicationController
       data[:beacons] = result
 
 
-    #locations
-    result = []
-
-      data[:locations].each do |b|
-        mem = {}
-        b.as_json.map do |k, v|
-          if k == "beacon_id"
-            mem[:beacon_uuid] = v
-          else
-            mem[k] = v
-          end
-        end
-        result.push(mem)
-      end
-      data[:locations] = result
-
-
-    #artwork
-    result = []
-
-      data[:artwork].each do |b|
-        mem = {}
-        b.as_json.map do |k, v|
-          if k == "beacon_id"
-            mem[:beacon_uuid] = v
-          else
-            mem[k] = v
-          end
-        end
-        result.push(mem)
-      end
-      data[:artwork] = result
     return data
   end
 
