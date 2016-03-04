@@ -936,9 +936,9 @@ nav.topbar {
 .select2
 {
   ul {
-    margin: none;
+    margin: 0 !important;
     line-height: 20px;
-    height: 20px;
+    height: 25px;
     font-size: 14px;
   }
 }
