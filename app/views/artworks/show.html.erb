@@ -38,9 +38,9 @@
       <h3>Location</h3>
       <p class="sub"><%= link_to(@artwork.location.name, @artwork.location) %></p>
 
-      <% if @artwork.beacon.present? %>
+      <% if @artwork.beacons.present? %>
         <h3>Beacon</h3>
-        <p class="sub"><%= link_to(@artwork.beacon.name, [@artwork.beacon]) %></p>
+        <p class="sub"><%= link_to(@artwork.beacons.first.name, [@artwork.beacons.first]) %></p>
       <% end %>
 
       <h3>Code</h3>
