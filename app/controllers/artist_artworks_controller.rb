@@ -32,7 +32,7 @@ class ArtistArtworksController < ApplicationController
 
   def update
     if @artist_artwork.update(artwork_params)
-      redirect_to [@exhibition, @artwork], notice: 'Artist was successfully updated.'
+      redirect_to [@exhibition, @artwork], notice: 'a Person was successfully updated.'
     else
       render action: 'edit'
     end
@@ -44,7 +44,7 @@ class ArtistArtworksController < ApplicationController
     # Acts_as_paranoid bug workaround
     @artist_artwork.updated_at = DateTime.now
     @artist_artwork.save
-    redirect_to [@exhibition, @artwork], notice: 'Artist was successfully removed.'
+    redirect_to [@exhibition, @artwork], notice: 'a Person was successfully removed.'
   end
 
   private
