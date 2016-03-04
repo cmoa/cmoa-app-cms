@@ -39,9 +39,9 @@ class LocationsController < ApplicationController
 
 
 
-      redirect_to @location, notice: 'Location was successfully updated.'
+      #redirect_to @location, notice: 'Location was successfully updated.'
     else
-      render action: 'edit'
+      #render action: 'edit'
     end
   end
 
