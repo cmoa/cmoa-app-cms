@@ -50,6 +50,7 @@ class ArtworksController < ApplicationController
   end
 
   def create
+    beacon = params[:artwork][:beacons]
 
     # Verity artistArtwork relation
     if artwork_params[:artist_id].nil?
@@ -64,6 +65,8 @@ class ArtworksController < ApplicationController
     @artwork.exhibition_id = @exhibition.id
 
     if @artwork.save
+      #Create beacon relation
+      update_beacon(@artwork, beacon)
       # Create artistArtwork relation
       aa = ArtistArtwork.new
       aa.exhibition_id = @artwork.exhibition_id
@@ -78,7 +81,10 @@ class ArtworksController < ApplicationController
   end
 
   def update
+    beacon = params[:artwork][:beacons]
+
     if @artwork.update(artwork_params)
+      update_beacon(@artwork, beacon)
       redirect_to [@exhibition, @artwork], notice: 'Artwork was successfully updated.'
     else
       render action: 'edit'
@@ -111,5 +117,14 @@ class ArtworksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
       params.require(:artwork).permit(:title, :artist_id, :category_id, :location_id, :code, :body, :share_url)
+    end
+
+    #Update beacons
+    def update_beacon(artwork, beacon)
+      if Beacon.exists?(beacon)
+        Beacon.where(:artwork_id => artwork.id).update_all(:artwork_id => nil)
+        b = Beacon.find(beacon)
+        b.update_columns(:artwork_id => artwork.id)
+      end
     end
 end
