@@ -121,8 +121,8 @@ class ArtworksController < ApplicationController
 
     #Update beacons
     def update_beacon(artwork, beacon)
+      Beacon.where(:artwork_id => artwork.id).update_all(:artwork_id => nil)
       if Beacon.exists?(beacon)
-        Beacon.where(:artwork_id => artwork.id).update_all(:artwork_id => nil)
         b = Beacon.find(beacon)
         b.update_columns(:artwork_id => artwork.id)
       end
