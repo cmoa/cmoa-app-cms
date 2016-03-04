@@ -35,7 +35,7 @@
   <p class="input"><%= f.text_area :body, :class => 'input-xxlarge', :rows => 5 %></p>
 
   <p class="lbl"><%= f.label "beacons" %></p>
-  <p class="input"><%= f.select  "beacons", Beacon.unassigned(@artwork.beacons).order('name asc').collect {|b| [ b.name, b.id ] },{:selected => @artwork.beacons.nil? ? nil : @artwork.beacons.pluck(:id)} %></p>
+  <p class="input"><%= f.select  "beacons", Beacon.unassigned(@artwork.beacons).order('name asc').collect {|b| [ b.name, b.id ] },{:selected => @artwork.beacons.nil? ? nil : @artwork.beacons.pluck(:id), :include_blank => '   No Beacon   '} %></p>
 
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
 
