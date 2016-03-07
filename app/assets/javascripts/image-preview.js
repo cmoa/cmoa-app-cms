@@ -3,7 +3,7 @@ $.fn.imagePreview = function (input)
   var $container = this;
   var $input = $(input); //jQuery version
   var input = $input.get(0); //Node version
-  var id = "image_preview_" + Date.now() + "_" +  random();
+  var id = "image_preview_" + ms() + "_" +  random();
   $container.append("<img id='" + id + "'>" );
   var $img = $("#" + id);
   //Start the image as hidden
@@ -34,4 +34,10 @@ $.fn.imagePreview = function (input)
 function random()
 {
   return Math.floor((Math.random() * 100000) + 1);
+}
+
+function ms()
+{
+  return  Date.now() - Math.floor(Date.now() / 1000);
+
 }
