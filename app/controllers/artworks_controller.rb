@@ -30,10 +30,7 @@ class ArtworksController < ApplicationController
   end
 
   def new
-    # Artist check
-    if @exhibition.artists.count == 0
-      return redirect_to exhibition_artworks_path(@exhibition), alert: 'Please add at least one artist before adding artwork.'
-    end
+
     # Category check
     if Category.count == 0
       return redirect_to categories_path, alert: 'Please add at least one category before adding artwork.'
