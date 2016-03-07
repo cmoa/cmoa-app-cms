@@ -1,7 +1,8 @@
 $.fn.imagePreview = function (input)
 {
   var $container = this;
-  var $input = $(input);
+  var $input = $(input); //jQuery version
+  var input = $input.get(0); //Node version
   var id = "image_preview_" + Date.now();
   $container.append("<img id='" + id + "'>" );
   var $img = $("#" + id);
@@ -10,7 +11,8 @@ $.fn.imagePreview = function (input)
 
   //When the input has a file chosen start loading the image
   $input.change(function() {
-    if ($input.files && $input.files[0])
+
+    if (input.files && input.files[0])
     {
         var reader = new FileReader();
         reader.onload = function (e) {
