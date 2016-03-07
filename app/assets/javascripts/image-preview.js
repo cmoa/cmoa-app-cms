@@ -38,6 +38,6 @@ function random()
 
 function ms()
 {
-  return  Date.now() - Math.floor(Date.now() / 1000);
+  return  Date.now() - (Math.floor(Date.now() / 1000) * 1000);
 
 }
