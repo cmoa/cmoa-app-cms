@@ -28,5 +28,5 @@ $.fn.imagePreview = function (input)
   });
 
 
-
+  return $img; //Return for chain
 };

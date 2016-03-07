@@ -24,7 +24,23 @@
 
   <p><%= f.file_field :bg_ipad, :title => raw('Select an iPad background to upload <strong>(1406x1408)</strong>'), :class => 'btn-mini btn-success' %></p>
 
-  <div id="ipad"></div>
+  <div class="row-fluid dash">
+    <div class='span4'>
+      <div class='image-info'>
+        <h3>iPhone</h3>
+      </div>
+      <div id="iphone" class='exhibition_image'></div>
+    </div>
+    <div class='span8'>
+      <div class='image-info'>
+        <h3>iPad</h3>
+                    <p><button id='show_overlay' data-visible='false' class="btn btn-default">Show Left Menu Image Location</button></p>
+      </div>
+      <div id="ipad" class='exhibition_image'>
+        <%= image_tag(image_url("highlight.png"), :class=>"image-overlay", :style=>"display:none;") %>
+      </div>
+    </div>
+  </div>
 
   <p class="input-chk"><%= f.check_box :is_live %> <%= f.label :is_live, 'Live exhibition? (Uncheck for draft mode)', :class => 'inline' %></p>
 
@@ -36,5 +52,26 @@
 <% end %>
 
 <% content_for :js do %>
-  $("#ipad").imagePreview("#exhibition_bg_ipad");
+
+  var $ipad = $("#ipad").imagePreview("#exhibition_bg_ipad");
+  $ipad.addClass("image-underlay");
+
+  var $iphone = $("#ipad").imagePreview("#exhibition_bg_iphone");
+  $iphone.addClass("image-underlay");
+
+  $('#show_overlay').click(function(){
+    var show = $('#show_overlay').attr('data-visible');
+    if(show == 'false')
+    {
+      $('#show_overlay').attr('data-visible', 'true');
+      $('#show_overlay').text("Hide Left Menu Image Location");
+      $('.image-overlay').show();
+    }
+    else
+    {
+      $('#show_overlay').attr('data-visible', 'false');
+      $('#show_overlay').text("Show Left Menu Image Location");
+      $('.image-overlay').hide();
+    }
+  });
 <% end %>
