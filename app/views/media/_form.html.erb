@@ -14,11 +14,13 @@
   <p class="lbl"><%= f.label :title %></p>
   <p class="input"><%= f.text_field :title, :class => 'input-xlarge' %></p>
 
-  <p class="lbl"><%= f.label :alt, 'Alt Text' %></p>
+  <p class="lbl"><%= f.label :alt, 'Accessibility Text (Alt Text)' %></p>
   <p class="input"><%= f.text_field :alt, :class => 'input-xlarge' %></p>
 
+<!--
   <p class="lbl"><%= f.label :description %></p>
   <p class="input"><%= f.text_area :description, :class => 'input-xlarge' %></p>
+-->
 
   <p><%= f.file_field :file, :title => 'Select a file to upload', :class => 'btn-mini btn-success' %></p>
 
