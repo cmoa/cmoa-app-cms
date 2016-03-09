@@ -47,7 +47,8 @@ module CMOA
       },
       :url => ':s3_domain_url',
       :path => ':uuid/:style.:content_type_extension',
-      :hash_secret => ENV['s3_hash_secret']
+      :hash_secret => ENV['s3_hash_secret'],
+      :whiny => false
     }
     #github
     config.github_url = 'https://github.com/CMP-Studio/cmoa-app-cms'
