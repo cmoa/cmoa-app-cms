@@ -6,7 +6,9 @@ class ErrorsController < ApplicationController
   end
 
   def server_error
-    @github_url = Rails.application.config.github_url + "/issues"
+    if Rails.application.config.github_url.present?
+      @github_url = Rails.application.config.github_url + "/issues/new"
+    end
     render(:status => 500)
   end
 
