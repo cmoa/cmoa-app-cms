@@ -50,7 +50,7 @@ module CMOA
       :hash_secret => ENV['s3_hash_secret']
     }
     #github
-    config.x.github_url = 'https://github.com/CMP-Studio/cmoa-app-cms'
+    config.github_url = 'https://github.com/CMP-Studio/cmoa-app-cms'
 
     #Error handeling
     config.exceptions_app = self.routes
