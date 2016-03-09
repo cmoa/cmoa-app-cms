@@ -25,6 +25,9 @@
 
   <p class="lbl"><%= f.label :bio %></p>
   <p class="input"><%= f.text_area :bio, :class => 'input-xxlarge', :rows => 5 %></p>
-
-  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+  <% if (action_name == 'new') %>
+    <p class="submit"><%= f.submit(:class => 'btn btn-primary', :value => "Create Person") %></p>
+  <% else %>
+    <p class="submit"><%= f.submit(:class => 'btn btn-primary', :value => "Update Person") %></p>
+  <% end %>
 <% end %>

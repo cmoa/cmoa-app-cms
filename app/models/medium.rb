@@ -6,13 +6,13 @@ class Medium < ActiveRecord::Base
   belongs_to :artwork_including_deleted, :class_name => 'Artwork', :foreign_key => 'artwork_id', :with_deleted => true
 
   # API
-  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'kind', 'width', 'height', 'position'].freeze
+  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'kind', 'width', 'height', 'position', 'alt'].freeze
 
   # Soft delete
   acts_as_paranoid
 
   # File attachment
-  has_attached_file :file, :styles => {
+  has_attached_file :file, :whiny => false, :styles => {
     :thumb  => '200x200#',
     :small  => '300x300',
     :medium => '600x600',

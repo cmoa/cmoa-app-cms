@@ -32,23 +32,19 @@ class ArtistArtworksController < ApplicationController
 
   def update
     if @artist_artwork.update(artwork_params)
-      redirect_to [@exhibition, @artwork], notice: 'Artist was successfully updated.'
+      redirect_to [@exhibition, @artwork], notice: 'a Person was successfully updated.'
     else
       render action: 'edit'
     end
   end
 
   def destroy
-    # Make sure there's at least 1 artist for the artwork when this one is deleted
-    if @artwork.artists.size < 2
-      return redirect_to [@exhibition, @artwork], alert: "Artwork must have at least one artist"
-    end
 
     @artist_artwork.destroy
     # Acts_as_paranoid bug workaround
     @artist_artwork.updated_at = DateTime.now
     @artist_artwork.save
-    redirect_to [@exhibition, @artwork], notice: 'Artist was successfully removed.'
+    redirect_to [@exhibition, @artwork], notice: 'a Person was successfully removed.'
   end
 
   private

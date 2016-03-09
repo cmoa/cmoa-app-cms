@@ -55,11 +55,17 @@ resources :hours
   # Base
   devise_for :admins
   resources :admins, only: [:index, :new, :create, :destroy]
+
   #profile edit for admins
   scope '/' do
     match 'profile' => 'admins#profile',       :as => 'admin_profile', via: [:get]
     match 'profile' => 'admins#save_profile',  :as => 'admin_save_profile', via: [:post, :patch]
   end
+
+  #Error codes
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#server_error", :via => :all
+  match "/413", :to => "errors#request_too_large", :via => :all
 
   root 'dashboard#index'
 end

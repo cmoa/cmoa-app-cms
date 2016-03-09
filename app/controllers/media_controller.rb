@@ -6,7 +6,7 @@ class MediaController < ApplicationController
   before_action do
     set_focus('objects')
   end
-  
+
   def index
     @media = @artwork.media
   end
@@ -90,6 +90,6 @@ class MediaController < ApplicationController
     end
 
     def medium_params
-      params.require(:medium).permit(:title, :file)
+      params.require(:medium).permit(:title, :file, :alt)
     end
 end

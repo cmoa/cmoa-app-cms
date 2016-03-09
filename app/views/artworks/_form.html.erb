@@ -11,11 +11,6 @@
     </div>
   <% end %>
 
-  <% if (action_name == 'new') || (action_name == 'create') %>
-  <p class="lbl"><%= f.label :artist_id %></p>
-  <p class="input"><%= f.collection_select :artist_id, @exhibition.artists.order('last_name asc'), :id, :name, :selected => params[:artist_id], :prompt => 'Please select the artist:' %></p>
-  <% end %>
-
   <p class="lbl"><%= f.label :category_id %></p>
   <p class="input"><%= f.collection_select :category_id, Category.all.order('title asc'), :id, :title, :selected => @artwork.category.nil? ? nil : @artwork.category.id, :prompt => 'Please select the category:' %></p>
 
@@ -34,9 +29,13 @@
   <p class="lbl"><%= f.label :body, 'Description' %></p>
   <p class="input"><%= f.text_area :body, :class => 'input-xxlarge', :rows => 5 %></p>
 
-  <p class="lbl"><%= f.label :beacon_id %></p>
-  <p class="input"><%= f.collection_select :beacon_id, Beacon.unassigned(@artwork.beacon).order('name asc') , :id, :name, :selected => @artwork.beacon.nil? ? nil : @artwork.beacon.id , :include_blank => '-- No Beacon --' %></p>
+  <p class="lbl"><%= f.label "beacons" %></p>
+  <p class="input"><%= f.select  "beacons", Beacon.unassigned(@artwork.beacons).order('name asc').collect {|b| [ b.name, b.id ] },{:selected => @artwork.beacons.nil? ? nil : @artwork.beacons.pluck(:id).first, :include_blank => '   No Beacon   '} %></p>
 
-  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+  <% if (action_name == 'new') %>
+    <p class="submit"><%= f.submit(:class => 'btn btn-primary', :value => "Create Object") %></p>
+  <% else %>
+    <p class="submit"><%= f.submit(:class => 'btn btn-primary', :value => "Update Object") %></p>
+  <% end %>
 
 <% end %>

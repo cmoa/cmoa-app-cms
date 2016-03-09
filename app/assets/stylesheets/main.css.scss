@@ -110,7 +110,7 @@ header {
     position: absolute;
     top:0;
     left:0;
-    max-height: 600px;
+    max-height: 400px;
 
   }
   .image-underlay
@@ -119,12 +119,17 @@ header {
     position: absolute;
     top:0;
     left: 0;
-    max-height: 600px;
-    padding-bottom: 50px;
-    
+    max-height: 400px;
+
+
   }
 
 }
+.exhibition_image_holder
+{
+  height: 500px;
+}
+
 
 // Nav
 nav {
@@ -929,4 +934,15 @@ nav.topbar {
     font-size: em(12);
   }
 
+}
+
+//Overrides
+
+.select2
+{
+  ul {
+    margin: 0 !important;
+    line-height: 20px;
+    font-size: 14px;
+  }
 }

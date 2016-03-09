@@ -1,9 +1,9 @@
 class Location < ActiveRecord::Base
   has_many :artworks
-  belongs_to :beacon
+  has_many :beacons, :dependent => :nullify
 
   # API
-  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'name', 'beacon_id'].freeze
+  JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'name'].freeze
 
   # Soft delete
   acts_as_paranoid

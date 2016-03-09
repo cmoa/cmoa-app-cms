@@ -1,6 +1,6 @@
 class Beacon < ActiveRecord::Base
-  has_one :artwork, :dependent => :nullify
-  has_one :location
+  belongs_to :artwork
+  belongs_to :location
 
 
   validates_uniqueness_of :major, :scope => :minor
@@ -14,34 +14,37 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  JSON_ATTRS = ["id", "major", "minor", "name"]
+  #validate :single_attachment
+
+  JSON_ATTRS = ["id", "major", "minor", "name", "location_id", "artwork_id"]
 
 
-  def self.unassigned(selected)
-    where_clause = "id not in (SELECT beacon_id FROM artworks where beacon_id is not null) AND id not in (SELECT beacon_id FROM locations where beacon_id is not null)"
-    if selected.blank?
+  def self.unassigned(beacons = nil)
+    where_clause = "(location_id IS NULL AND artwork_id IS NULL)"
+
+    if beacons.blank?
 
     else
-      where_clause += " OR (id = '#{selected.id}')"
+      beacon_ids = beacons.pluck(:id).join(',')
+
+      where_clause += " OR (id IN (#{beacon_ids}))"
     end
 
     where(where_clause)
   end
 
   def self.attached
-    where_clause = "id in (SELECT beacon_id FROM artworks where beacon_id is not null) OR id  in (SELECT beacon_id FROM locations where beacon_id is not null)"
+    where_clause = "(location_id IS NOT NULL OR artwork_id IS NOT NULL)"
     where(where_clause)
   end
 
   def self.exhibition_beacons(exhibition)
-    e_beacons = Artwork.where("(beacon_id IS NOT NULL) AND (exhibition_id = ?)", exhibition.id).pluck("beacon_id")
+    e_beacons = Beacon.where(:artwork_id => Artwork.where(:exhibition_id => exhibition).select(:id)).pluck(:id)
     return e_beacons.uniq.count
   end
 
   def detach
-    beacon = self.id
-    Location.where(beacon_id: beacon).update_all(beacon_id: nil)
-    Artwork.where(beacon_id: beacon).update_all(beacon_id: nil)
+    self.update_columns(:location_id => nil, :artwork_id => nil)
   end
 
 
@@ -50,5 +53,13 @@ class Beacon < ActiveRecord::Base
 
   def as_json(options=nil)
     attributes.slice(*JSON_ATTRS)
+  end
+
+  def single_attachment
+    if artwork.present?
+      if location.present?
+        errors.add(:base, "Can't attach a beacon to both a location and an object")
+      end
+    end
   end
 end

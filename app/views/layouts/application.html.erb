@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>CMOA + CMNH for iOS</title>
+  <%= yield(:head) %>
   <%= stylesheet_link_tag "main", :media => "all", "data-turbolinks-track" => true %>
+  <%= yield(:css_files) %>
   <%= csrf_meta_tags %>
 </head>
 <body>
