@@ -8,7 +8,7 @@ module Paperclip
       @file     = file
       @options  = options
       @instance = attachment.instance
-      @whiny    = options[:whiny].nil? ? true : options[:whiny]
+      @whiny    = options[:whiny].nil? ? false : options[:whiny]
       @basename = File.basename(file.path, File.extname(file.path))
     end
 
