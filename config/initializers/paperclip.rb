@@ -1,5 +1,4 @@
 Paperclip::Attachment.default_options[:use_timestamp] = false
-Paperclip::Thumbnail.default_options[:whiny] = false #Disable whiny
 
 # Custom interpolations
 module Paperclip

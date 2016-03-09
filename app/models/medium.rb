@@ -12,7 +12,7 @@ class Medium < ActiveRecord::Base
   acts_as_paranoid
 
   # File attachment
-  has_attached_file :file, :styles => {
+  has_attached_file :file, :whiny => false, :styles => {
     :thumb  => '200x200#',
     :small  => '300x300',
     :medium => '600x600',
