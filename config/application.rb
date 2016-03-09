@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+#ENV variables
+ENV["GITHUB_URL"] = 'https://github.com/CMP-Studio/cmoa-app-cms'
+
 # Load application ENV vars and merge with existing ENV vars.
 ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
 
@@ -49,5 +52,8 @@ module CMOA
       :path => ':uuid/:style.:content_type_extension',
       :hash_secret => ENV['s3_hash_secret']
     }
+
+    #Error handeling
+    config.exceptions_app = self.routes
   end
 end
