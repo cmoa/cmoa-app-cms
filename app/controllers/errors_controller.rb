@@ -6,6 +6,7 @@ class ErrorsController < ApplicationController
   end
 
   def server_error
+    @github_url = ENV["GITHUB_URL"] + "/issues"
     render(:status => 500)
   end
 
