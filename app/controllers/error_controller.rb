@@ -1,6 +1,6 @@
-class ErrorController < ApplicationController
+class ErrorsController < ApplicationController
   skip_before_filter :authenticate_admin!
-  
+
   def not_found
     render(:status => 404)
   end
