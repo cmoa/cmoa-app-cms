@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303203727) do
+ActiveRecord::Schema.define(version: 20160310160217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160303203727) do
     t.datetime "updated_at"
     t.integer  "artwork_id"
     t.integer  "location_id"
+    t.string   "uuid"
   end
 
   add_index "beacons", ["artwork_id"], name: "index_beacons_on_artwork_id", using: :btree
