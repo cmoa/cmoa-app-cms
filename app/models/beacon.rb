@@ -49,7 +49,7 @@ class Beacon < ActiveRecord::Base
     self.update_columns(:location_id => nil, :artwork_id => nil)
   end
 
-private
+
 
 
 
@@ -71,6 +71,7 @@ private
 
   end
 
+
   def single_attachment
     if artwork.present?
       if location.present?
@@ -78,6 +79,8 @@ private
       end
     end
   end
+
+private
 
   def set_uuid
     self.uuid = UUIDTools::UUID.timestamp_create().to_s
