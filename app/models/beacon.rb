@@ -56,12 +56,12 @@ class Beacon < ActiveRecord::Base
   def as_json(options=nil)
     #Gather UUID from attachments
     if self.location_id.present?
-      location_uuid = Location.where(:id => self.location_id).first.pluck(:uuid)
+      location_uuid = Location.where(:id => self.location_id).pluck(:uuid).first
       return attributes.slice(*JSON_ATTRS).merge({
         :location_uuid => location_uuid
       })
     elsif self.artwork_id.present?
-      artwork_uuid = Artwork.where(:id => self.artwork_id).first.pluck(:uuid)
+      artwork_uuid = Artwork.where(:id => self.artwork_id).pluck(:uuid).first
       return attributes.slice(*JSON_ATTRS).merge({
         :artwork_uuid => artwork_uuid
       })
