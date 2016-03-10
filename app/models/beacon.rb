@@ -56,7 +56,7 @@ class Beacon < ActiveRecord::Base
   def as_json(options=nil)
     #Gather UUID from attachments
     if self.location_id.present?
-      location_uuid = Loaction.find(self.location_id).pluck(:uuid)
+      location_uuid = Location.find(self.location_id).pluck(:uuid)
       return attributes.slice(*JSON_ATTRS).merge({
         :location_uuid => location_uuid
       })
