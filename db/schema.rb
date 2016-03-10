@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303182828) do
+ActiveRecord::Schema.define(version: 20160303203727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,17 +73,17 @@ ActiveRecord::Schema.define(version: 20160303182828) do
   end
 
   create_table "beacons", force: true do |t|
-    t.integer  "major",        null: false
-    t.integer  "minor",        null: false
+    t.integer  "major",       null: false
+    t.integer  "minor",       null: false
     t.string   "name"
-    t.integer  "artworks_id"
-    t.integer  "locations_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "artwork_id"
+    t.integer  "location_id"
   end
 
-  add_index "beacons", ["artworks_id"], name: "index_beacons_on_artworks_id", using: :btree
-  add_index "beacons", ["locations_id"], name: "index_beacons_on_locations_id", using: :btree
+  add_index "beacons", ["artwork_id"], name: "index_beacons_on_artwork_id", using: :btree
+  add_index "beacons", ["location_id"], name: "index_beacons_on_location_id", using: :btree
   add_index "beacons", ["major", "minor"], name: "index_beacons_on_major_and_minor", unique: true, using: :btree
 
   create_table "categories", force: true do |t|
