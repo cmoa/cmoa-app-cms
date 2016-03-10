@@ -65,7 +65,7 @@ class ApiV2Controller < ApplicationController
         :tourArtworks      => tour_artworks
       }
 
-      response = beacon_rename(response)
+
 
       # Store in redis
       $redis.set(cacheKey, JSON.generate(response))
@@ -198,27 +198,5 @@ class ApiV2Controller < ApplicationController
     return render :json => {:status => false, :message => "Invalid Login"} if signature1 != signature2
   end
 
-  #rename id to uuid
-  def beacon_rename(data)
-
-    #beacons themselves
-    result = []
-
-      data[:beacons].each do |b|
-        mem = {}
-        b.as_json.map do |k, v|
-          if k == "id"
-            mem[:uuid] = v
-          else
-            mem[k] = v
-          end
-        end
-        result.push(mem)
-      end
-      data[:beacons] = result
-
-
-    
-    return data
-  end
+  
 end

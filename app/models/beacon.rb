@@ -14,9 +14,11 @@ class Beacon < ActiveRecord::Base
   validates :minor, :presence => true
   validates :name, :presence => true
 
-  #validate :single_attachment
+  validate :single_attachment
 
-  JSON_ATTRS = ["id", "major", "minor", "name", "location_id", "artwork_id"]
+  before_create :set_uuid
+
+  JSON_ATTRS = ["uuid", "major", "minor", "name"]
 
 
   def self.unassigned(beacons = nil)
@@ -52,8 +54,23 @@ class Beacon < ActiveRecord::Base
 
 
   def as_json(options=nil)
-    attributes.slice(*JSON_ATTRS)
+    #Gather UUID from attachments
+    if self.location_id.present?
+      location_uuid = Location.where(:id => self.location_id).pluck(:uuid).first
+      return attributes.slice(*JSON_ATTRS).merge({
+        :location_uuid => location_uuid
+      })
+    elsif self.artwork_id.present?
+      artwork_uuid = Artwork.where(:id => self.artwork_id).pluck(:uuid).first
+      return attributes.slice(*JSON_ATTRS).merge({
+        :artwork_uuid => artwork_uuid
+      })
+    else
+      return attributes.slice(*JSON_ATTRS)
+    end
+
   end
+
 
   def single_attachment
     if artwork.present?
@@ -61,5 +78,11 @@ class Beacon < ActiveRecord::Base
         errors.add(:base, "Can't attach a beacon to both a location and an object")
       end
     end
+  end
+
+private
+
+  def set_uuid
+    self.uuid = UUIDTools::UUID.timestamp_create().to_s
   end
 end
