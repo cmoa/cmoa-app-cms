@@ -172,11 +172,11 @@ class ApiV2Controller < ApplicationController
     if ((token.nil? || token.empty?) ||
         (signature1.nil? || signature1.empty?) ||
         (sodium.nil? || sodium.empty?))
-      return render :json => {:status => false, :message => 'Invalid login'}
+      return render :json => {:status => false, :message => 'Invalid login', :code => 1}
     end
 
     # Verify the token
-    return render :json => {:status => false, :message => 'Invalid login'} if token != API_TOKEN
+    return render :json => {:status => false, :message => 'Invalid login', :code => 2} if token != API_TOKEN
 
     # Build hashable string
     hashable = "#{request.method}:#{request.protocol}#{request.host}#{request.fullpath.split('?').first}?"
@@ -195,8 +195,8 @@ class ApiV2Controller < ApplicationController
     # Generate signature and compare
     digest = OpenSSL::Digest::Digest.new('sha256')
     signature2 = Base64.strict_encode64(OpenSSL::HMAC.digest(digest, sodium, hashable))
-    return render :json => {:status => false, :message => "Invalid Login"} if signature1 != signature2
+    return render :json => {:status => false, :message => "Invalid Login", :code => 3} if signature1 != signature2
   end
 
-  
+
 end
