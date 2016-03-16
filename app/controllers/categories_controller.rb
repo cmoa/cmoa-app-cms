@@ -41,7 +41,7 @@ class CategoriesController < ApplicationController
   def destroy
     # Check if this object related to any non-deleted objects
     unless @category.artworks.empty?
-      return redirect_to categories_url, alert: "At least one artwork relies on this category – cannot delete '#{@category.title}'"
+      return redirect_to categories_url, alert: "At least one artwork relies on this category: '#{@category.title}'"
     end
 
     @category.destroy
