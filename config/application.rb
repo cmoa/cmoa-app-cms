@@ -24,7 +24,7 @@ module CMOA
     # config.i18n.default_locale = :de
 
     # Fix for bootstrap-sass gem for Rails 4
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile = %w(*.png *.jpg *.jpeg *.gif)
 
     # Modify form field with error view
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
@@ -47,7 +47,6 @@ module CMOA
       },
       :url => ':s3_domain_url',
       :path => ':uuid/:style.:content_type_extension',
-      :hash_secret => ENV['s3_hash_secret']
 
     }
     #github
