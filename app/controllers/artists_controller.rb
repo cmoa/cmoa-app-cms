@@ -44,7 +44,7 @@ class ArtistsController < ApplicationController
   def destroy
     # Check if this object related to any non-deleted objects
     unless @artist.artworks.empty?
-      return redirect_to exhibition_artists_url(@exhibition), alert: "At least one artwork relies on this person: '#{@artist.name}'"
+      return redirect_to exhibition_artists_url(@exhibition), alert: "At least one artwork relies on this artist – cannot delete '#{@artist.name}'"
     end
 
     @artist.destroy
