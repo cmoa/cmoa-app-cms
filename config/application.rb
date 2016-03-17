@@ -23,14 +23,16 @@ module CMOA
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # precompile
-    config.assets.precompile = %w(*.png *.jpg *.jpeg *.gif main.css)
+    # Fix for bootstrap-sass gem for Rails 4
+    config.assets.precompile = %w(*.png *.jpg *.jpeg *.gif)
 
     # Modify form field with error view
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       "#{html_tag}".html_safe
     }
 
+    # Asset pipeline
+    config.assets.precompile += ['main.css']
 
     # GZip responses
     config.middleware.use Rack::Deflater
