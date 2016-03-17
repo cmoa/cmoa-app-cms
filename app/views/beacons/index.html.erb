@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1>Beacons</h1>
+
+      <table class="table table-striped table-bordered table-exhibitions">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th >Major</th>
+            <th >Minor</th>
+            <th>Attachments</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if @beacons.size > 0 %>
+          <% @beacons.each_with_index do |beacon, index| %>
+            <tr data-id="<%= beacon.id %>">
+              <td><%= beacon.name %></td>
+              <td><%= beacon.major %></td>
+              <td><%= beacon.minor %></td>
+              <% if beacon.location.present? %>
+                <td><%= link_to beacon.location.name, location_path(beacon.location) %> <br> <%= link_to 'Detach', detach_beacon_path(beacon), method: :get, :class => 'btn btn-mini btn-danger' %></td>
+              <% elsif beacon.artwork.present? %>
+                <td><%= link_to(beacon.artwork.exhibition.title, [beacon.artwork.exhibition]) %> &gt; <%= link_to(beacon.artwork.title, [beacon.artwork.exhibition, beacon.artwork]) %> <br> <%= link_to 'Detach', detach_beacon_path(beacon), method: :get, :class => 'btn btn-mini btn-danger' %> </td>
+              <% else %>
+                <td>None</td>
+              <% end %>
+              <td class="actions"><%= link_to 'Show', beacon, :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_beacon_path(beacon), :class => 'btn btn-mini' %> <%= link_to 'Delete', beacon, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>  </td>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="empty" colspan="6"><strong>No beacons have been added yet.</strong></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p><%= link_to 'Add a Beacon', new_beacon_path, :class => 'btn btn-success' %></p>
+    </div>
+  </div>
+</div>

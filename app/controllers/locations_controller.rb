@@ -2,6 +2,9 @@ class LocationsController < ApplicationController
   before_action :set_exhibition
   before_action :set_location, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
+  before_action do
+    set_focus('locations')
+  end
 
   def index
     @locations = Location.all.order('name asc')
@@ -18,18 +21,23 @@ class LocationsController < ApplicationController
   end
 
   def create
+    @beacons = params[:location][:beacons]
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to [@exhibition, @location], notice: 'Location was successfully created.'
+      update_beacons(@location, @beacons)
+      redirect_to @location, notice: 'Location was successfully created.'
     else
       render action: 'new'
     end
   end
 
   def update
+    @beacons = params[:location][:beacons]
+
     if @location.update(location_params)
-      redirect_to [@exhibition, @location], notice: 'Location was successfully updated.'
+      update_beacons(@location, @beacons)
+      redirect_to @location, notice: 'Location was successfully updated.'
     else
       render action: 'edit'
     end
@@ -38,14 +46,14 @@ class LocationsController < ApplicationController
   def destroy
     # Check if this object related to any non-deleted objects
     unless @location.artworks.empty?
-      return redirect_to exhibition_locations_url(@exhibition), alert: "At least one artwork relies on this location – cannot delete '#{@location.name}'"
+      return redirect_to locations_url, alert: "At least one artwork relies on this location – cannot delete '#{@location.name}'"
     end
 
     @location.destroy
     # Acts_as_paranoid bug workaround
     @location.updated_at = DateTime.now
     @location.save
-    redirect_to exhibition_locations_url(@exhibition), notice: 'Location was successfully deleted.'
+    redirect_to locations_url, notice: 'Location was successfully deleted.'
   end
 
   private
@@ -58,4 +66,20 @@ class LocationsController < ApplicationController
     def location_params
       params.require(:location).permit(:name)
     end
+
+    def update_beacons(location, beacons)
+      if beacons.present?
+        #Remove all beacons from the location
+        Beacon.where(:location_id => location.id).update_all(:location_id => nil)
+
+        #And then add all selected
+        beacons.each do |b|
+          if Beacon.exists?(b)
+            beacon = Beacon.find(b)
+            beacon.update_columns(:location_id => location.id)
+          end
+        end
+      end
+    end
+#########################################
 end

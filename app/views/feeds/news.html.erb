@@ -1,10 +1,27 @@
+<%
+def summarize(text)
+  #Clean up input text by removing HTML tags, ellipsis, leading whitespace
+  clean = text.gsub(/<[^>]+>/i," ").sub(/\[&#8230;\]/,"[ellipsis]!").gsub(/(&[a-zA-Z0-9#]+;)/," ").sub(/^\s+/,'')
+  #Get the first 25 words then remaining sentence
+  summary = clean[/^(\s*(\S+\s+){25}[^.!?]*[.!?])/, 0]
+  ret = ''
+  #If text is less than 25 words summary will return nil
+  if summary.blank?
+    ret =  clean
+  else
+    ret = summary + " [ellipsis]!"
+  end
+  #replace ellipsis place-holder with the real thing (and remove duplicates)
+  return ret.sub(/\[ellipsis\]!/,"[…]").gsub(/\[ellipsis\]!/,"")
+end
+ %>
+
 <ul>
   <% @entries.each do |entry| %>
-  <li>
-    <h1><%= link_to(raw(entry.title.sanitize), entry.url) %></h1>
-    <h2><%= entry.published.to_s(:published) %></h2>
-    <p><%= entry.summary.sanitize %></p>
-    <p class="continue"><a href="<%= entry.url %>">Continue &raquo;</a></p>
+  <li class='post' onclick='location.href="<%= entry.url %>"'>
+      <h1 class='title'><%= entry.title.sanitize %></h1>
+      <h2 class='pubdate'><%= entry.published.to_s(:published) %></h2>
+      <div class='summary'><%= summarize(entry.summary) %></div>
   </li>
   <% end %>
 </ul>

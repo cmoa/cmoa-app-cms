@@ -17,6 +17,7 @@ Other system dependencies:
 
 * PostgreSQL
 * ImageMagick
+* ffmpegthumbnailer
 * Redis
 * RubyGems
 * Bundler gem (`sudo gem install bundler`)

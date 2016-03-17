@@ -21,7 +21,7 @@
       </div>
       <% end %>
 
-      <h2 class="big-space">Artwork in this tour</h2>
+      <h2 class="big-space">Objects in this tour</h2>
       <% if @tour.artworks.size > 0 %>
       <div class="artwork-list">
         <ol>
@@ -34,12 +34,12 @@
         </ol>
       </div>
       <% else %>
-      <p><em>This tour has no artwork.</em></p>
+      <p><em>This tour has no objects.</em></p>
       <% end %>
 
       <hr>
 
-      <p><%= link_to raw('&laquo; Back'), exhibition_tours_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_tour_path(@exhibition, @tour), :class => 'btn btn-mini' %> <%= link_to 'Modify artwork', edit_exhibition_tour_tour_artwork_path(@exhibition, @tour), :class => 'btn btn-mini btn-success' %></p>
+      <p><%= link_to raw('&laquo; Back'), exhibition_tours_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_tour_path(@exhibition, @tour), :class => 'btn btn-mini' %> <%= link_to 'Modify objects', edit_exhibition_tour_tour_artwork_path(@exhibition, @tour), :class => 'btn btn-mini btn-success' %></p>
     </div>
   </div>
 </div>

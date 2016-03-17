@@ -1,5 +1,6 @@
 class Location < ActiveRecord::Base
   has_many :artworks
+  has_many :beacons, :dependent => :nullify
 
   # API
   JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'name'].freeze
@@ -17,6 +18,10 @@ class Location < ActiveRecord::Base
 
   def as_json(options=nil)
     attributes.slice(*JSON_ATTRS)
+  end
+
+  def exhibition_artworks(exhibition)
+    self.artworks.where(exhibition_id: exhibition)
   end
 
   private

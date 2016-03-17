@@ -6,11 +6,11 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <h1>Artwork Detail</h1>
+      <h1>Object Detail</h1>
 
       <h2><%= @artwork.title %></h2>
 
-      <h3><%= 'Artist'.pluralize(@artwork.artists.size) %></h3>
+      <h3><%= 'Person'.pluralize(@artwork.artists.size) %></h3>
       <% if @artwork.artists.size > 0 %>
       <table class="table table-striped table-bordered table-artwork-artists">
         <thead>
@@ -33,10 +33,15 @@
       <% end %>
 
       <h3>Category</h3>
-      <p class="sub"><%= link_to(@artwork.category.title, [@exhibition, @artwork.category]) %></p>
+      <p class="sub"><%= link_to(@artwork.category.title, @artwork.category) %></p>
 
       <h3>Location</h3>
-      <p class="sub"><%= link_to(@artwork.location.name, [@exhibition, @artwork.location]) %></p>
+      <p class="sub"><%= link_to(@artwork.location.name, @artwork.location) %></p>
+
+      <% if @artwork.beacons.present? %>
+        <h3>Beacon</h3>
+        <p class="sub"><%= link_to(@artwork.beacons.first.name, [@artwork.beacons.first]) %></p>
+      <% end %>
 
       <h3>Code</h3>
       <p class="sub"><%= @artwork.code %></p>
@@ -78,7 +83,7 @@
           <% @artwork.media.image.each_with_index do |medium, index| %>
             <tr data-id="<%= medium.id %>">
               <td class="position"><span><%= (index + 1) %></span></td>
-              <td class="image"><%= image_tag(medium.file(:thumb)) %></td>
+              <td class="image"><%= image_tag(medium.file(:thumb), alt: medium.alt) %></td>
               <td class="title"><%= medium.title %></td>
               <td class="url"><%= link_to('Link', medium.file(:medium), :class => 'btn btn-mini') %></td>
               <td class="actions"><%= link_to 'Edit', edit_exhibition_artwork_medium_path(@exhibition, @artwork, medium), :class => 'btn btn-mini' %> <%= link_to 'Delete', exhibition_artwork_medium_path(@exhibition, @artwork, medium), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
@@ -145,7 +150,7 @@
 
       <hr>
 
-      <p><%= link_to raw('&laquo; Back'), exhibition_artworks_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini' %> <%= link_to 'Add artist', new_exhibition_artwork_artist_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %> <%= link_to 'Add media', new_exhibition_artwork_medium_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %></p>
+      <p><%= link_to raw('&laquo; Back'), exhibition_artworks_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini' %> <%= link_to 'Add person', new_exhibition_artwork_artist_artwork_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %> <%= link_to 'Add media', new_exhibition_artwork_medium_path(@exhibition, @artwork), :class => 'btn btn-mini btn-success' %></p>
     </div>
   </div>
 </div>

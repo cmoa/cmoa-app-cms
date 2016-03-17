@@ -5,9 +5,18 @@
 
       <h2><%= @location.name %></h2>
 
+      <% if @location.beacons.present? %>
+        <h3>Beacons</h3>
+        <ul>
+          <% @location.beacons.each do |b| %>
+            <li><p class="sub"><%= link_to(b.name, [b]) %></p></li>
+          <% end %>
+        </ul>
+      <% end %>
+
       <hr>
 
-      <p><%= link_to raw('&laquo; Back'), exhibition_locations_path(@exhibition), :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_exhibition_location_path(@exhibition, @location), :class => 'btn btn-mini' %></p>
+      <p><%= link_to raw('&laquo; Back'), locations_path, :class => 'btn btn-mini' %> <%= link_to 'Edit', edit_location_path(@location), :class => 'btn btn-mini' %></p>
     </div>
   </div>
 </div>

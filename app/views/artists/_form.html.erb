@@ -1,7 +1,7 @@
 <%= form_for([@exhibition, @artist]) do |f| %>
   <% if @artist.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this person from being saved:</h2>
 
       <ul class="errors">
       <% @artist.errors.full_messages.each do |msg| %>
@@ -25,6 +25,9 @@
 
   <p class="lbl"><%= f.label :bio %></p>
   <p class="input"><%= f.text_area :bio, :class => 'input-xxlarge', :rows => 5 %></p>
-
-  <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+  <% if (action_name == 'new') %>
+    <p class="submit"><%= f.submit(:class => 'btn btn-primary', :value => "Create Person") %></p>
+  <% else %>
+    <p class="submit"><%= f.submit(:class => 'btn btn-primary', :value => "Update Person") %></p>
+  <% end %>
 <% end %>
