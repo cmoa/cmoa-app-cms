@@ -46,7 +46,7 @@ class LocationsController < ApplicationController
   def destroy
     # Check if this object related to any non-deleted objects
     unless @location.artworks.empty?
-      return redirect_to locations_url, alert: "At least one artwork relies on this location: '#{@location.name}'"
+      return redirect_to locations_url, alert: "At least one artwork relies on this location – cannot delete '#{@location.name}'"
     end
 
     @location.destroy
