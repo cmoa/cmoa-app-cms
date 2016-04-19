@@ -2,6 +2,9 @@ class ArtworksController < ApplicationController
   before_action :set_exhibition
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy]
+  before_action do
+    set_focus('objects')
+  end
 
   def index
     # Filters
@@ -27,31 +30,26 @@ class ArtworksController < ApplicationController
   end
 
   def new
-    # Artist check
-    if @exhibition.artists.count == 0
-      return redirect_to exhibition_artworks_path(@exhibition), alert: 'Please add at least one artist before adding artwork.'
-    end
+
     # Category check
     if Category.count == 0
-      return redirect_to exhibition_categories_path(@exhibition), alert: 'Please add at least one category before adding artwork.'
+      return redirect_to categories_path, alert: 'Please add at least one category before adding artwork.'
     end
     # Location check
     if Location.count == 0
-      return redirect_to exhibition_locations_path(@exhibition), alert: 'Please add at least one location before adding artwork.'
+      return redirect_to locations_path, alert: 'Please add at least one location before adding artwork.'
     end
     @artwork = Artwork.new
   end
 
   def edit
+
   end
 
   def create
-    # Verity artistArtwork relation
-    if artwork_params[:artist_id].nil?
-      flash.now[:notice] = 'Please specify an artist for this artwork'
-      render action: 'new'
-      return
-    end
+    beacon = params[:artwork][:beacons]
+
+
 
     @artwork = Artwork.new(artwork_params)
 
@@ -59,12 +57,8 @@ class ArtworksController < ApplicationController
     @artwork.exhibition_id = @exhibition.id
 
     if @artwork.save
-      # Create artistArtwork relation
-      aa = ArtistArtwork.new
-      aa.exhibition_id = @artwork.exhibition_id
-      aa.artwork = @artwork
-      aa.artist_id = artwork_params[:artist_id]
-      aa.save
+      #Create beacon relation
+      update_beacon(@artwork, beacon)
 
       redirect_to [@exhibition, @artwork], notice: 'Artwork was successfully created.'
     else
@@ -73,7 +67,10 @@ class ArtworksController < ApplicationController
   end
 
   def update
+    beacon = params[:artwork][:beacons]
+
     if @artwork.update(artwork_params)
+      update_beacon(@artwork, beacon)
       redirect_to [@exhibition, @artwork], notice: 'Artwork was successfully updated.'
     else
       render action: 'edit'
@@ -106,5 +103,14 @@ class ArtworksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
       params.require(:artwork).permit(:title, :artist_id, :category_id, :location_id, :code, :body, :share_url)
+    end
+
+    #Update beacons
+    def update_beacon(artwork, beacon)
+      Beacon.where(:artwork_id => artwork.id).update_all(:artwork_id => nil)
+      if Beacon.exists?(beacon)
+        b = Beacon.find(beacon)
+        b.update_columns(:artwork_id => artwork.id)
+      end
     end
 end

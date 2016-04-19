@@ -1,4 +1,4 @@
-<%= form_for([@exhibition, @location]) do |f| %>
+<%= form_for(@location) do |f| %>
   <% if @location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
@@ -14,5 +14,23 @@
   <p class="lbl"><%= f.label :name %></p>
   <p class="input"><%= f.text_field :name, :class => 'input-xlarge' %></p>
 
+  <p class="lbl"><%= f.label "beacons" %></p>
+  <p class="input"><%= f.select  "beacons", Beacon.unassigned(@location.beacons).order('name asc').collect {|b| [ b.name, b.id ] },{:selected => @location.beacons.nil? ? nil : @location.beacons.pluck(:id)}, {:multiple => true, :size => 5} %></p>
+
   <p class="submit"><%= f.submit(:class => 'btn btn-primary') %></p>
+<% end %>
+
+<% content_for :css_files do %>
+  <%= stylesheet_link_tag "select2.min" %>
+<% end %>
+
+<% content_for :js_files do %>
+  <%= javascript_include_tag "select2.min" %>
+<% end %>
+
+<% content_for :js do %>
+  $('select').select2({
+    placeholder: "You may select multiple beacons",
+    width: '284px'
+  });
 <% end %>

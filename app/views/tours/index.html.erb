@@ -7,7 +7,7 @@
         <thead>
           <tr>
             <th class="title">Title</th>
-            <th class="artwork"># of Artwork</th>
+            <th class="artwork"># of Objects</th>
             <th class="actions"></th>
           </tr>
         </thead>
@@ -17,7 +17,7 @@
           <% @tours.each do |tour| %>
             <tr>
               <td class="title"><%= tour.title %></td>
-              <td class="artwork"><%= tour.artworks.size %> <%= link_to 'Modify artwork', edit_exhibition_tour_tour_artwork_path(@exhibition, tour), :class => 'btn btn-mini btn-success' %></td>
+              <td class="artwork"><%= tour.artworks.size %> <%= link_to 'Modify objects', edit_exhibition_tour_tour_artwork_path(@exhibition, tour), :class => 'btn btn-mini btn-success' %></td>
               <td class="actions"><%= link_to 'Show', [@exhibition, tour], :class => 'btn btn-mini btn-info' %> <%= link_to 'Edit', edit_exhibition_tour_path(@exhibition, tour), :class => 'btn btn-mini' %> <%= link_to 'Delete', [@exhibition, tour], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>

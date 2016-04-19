@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219211940) do
+ActiveRecord::Schema.define(version: 20160310160217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,21 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.string   "share_url"
   end
 
+  create_table "beacons", force: true do |t|
+    t.integer  "major",       null: false
+    t.integer  "minor",       null: false
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "artwork_id"
+    t.integer  "location_id"
+    t.string   "uuid"
+  end
+
+  add_index "beacons", ["artwork_id"], name: "index_beacons_on_artwork_id", using: :btree
+  add_index "beacons", ["location_id"], name: "index_beacons_on_location_id", using: :btree
+  add_index "beacons", ["major", "minor"], name: "index_beacons_on_major_and_minor", unique: true, using: :btree
+
   create_table "categories", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -98,6 +113,35 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.integer  "bg_ipad_file_size"
     t.datetime "bg_ipad_updated_at"
     t.string   "sponsor"
+  end
+
+  create_table "feeds", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "feed_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hours", force: true do |t|
+    t.datetime "start_schedule"
+    t.datetime "end_schedule"
+    t.time     "sunday_start"
+    t.time     "sunday_end"
+    t.time     "monday_start"
+    t.time     "monday_end"
+    t.time     "tuesday_start"
+    t.time     "tuesday_end"
+    t.time     "wednesday_start"
+    t.time     "wednesday_end"
+    t.time     "thursday_start"
+    t.time     "thursday_end"
+    t.time     "friday_start"
+    t.time     "friday_end"
+    t.time     "saturday_start"
+    t.time     "saturday_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "likes", force: true do |t|
@@ -144,6 +188,8 @@ ActiveRecord::Schema.define(version: 20140219211940) do
     t.integer  "height"
     t.datetime "deleted_at"
     t.integer  "position"
+    t.string   "alt"
+    t.text     "description"
   end
 
   create_table "tour_artworks", force: true do |t|

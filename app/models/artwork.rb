@@ -14,6 +14,7 @@ class Artwork < ActiveRecord::Base
   has_many :likes
   has_many :artist_artworks
   has_many :artists, -> { order('"artists"."last_name" asc') }, :through => :artist_artworks
+  has_many :beacons, :dependent => :nullify
 
   # API
   JSON_ATTRS = ['uuid', 'created_at', 'updated_at', 'deleted_at', 'title', 'code', 'body', 'share_url'].freeze

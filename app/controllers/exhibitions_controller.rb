@@ -1,8 +1,12 @@
 class ExhibitionsController < ApplicationController
   before_action :set_exhibition, only: [:show, :edit, :update, :destroy]
   cache_sweeper :cache_sweeper, :only => [:create, :update, :destroy, :positions]
+  before_action do
+    set_focus('exhibitions')
+  end
 
   def index
+    unset_exhibition
     @exhibitions = Exhibition.order('position asc').all
   end
 
@@ -12,6 +16,7 @@ class ExhibitionsController < ApplicationController
     @total_artwork = @exhibition.artworks.size
     @total_locations = Location.all.size
     @total_tours = @exhibition.tours.size
+    @total_beacons = Beacon.exhibition_beacons(@exhibition)
   end
 
   def new
@@ -42,7 +47,7 @@ class ExhibitionsController < ApplicationController
 
   def update
     if @exhibition.update(exhibition_params)
-      redirect_to root_path, notice: 'Exhibition was successfully updated.'
+      redirect_to @exhibition, notice: 'Exhibition was successfully updated.'
     else
       render action: 'edit'
     end
@@ -74,10 +79,19 @@ class ExhibitionsController < ApplicationController
     render :json => {:success => true}
   end
 
-  private
-    def set_exhibition
+  private def set_exhibition
+    if params.has_key?(:id)
       @exhibition = Exhibition.find(params[:id])
+      session[:exhibition] = params[:id]
+    else
+      if session.has_key?(:exhibition)
+        @exhibition = Exhibition.find(session[:exhibition])
+      else
+        @exhibition = nil #There isn't an exhibition
+      end
+      ###
     end
+  end
 
     def exhibition_params
       params.require(:exhibition).permit(:title, :subtitle, :sponsor, :is_live, :bg_iphone, :bg_ipad)
