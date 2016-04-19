@@ -1,7 +1,7 @@
-# Carnegie Museum of Art
+# Carnegie Museums of Art and Natural History
 ## CMS
 
-This CMS is meant to provide an efficient way to manage exhibitions, artists, artworks and related artwork media and metadata. There's a simple API layer to enable syncing functionality for mobile applications.
+This CMS is meant to provide an efficient way to manage exhibitions, people, objects and related media with metadata. There's a simple API layer to enable syncing functionality for mobile applications.
 
 ### Installation guide:
 
