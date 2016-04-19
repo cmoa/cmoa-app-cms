@@ -30,6 +30,7 @@ Copy/rename **application.sample.yml** to **application.yml** in **/config** dir
 * S3 configuration: **s3_bucket**/**s3_key**/**s3_secret** are self-explanatory. **s3_hash_secret** is a salt hash used to encode uploaded file names. Generate any long hash you prefer (eg. md5).
 * **api_token**/**api_secret**: used to secure API calls. Generate any hashes you'd like here (eg. md5). Both of these will need to be implemented by your mobile applications for safe communication.
 * MailChimp configuration: Enter your MailChip account API key and mailbox id to add submitted email addresses. End users are subscribed via an API call. Mobile applications need to implement this API call for this to function.
+* GitHub Configuration: [This line](https://github.com/CMP-Studio/cmoa-app-cms/blob/master/config/application.rb#L55) points to this github repo, when you fork/clone/whatever this to a new repo change this url
 
 #### Database creation
 
@@ -45,7 +46,7 @@ Run `whenever -w` to generate and write the required crontab for you. Simply run
 
 #### Admin user account
 
-There's currently no UI to create and manage the users. To create the first user, enter the Rails console and manually create the user entry. Example:
+To create the first admin, do the following:
 
 * `rails c` - to enter the Rails console
 * `admin = Admin.new` - create a new Admin entry
@@ -53,3 +54,16 @@ There's currently no UI to create and manage the users. To create the first user
 * `admin.password = 'password'` - configure password
 * `admin.save` - save new Admin entry
 * `exit` - exit the console
+ 
+Once you have an admin account you can add additional admins through the website:
+
+* Login
+* Click on "Admins"
+* Click "New Admin"
+* Enter their email and an initial password (I reccoment you have them change this initial password the first time they log in)
+* Click "Create Admin"
+
+Notes: 
+
+ * Currently the application does not send an email to the new admin
+ * All admins have the same permission level, so every admin can do everything including adding more admins.
